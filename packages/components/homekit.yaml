@@ -33,8 +33,7 @@ homekit:
       # Xiaomi Aqara
       - binary_sensor.door_window_sensor_158d00019fd4c6
       - binary_sensor.door_window_sensor_158d0001c0e526
-      - binary_sensor.door_window_sensor_158d0001d934e3
-      - binary_sensor.door_window_sensor_158d0001b77e9a
+      - binary_sensor.door_window_sensor_kitchen_windows
       - binary_sensor.door_window_sensor_158d0001d8228c
       - binary_sensor.door_window_sensor_158d0001ab5853
       - binary_sensor.door_window_sensor_158d0001b77eb1
