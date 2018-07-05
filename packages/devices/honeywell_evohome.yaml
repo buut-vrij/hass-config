@@ -1,0 +1,59 @@
+##
+# honeywell_evohome.yaml
+#
+# Honeywell EvoHome
+#
+# @category   Home Assistant
+# @package    Devices
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+
+##
+# Components
+##
+climate:
+  - platform: honeywell
+    username: !secret honeywell_username
+    password: !secret honeywell_password
+#    scan_interval: 600
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    climate.eethoek:
+      friendly_name: Verwarming eethoek
+    climate.entree:
+      friendly_name: Verwarming hal
+    climate.keuken:
+      friendly_name: Verwarming keuken
+    climate.zithoek:
+      friendly_name: Verwarming zithoek
+
+  customize_glob:
+    climate.entree:
+      group:
+        group.climate_entryway:
+          friendly_name: Verwarming
+    climate.keuken:
+      group:
+        group.climate_kitchen:
+          friendly_name: Verwarming
+
+##
+# Groups
+##
+
+##
+# Scenes
+##
+
+##
+# Automation
+##
+
+##
+# Scripts
+##

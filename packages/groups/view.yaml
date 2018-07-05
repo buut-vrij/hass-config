@@ -1,0 +1,114 @@
+##
+# view.yaml
+#
+# Views
+#
+# @category   Home Assistant
+# @package    Groups
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+
+##
+# Groups
+##
+group:
+  #default_view:
+  view_home:
+    entities:
+      - alarm_control_panel.alarm
+      - binary_sensor.door_window_sensor_all
+      - binary_sensor.water_leak_sensor_all
+      - binary_sensor.natgas_sensor_all
+      - binary_sensor.internet_connection
+      - group.home_tracker
+      - group.home_lighting
+      - history_graph.temperature
+      - history_graph.humidity
+    icon: mdi:home-assistant
+    name: Thuis
+    view: true
+
+#  view_scenes:
+#    entities:
+#    icon: mdi:movie
+#    name: Scenes
+#    view: true
+
+  view_lighting:
+    entities:
+      - group.lighting_living_room
+      - group.lighting_kitchen
+      - group.lighting_entryway
+      - group.lighting_landing_upstairs
+      - group.lighting_garage
+    icon: mdi:lightbulb
+    name: verlichting
+    view: true
+
+#  view_blinds:
+#    entities:
+#    icon: mdi:blinds
+#    name: Blindering
+#    view: true
+
+  view_climate:
+    entities:
+      - group.climate_outdoor
+      - group.climate_living_room
+      - group.climate_kitchen
+      - group.climate_entryway
+      - group.climate_toilet
+      - group.climate_laundry_room
+      - group.climate_garage
+      - group.climate_landing_upstairs
+    icon: mdi:leaf
+    name: Klimaat
+    view: true
+
+  view_media:
+    entities:
+      - media_player.receiver
+      - media_player.apple_tv
+      - media_player.chromecast
+      - media_player.begane_grond
+      - media_player.woonkamer
+      - media_player.keuken
+      - media_player.slaapkamer
+    icon: mdi:television-classic
+    name: Media
+    view: true
+
+  view_security:
+    entities:
+      - group.woonveilig
+      - group.security_perimeter
+      - group.security_presence
+      - group.security_smoke
+      - group.security_gas
+      - group.security_moisture
+    icon: mdi:security-home
+    name: Beveiliging
+    view: true
+
+#  view_cctv:
+#    entities:
+#    icon: mdi:cctv
+#    name: Camera bewaking
+#    view: true
+
+#  view_consumption:
+#    entities:
+#    icon: mdi:chart-line
+#    name: Verbruik
+#    view: true
+
+  view_status:
+    entities:
+      - group.zwave_devices
+      - group.synology_ds114
+      - group.ups
+      - group.battery_levels
+    icon: mdi:clipboard-pulse
+    name: Status
+    view: true

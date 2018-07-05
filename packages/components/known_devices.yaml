@@ -1,0 +1,48 @@
+##
+# known_devices.yaml
+#
+# Known devices
+#
+# @category   Home Assistant
+# @package    Device packages
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+
+##
+# Components
+##
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    sensor.iphone_van_veerle_dachard_battery_level:
+      hidden: true
+    sensor.iphone_van_veerle_dachard_battery_state:
+      hidden: true
+    sensor.its_not_a_blender_battery_level:
+      hidden: true
+    sensor.its_not_a_blender_battery_state:
+      hidden: true
+    sensor.swatter_battery_level:
+      hidden: true
+    sensor.swatter_battery_state:
+      hidden: true
+
+##
+# Groups
+##
+
+##
+# Scenes
+##
+
+##
+# Automation
+##
+
+##
+# Scripts
+##

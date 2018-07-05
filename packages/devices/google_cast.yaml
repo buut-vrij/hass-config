@@ -1,0 +1,59 @@
+##
+# google_cast.yaml
+#
+# Google Cast
+#
+# @category   Home Assistant
+# @package    Devices
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+
+##
+# Components
+##
+cast:
+  media_player:
+#  - host: !secret cast_host_chromecast
+  - host: !secret cast_host_home_living
+  - host: !secret cast_host_home_kitchen
+  - host: !secret cast_host_home_bedroom
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    media_player.begane_grond:
+      friendly_name: Google Home begane grond
+      icon: mdi:google-home
+
+#    media_player.chromecast:
+#      icon: mdi:cast
+
+    media_player.keuken:
+      friendly_name: Google Home keuken
+      icon: mdi:google-home
+
+    media_player.slaapkamer:
+      friendly_name: Google Home slaapkamer
+      icon: mdi:google-home
+
+    media_player.woonkamer:
+      friendly_name: Google Home woonkamer
+      icon: mdi:google-home
+##
+# Groups
+##
+
+##
+# Scenes
+##
+
+##
+# Automation
+##
+
+##
+# Scripts
+##

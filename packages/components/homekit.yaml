@@ -1,0 +1,79 @@
+##
+# homekit.yaml
+#
+# Apple Homekit
+#
+# @category   Home Assistant
+# @package    Component packages
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+
+##
+# Components
+##
+homekit:
+  pincode: !secret homekit_pincode
+  filter:
+    exclude_domains:
+      - binary_sensor
+      - device_tracker
+      - light
+      - script
+      - sensor
+      - switch
+    include_entities:
+      # FIBARO
+      - light.fibaro_system_fgd212_dimmer_2_level_2
+      - light.fibaro_system_fgd212_dimmer_2_level_4
+      - light.fibaro_system_fgd212_dimmer_2_level_6
+      - light.fibaro_system_fgd212_dimmer_2_level_8
+      # Philips Hue
+      - light.hue_color_lamp_1
+      # Xiaomi Aqara
+      - binary_sensor.door_window_sensor_158d00019fd4c6
+      - binary_sensor.door_window_sensor_158d0001c0e526
+      - binary_sensor.door_window_sensor_158d0001d934e3
+      - binary_sensor.door_window_sensor_158d0001b77e9a
+      - binary_sensor.door_window_sensor_158d0001d8228c
+      - binary_sensor.door_window_sensor_158d0001ab5853
+      - binary_sensor.door_window_sensor_158d0001b77eb1
+      - binary_sensor.door_window_sensor_158d0001ab5797
+      - binary_sensor.door_window_sensor_158d0001f38318
+      - binary_sensor.door_window_sensor_158d0001f38976
+      - sensor.humidity_158d0002271b5e
+      - sensor.humidity_158d00022883df
+      - sensor.humidity_158d00022883db
+      - sensor.humidity_158d00022881a8
+      - sensor.humidity_158d0002288396
+      - sensor.illumination_34ce0091d4d9
+      - sensor.illumination_7811dcb266db
+      - sensor.illumination_7811dcb7e406
+      - sensor.temperature_158d0002271b5e
+      - sensor.temperature_158d00022883df
+      - sensor.temperature_158d00022883db
+      - sensor.temperature_158d00022881a8
+      - sensor.temperature_158d0002288396
+      - sensor.water_leak_sensor_158d0001bb63a5
+      - sensor.water_leak_sensor_158d0001bc42ee
+      - sensor.water_leak_sensor_158d0001bc19c5
+
+##
+# Customize
+##
+
+##
+# Groups
+##
+
+##
+# Scenes
+##
+
+##
+# Automation
+##
+
+##
+# Scripts
+##

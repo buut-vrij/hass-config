@@ -1,0 +1,39 @@
+##
+# sun.yaml
+#
+# Sun
+#
+# @category   Home Assistant
+# @package    Component packages
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+
+##
+# Components
+##
+sun:
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    sun.sun:
+      friendly_name: Zon
+
+##
+# Groups
+##
+
+##
+# Scenes
+##
+
+##
+# Automation
+##
+
+##
+# Scripts
+##

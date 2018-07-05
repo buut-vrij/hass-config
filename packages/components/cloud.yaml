@@ -1,0 +1,133 @@
+##
+# cloud.yaml
+#
+# Home Assistant Cloud
+#
+# @category   Home Assistant
+# @package    Component packages
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+
+##
+# Components
+##
+cloud:
+  google_actions:
+    filter:
+      exclude_domains:
+        - alarm_control_panel
+        - climate
+        - group
+        - media_player
+        - remote
+        - script
+        - switch
+        - zwave
+      exclude_entities:
+        - light.fibaro_system_fgd212_dimmer_2_level
+        - light.fibaro_system_fgd212_dimmer_2_level_3
+        - light.fibaro_system_fgd212_dimmer_2_level_5
+        - light.fibaro_system_fgd212_dimmer_2_level_7
+        - light.gateway_light_34ce0091d4d9
+        - light.gateway_light_7811dcb266db
+        - light.gateway_light_7811dcb7e406
+    entity_config:
+      # FIBARO
+      light.fibaro_system_fgd212_dimmer_2_level_2:
+        name: Plafondlamp eethoek
+        aliases:
+          - Hanglamp eethoek
+          - Hanglamp eettafel
+          - Lamp eethoek
+          - Lamp eettafel
+          - Licht eethoek
+          - Licht eettafel
+          - Plafondlamp eettafel
+          - Verlichting eethoek
+          - Verlichting eettafel
+        room: Woonkamer
+      light.fibaro_system_fgd212_dimmer_2_level_4:
+        name: Plafondlamp keuken
+        aliases:
+          - Keukenlamp
+          - Keukenlicht
+          - Lamp keuken
+          - Licht keuken
+          - Verlichting keuken
+        room: Keuken
+      light.fibaro_system_fgd212_dimmer_2_level_6:
+        name: Plafondlamp zithoek
+        aliases:
+          - Lamp living
+          - Lamp salon
+          - Lamp zithoek
+          - Licht living
+          - Licht salon
+          - Licht zithoek
+          - Plafondlamp living
+          - Plafondlamp salon
+          - Verlichting living
+          - Verlichting salon
+          - Verlichting zithoek
+        room: Woonkamer
+      light.fibaro_system_fgd212_dimmer_2_level_8:
+        name: Plafondlamp hal
+        aliases:
+          - Lamp entree
+          - Lamp gang
+          - Lamp hal
+          - Licht entree
+          - Licht gang
+          - Licht hal
+          - Plafondlamp entree
+          - Plafondlamp gang
+          - Verlichting entree
+          - Verlichting gang
+          - Verlichting hal
+        room: Gang
+      # Xiaomi Aqara
+      light.gateway_light_34ce0091d4d9:
+        name: Veiligheidsverlichting woonkamer
+        aliases:
+          - Indicatielamp woonkamer
+          - Noodverlichting woonkamer
+          - Seinlamp woonkamer
+          - Signaallamp woonkamer
+        room: Woonkamer
+      light.gateway_light_7811dcb266db:
+        name: Veiligheidsverlichting overloop
+        aliases:
+          - Indicatielamp overloop
+          - Noodverlichting overloop
+          - Seinlamp overloop
+          - Signaallamp overloop
+        room: Overloop
+      light.gateway_light_7811dcb7e406:
+        name: Veiligheidsverlichting garage
+        aliases:
+          - Indicatielamp garage
+          - Noodverlichting garage
+          - Seinlamp garage
+          - Signaallamp garage
+        room: Garage
+
+##
+# Customize
+##
+
+##
+# Groups
+##
+
+##
+# Scenes
+##
+
+##
+# Automation
+##
+
+##
+# Scripts
+##

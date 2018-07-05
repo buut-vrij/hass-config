@@ -1,0 +1,42 @@
+##
+# denon_avr.yaml
+#
+# DENON AVR-X1300W
+#
+# @category   Home Assistant
+# @package    Devices
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+
+##
+# Components
+##
+media_player:
+  - platform: denonavr
+    host: !secret denonavr_host
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    media_player.receiver:
+      friendly_name: Receiver woonkamer
+      icon: mdi:amplifier
+
+##
+# Groups
+##
+
+##
+# Scenes
+##
+
+##
+# Automation
+##
+
+##
+# Scripts
+##

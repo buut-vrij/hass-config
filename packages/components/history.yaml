@@ -1,0 +1,197 @@
+##
+# history.yaml
+#
+# Home Assistant history
+#
+# @category   Home Assistant
+# @package    Component packages
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+
+##
+# Components
+##
+history:
+  exclude:
+    domains:
+      - group
+      - history_graph
+      - zwave
+    entities:
+      # Apple TV
+      - remote.apple_tv
+      # Buienradar
+      - sensor.eindhoven_condition
+      - sensor.eindhoven_condition_code
+      - sensor.eindhoven_detailed_condition
+      - sensor.eindhoven_full_condition
+      - sensor.eindhoven_rain_1d
+      - sensor.eindhoven_rain_2d
+      - sensor.eindhoven_rain_3d
+      - sensor.eindhoven_rain_4d
+      - sensor.eindhoven_rain_5d
+      - sensor.eindhoven_rainchance_1d
+      - sensor.eindhoven_rainchance_2d
+      - sensor.eindhoven_rainchance_3d
+      - sensor.eindhoven_rainchance_4d
+      - sensor.eindhoven_rainchance_5d
+      - sensor.eindhoven_sunchance_1d
+      - sensor.eindhoven_sunchance_2d
+      - sensor.eindhoven_sunchance_3d
+      - sensor.eindhoven_sunchance_4d
+      - sensor.eindhoven_sunchance_5d
+      - sensor.eindhoven_symbol
+      - sensor.eindhoven_symbol_1d
+      - sensor.eindhoven_symbol_2d
+      - sensor.eindhoven_symbol_3d
+      - sensor.eindhoven_symbol_4d
+      - sensor.eindhoven_symbol_5d
+      - sensor.eindhoven_temperature_1d
+      - sensor.eindhoven_temperature_2d
+      - sensor.eindhoven_temperature_3d
+      - sensor.eindhoven_temperature_4d
+      - sensor.eindhoven_temperature_5d
+      # FIBARO
+      - binary_sensor.door_window_sensor_all
+      - binary_sensor.natgas_sensor_all
+      - binary_sensor.water_leak_sensor_all
+      - light.fibaro_system_fgd212_dimmer_2_level_2
+      - light.fibaro_system_fgd212_dimmer_2_level_4
+      - sensor.fibaro_system_fgd212_dimmer_2_alarm_level
+      - sensor.fibaro_system_fgd212_dimmer_2_alarm_level_2
+      - sensor.fibaro_system_fgd212_dimmer_2_alarm_level_3
+      - sensor.fibaro_system_fgd212_dimmer_2_alarm_type
+      - sensor.fibaro_system_fgd212_dimmer_2_alarm_type_2
+      - sensor.fibaro_system_fgd212_dimmer_2_alarm_type_3
+      - sensor.fibaro_system_fgd212_dimmer_2_exporting
+      - sensor.fibaro_system_fgd212_dimmer_2_exporting_2
+      - sensor.fibaro_system_fgd212_dimmer_2_exporting_3
+      - sensor.fibaro_system_fgd212_dimmer_2_heat
+      - sensor.fibaro_system_fgd212_dimmer_2_heat_2
+      - sensor.fibaro_system_fgd212_dimmer_2_heat_3
+      - sensor.fibaro_system_fgd212_dimmer_2_power
+      - sensor.fibaro_system_fgd212_dimmer_2_power_2
+      - sensor.fibaro_system_fgd212_dimmer_2_power_3
+      - sensor.fibaro_system_fgd212_dimmer_2_power_4
+      - sensor.fibaro_system_fgd212_dimmer_2_power_5
+      - sensor.fibaro_system_fgd212_dimmer_2_power_6
+      - sensor.fibaro_system_fgd212_dimmer_2_power_management
+      - sensor.fibaro_system_fgd212_dimmer_2_power_management_2
+      - sensor.fibaro_system_fgd212_dimmer_2_power_management_3
+      - sensor.fibaro_system_fgd212_dimmer_2_sourcenodeid
+      - sensor.fibaro_system_fgd212_dimmer_2_sourcenodeid_2
+      - sensor.fibaro_system_fgd212_dimmer_2_sourcenodeid_3
+      - sensor.fibaro_system_fgd212_dimmer_2_system
+      - sensor.fibaro_system_fgd212_dimmer_2_system_2
+      - sensor.fibaro_system_fgd212_dimmer_2_system_3
+      # Known devices
+      - camera.jeroen
+      - camera.veerle
+      - sensor.iphone_van_veerle_dachard_battery_level
+      - sensor.iphone_van_veerle_dachard_battery_state
+      - sensor.its_not_a_blender_battery_level
+      - sensor.its_not_a_blender_battery_state
+      - sensor.swatter_battery_level
+      - sensor.swatter_battery_state
+      # Synology DS114
+      - sensor.cpu_load_total
+      - sensor.memory_usage_real
+      - sensor.network_down
+      - sensor.network_up
+      - sensor.temperature_sda
+      - sensor.free_space_volume_1
+      - switch.synology_ds114
+      # UPS
+      - binary_sensor.ups_online
+      - sensor.ups_battery_charge
+      - sensor.ups_battery_runtime
+      - sensor.ups_load
+      # WoonVeilig
+      - script.woonveilig_arm_away
+      - script.woonveilig_arm_home
+      - script.woonveilig_disarm
+      - sensor.woonveilig_state
+      # Xiaomi Aqara
+      - sensor.humidity_158d0002271b5e
+      - sensor.humidity_158d00022881a8
+      - sensor.humidity_158d0002288396
+      - sensor.humidity_158d00022883db
+      - sensor.humidity_158d00022883df
+      - sensor.illumination_34ce0091d4d9
+      - sensor.illumination_7811dcb266db
+      - sensor.illumination_7811dcb7e406
+      - sensor.pressure_158d0002271b5e
+      - sensor.pressure_158d00022881a8
+      - sensor.pressure_158d0002288396
+      - sensor.pressure_158d00022883db
+      - sensor.pressure_158d00022883df
+      - sensor.temperature_158d0002271b5e
+      - sensor.temperature_158d00022881a8
+      - sensor.temperature_158d0002288396
+      - sensor.temperature_158d00022883db
+      - sensor.temperature_158d00022883df
+      - sensor.door_window_sensor_158d00019fd4c6_battery
+      - sensor.door_window_sensor_158d0001c0e526_battery
+      - sensor.door_window_sensor_158d0001d934e3_battery
+      - sensor.door_window_sensor_158d0001b77e9a_battery
+      - sensor.door_window_sensor_158d0001d8228c_battery
+      - sensor.door_window_sensor_158d0001ab5853_battery
+      - sensor.door_window_sensor_158d0001b77eb1_battery
+      - sensor.door_window_sensor_158d0001ab5797_battery
+      - sensor.door_window_sensor_158d0001f38318_battery
+      - sensor.door_window_sensor_158d0001f38976_battery
+      - sensor.temperature_158d0002271b5e_battery
+      - sensor.temperature_158d00022883df_battery
+      - sensor.temperature_158d00022883db_battery
+      - sensor.temperature_158d00022881a8_battery
+      - sensor.temperature_158d0002288396_battery
+      - sensor.water_leak_sensor_158d0001bb63a5_battery
+      - sensor.water_leak_sensor_158d0001bc42ee_battery
+      - sensor.water_leak_sensor_158d0001bc19c5_battery
+      # YR
+      - sensor.yr_symbol
+      # Zwave
+      - zwave.zwaveme_razberry_2
+
+history_graph:
+  humidity:
+    name: Luchtvochtigheid
+    entities:
+      - sensor.outdoor_humidity
+      - sensor.humidity_158d0002271b5e
+      - sensor.humidity_158d00022881a8
+      - sensor.humidity_158d0002288396
+      - sensor.humidity_158d00022883db
+      - sensor.humidity_158d00022883df
+    refresh: 60
+  temperature:
+    name: Temperatuur
+    entities:
+      - sensor.outdoor_temperature
+      - sensor.temperature_158d0002271b5e
+      - sensor.temperature_158d00022881a8
+      - sensor.temperature_158d0002288396
+      - sensor.temperature_158d00022883db
+      - sensor.temperature_158d00022883df
+    refresh: 60
+
+##
+# Customize
+##
+
+##
+# Groups
+##
+
+##
+# Scenes
+##
+
+##
+# Automation
+##
+
+##
+# Scripts
+##

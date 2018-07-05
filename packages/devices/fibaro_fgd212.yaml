@@ -1,0 +1,177 @@
+##
+# fibaro_fdg212.yaml
+#
+# FIBARO FDG212 Dimmer 2
+#
+# @category   Home Assistant
+# @package    Device packages
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+
+##
+# Components
+##
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    # Dimmer living room 2 (node 4)
+    light.fibaro_system_fgd212_dimmer_2_level:
+      friendly_name: Dimmer plafondlamp eethoek (S2)
+      hidden: true
+
+    light.fibaro_system_fgd212_dimmer_2_level_2:
+      friendly_name: Plafondlamp eethoek
+      icon: mdi:ceiling-light
+      state_card_mode: hide-slider
+      stretch_slider: true
+      slider_theme:
+        report_when_not_changed: false
+
+    sensor.fibaro_system_fgd212_dimmer_2_energy_2:
+      friendly_name: Plafondlamp eethoek
+
+    zwave.fibaro_system_fgd212_dimmer_2_2:
+      friendly_name: Plafondlamp eethoek
+
+    # Dimmer kitchen (node 5)
+    light.fibaro_system_fgd212_dimmer_2_level_3:
+      friendly_name: Dimmer plafondlamp keuken (S2)
+      hidden: true
+
+    light.fibaro_system_fgd212_dimmer_2_level_4:
+      friendly_name: Plafondlamp keuken
+      icon: mdi:ceiling-light
+      state_card_mode: hide-slider
+      stretch_slider: true
+      slider_theme:
+        report_when_not_changed: false
+
+    sensor.fibaro_system_fgd212_dimmer_2_energy_3:
+      friendly_name: Plafondlamp keuken
+
+    zwave.fibaro_system_fgd212_dimmer_2_3:
+      friendly_name: Plafondlamp keuken
+
+    # Dimmer living room (node 3)
+    light.fibaro_system_fgd212_dimmer_2_level_5:
+      friendly_name: Dimmer plafondlamp zithoek (S2)
+      hidden: true
+
+    light.fibaro_system_fgd212_dimmer_2_level_6:
+      friendly_name: Plafondlamp zithoek
+      icon: mdi:ceiling-light
+      state_card_mode: hide-slider
+      stretch_slider: true
+      slider_theme:
+        report_when_not_changed: false
+
+    sensor.fibaro_system_fgd212_dimmer_2_energy:
+      friendly_name: Plafondlamp zithoek
+
+    zwave.fibaro_system_fgd212_dimmer_2:
+      friendly_name: Plafondlamp zithoek
+
+    # Dimmer entryway (node 6)
+    light.fibaro_system_fgd212_dimmer_2_level_7:
+      friendly_name: Dimmer plafondlamp hal (S2)
+      hidden: true
+
+    light.fibaro_system_fgd212_dimmer_2_level_8:
+      friendly_name: Plafondlamp hal
+      icon: mdi:ceiling-light
+      state_card_mode: hide-slider
+      stretch_slider: true
+      slider_theme:
+        report_when_not_changed: false
+
+    sensor.fibaro_system_fgd212_dimmer_2_energy_4:
+      friendly_name: Plafondlamp hal
+
+    zwave.fibaro_system_fgd212_dimmer_2_4:
+      friendly_name: Plafondlamp hal
+
+  customize_glob:
+    "sensor.fibaro_system_fgd212_dimmer_2_alarm_level*":
+      hidden: true
+
+    "sensor.fibaro_system_fgd212_dimmer_2_alarm_type*":
+      hidden: true
+
+    "sensor.fibaro_system_fgd212_dimmer_2_exporting*":
+      hidden: true
+
+    "sensor.fibaro_system_fgd212_dimmer_2_heat*":
+      hidden: true
+
+    "sensor.fibaro_system_fgd212_dimmer_2_power*":
+      hidden: true
+
+    "sensor.fibaro_system_fgd212_dimmer_2_power_management*":
+      hidden: true
+
+    "sensor.fibaro_system_fgd212_dimmer_2_sourcenodeid*":
+      hidden: true
+
+    "sensor.fibaro_system_fgd212_dimmer_2_system*":
+      hidden: true
+
+    light.fibaro_system_fgd212_dimmer_2_level_2:
+      group:
+        group.lighting_living_room:
+          friendly_name: Plafondlamp eethoek
+
+    light.fibaro_system_fgd212_dimmer_2_level_4:
+      group:
+        group.lighting_kitchen:
+          friendly_name: Plafondlamp
+
+    light.fibaro_system_fgd212_dimmer_2_level_6:
+      group:
+        group.lighting_living_room:
+          friendly_name: Plafondlamp zithoek
+
+    light.fibaro_system_fgd212_dimmer_2_level_8:
+      group:
+        group.lighting_entryway:
+          friendly_name: Plafondlamp
+
+    zwave.fibaro_system_fgd212_dimmer_2:
+      group:
+        group.zwave_devices:
+          friendly_name: Dimmer zithoek
+
+    zwave.fibaro_system_fgd212_dimmer_2_2:
+      group:
+        group.zwave_devices:
+          friendly_name: Dimmer eethoek
+
+    zwave.fibaro_system_fgd212_dimmer_2_3:
+      group:
+        group.zwave_devices:
+          friendly_name: Dimmer keuken
+
+    zwave.fibaro_system_fgd212_dimmer_2_4:
+      group:
+        group.zwave_devices:
+          friendly_name: Dimmer hal
+
+
+##
+# Groups
+##
+
+##
+# Scenes
+##
+
+##
+# Automation
+##
+
+##
+# Scripts
+##

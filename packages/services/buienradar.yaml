@@ -1,0 +1,126 @@
+##
+# buienradar.yaml
+#
+# Buienradar forecast
+#
+# @category   Home Assistant
+# @package    Service packages
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+
+##
+# Components
+##
+sensor:
+  - platform: buienradar
+    name: !secret buienradar_name
+    monitored_conditions:
+      # current condition:
+#      - condition
+#      - conditioncode
+#      - conditiondetailed
+#      - conditionexact
+      - humidity
+      - precipitation
+      - pressure
+#      - symbol
+      - temperature
+      - winddirection
+      - windforce
+      # forecasted condition:
+#      - symbol_1d
+#      - symbol_2d
+#      - symbol_3d
+#      - symbol_4d
+#      - symbol_5d
+#      - temperature_1d
+#      - temperature_2d
+#      - temperature_3d
+#      - temperature_4d
+#      - temperature_5d
+#      - rainchance_1d
+#      - rainchance_2d
+#      - rainchance_3d
+#      - rainchance_4d
+#      - rainchance_5d
+#      - sunchance_1d
+#      - sunchance_2d
+#      - sunchance_3d
+#      - sunchance_4d
+#      - sunchance_5d
+#      - rain_1d
+#      - rain_2d
+#      - rain_3d
+#      - rain_4d
+#      - rain_5d
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    sensor.outdoor_humidity:
+      friendly_name: 'Luchtvochtigheid buiten'
+
+    sensor.outdoor_precipitation:
+      friendly_name: 'Neerslag buiten'
+
+    sensor.outdoor_pressure:
+      friendly_name: 'Luchtdruk buiten'
+
+    sensor.outdoor_temperature:
+      friendly_name: 'Luchtvochtigheid buiten'
+
+    sensor.outdoor_wind_direction:
+      friendly_name: 'Windrichting buiten'
+
+    sensor.outdoor_wind_force:
+      friendly_name: 'Windkracht buiten'
+
+  customize_glob:
+    sensor.outdoor_humidity:
+      group:
+        group.climate_outdoor:
+          friendly_name: 'Luchtvochtigheid'
+
+    sensor.outdoor_precipitation:
+      group:
+        group.climate_outdoor:
+          friendly_name: 'Neerslag'
+
+    sensor.outdoor_pressure:
+      group:
+        group.climate_outdoor:
+          friendly_name: 'Luchtdruk'
+
+    sensor.outdoor_temperature:
+      group:
+        group.climate_outdoor:
+          friendly_name: 'Temperatuur'
+
+    sensor.outdoor_wind_direction:
+      group:
+        group.climate_outdoor:
+          friendly_name: 'Windrichting'
+
+    sensor.outdoor_wind_force:
+      group:
+        group.climate_outdoor:
+          friendly_name: 'Windkracht'
+
+##
+# Groups
+##
+
+##
+# Scenes
+##
+
+##
+# Automation
+##
+
+##
+# Scripts
+##

@@ -1,0 +1,95 @@
+##
+# door_window_sensor_158d0001c0e526.yaml
+#
+# Xiaomi Aqara door/window sensor
+#
+# @category   Home Assistant
+# @package    Devices
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+
+##
+# Components
+##
+
+binary_sensor:
+  - platform: template
+    sensors:
+      door_window_sensor_158d0001c0e526_battery_low:
+        device_class: battery
+        value_template: '{{ states.binary_sensor.door_window_sensor_158d0001c0e526.attributes.battery_level < 5 }}'
+
+sensor:
+  - platform: template
+    sensors:
+      door_window_sensor_158d0001c0e526_battery:
+        device_class: battery
+        friendly_name: 'Batterij deur-/raamsensor garage loopdeur'
+        unit_of_measurement: '%'
+        value_template: '{{ states.binary_sensor.door_window_sensor_158d0001c0e526.attributes.battery_level|int }}'
+        icon_template: >
+          {% set battery_level = states.sensor.door_window_sensor_158d0001c0e526_battery.state|default(0)|int %}
+          {% set battery_round = (battery_level / 10) |int * 10 %}
+          {% if battery_round >= 100 %}
+            mdi:battery
+          {% elif battery_round > 0 %}
+            mdi:battery-{{ battery_round }}
+          {% else %}
+            mdi:battery-alert
+          {% endif %}
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    binary_sensor.door_window_sensor_158d0001c0e526:
+      device_class: door
+      friendly_name: 'Garage loopdeur'
+
+    sensor.door_window_sensor_158d0001c0e526_battery:
+      templates:
+        theme: >
+          if (state < 5) {
+            return 'alert-danger';
+          } else if (state < 10) {
+            return 'alert-warning';
+          }
+
+    binary_sensor.door_window_sensor_158d0001c0e526_battery_low:
+      hidden: true
+
+  customize_glob:
+    sensor.door_window_sensor_158d0001c0e526_battery:
+      group:
+        group.battery_levels:
+          friendly_name: Deur-/raamsensor garage loopdeur
+
+##
+# Groups
+##
+
+##
+# Scenes
+##
+
+##
+# Alerts
+##
+alert:
+  door_window_sensor_158d0001c0e526_battery_low:
+    name: Batterijniveau deur-/raamcontact garage loopdeur onder 5%
+    entity_id: binary_sensor.door_window_sensor_158d0001c0e526_battery_low
+    repeat: 1440
+    notifiers:
+      - user_1
+      - user_2
+
+##
+# Automation
+##
+
+##
+# Scripts
+##

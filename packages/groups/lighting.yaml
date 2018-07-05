@@ -1,0 +1,67 @@
+##
+# lighting.yaml
+#
+# Lighting group
+#
+# @category   Home Assistant
+# @package    Groups
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+
+##
+# Groups
+##
+group:
+  lighting_garage:
+    entities:
+      - light.gateway_light_7811dcb7e406
+    icon: mdi:car
+    name: Garage
+
+  lighting_entryway:
+    entities:
+      - light.fibaro_system_fgd212_dimmer_2_level_8
+    icon: mdi:glassdoor
+    name: Hal
+
+  lighting_kitchen:
+    entities:
+      - light.fibaro_system_fgd212_dimmer_2_level_4
+    icon: mdi:silverware-variant
+    name: Keuken
+
+  lighting_landing_upstairs:
+    entities:
+      - light.gateway_light_7811dcb266db
+    icon: mdi:stairs
+    name: Overloop
+
+  lighting_living_room:
+    entities:
+      - light.fibaro_system_fgd212_dimmer_2_level_6
+      - light.hue_color_lamp_1
+      - light.fibaro_system_fgd212_dimmer_2_level_2
+      - light.gateway_light_34ce0091d4d9
+    icon: mdi:sofa
+    name: Woonkamer
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    group.lighting_entryway:
+      order: 3
+
+    group.lighting_living_room:
+      order: 1
+
+    group.lighting_kitchen:
+      order: 2
+
+    group.lighting_landing_upstairs:
+      order: 11
+
+    group.lighting_garage:
+      order: 21

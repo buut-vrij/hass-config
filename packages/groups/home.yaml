@@ -1,0 +1,33 @@
+##
+# home.yaml
+#
+# Home group
+#
+# @category   Home Assistant
+# @package    Groups
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+
+##
+# Groups
+##
+group:
+  home_lighting:
+    entities:
+      - light.livingroom
+    icon: mdi:lightbulb
+    name: Verlichting
+    view: false
+
+  home_tracker:
+    entities:
+      - device_tracker.user_1
+      - device_tracker.user_2
+    icon: mdi:account-multiple
+    name: Aanwezigheid
+    view: false
+
+##
+# Customize
+##

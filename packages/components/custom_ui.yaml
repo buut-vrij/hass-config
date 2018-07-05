@@ -1,0 +1,39 @@
+##
+# custom_ui.yaml
+#
+# Home Assistant CustomUI
+#
+# @category   Home Assistant
+# @package    Component packages
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+
+##
+# Components
+##
+customizer:
+  custom_ui: hosted
+
+##
+# Customize
+##
+homeassistant:
+  customize_glob:
+    "*.*":
+      custom_ui_state_card: state-card-custom-ui
+##
+# Groups
+##
+
+##
+# Scenes
+##
+
+##
+# Automation
+##
+
+##
+# Scripts
+##

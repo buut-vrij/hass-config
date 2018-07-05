@@ -1,0 +1,121 @@
+##
+# temperature_sensor_158d0002271b5e.yaml
+#
+# Xiaomi Aqara temperature sensor
+#
+# @category   Home Assistant
+# @package    Devices
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+
+##
+# Components
+##
+binary_sensor:
+  - platform: template
+    sensors:
+      temperature_158d0002271b5e_battery_low:
+        device_class: battery
+        value_template: '{{ states.sensor.temperature_158d0002271b5e.attributes.battery_level < 5 }}'
+
+sensor:
+  - platform: template
+    sensors:
+      temperature_158d0002271b5e_battery:
+        device_class: battery
+        friendly_name: 'Batterij temperatuursensor garage'
+        unit_of_measurement: '%'
+        value_template: '{{ states.sensor.temperature_158d0002271b5e.attributes.battery_level|int }}'
+        icon_template: >
+          {% set battery_level = states.sensor.temperature_158d0002271b5e_battery.state|default(0)|int %}
+          {% set battery_round = (battery_level / 10) |int * 10 %}
+          {% if battery_round >= 100 %}
+            mdi:battery
+          {% elif battery_round > 0 %}
+            mdi:battery-{{ battery_round }}
+          {% else %}
+            mdi:battery-alert
+          {% endif %}
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    binary_sensor.temperature_158d0002271b5e_battery_low:
+      hidden: true
+
+    sensor.humidity_158d0002271b5e:
+      friendly_name: Luchtvochtigheid garage
+      icon: mdi:water-percent
+
+    sensor.pressure_158d0002271b5e:
+      friendly_name: Luchtdruk garage
+      icon: mdi:gauge
+
+    sensor.temperature_158d0002271b5e:
+      friendly_name: Temperatuur garage
+      icon: mdi:thermometer
+
+    sensor.temperature_158d0002271b5e_battery:
+      templates:
+        theme: >
+          if (state < 5) {
+            return 'alert-danger';
+          } else if (state < 10) {
+            return 'alert-warning';
+          }
+
+  customize_glob:
+    sensor.humidity_158d0002271b5e:
+      group:
+        group.climate_garage:
+          friendly_name: Luchtvochtigheid
+        history_graph.luchtvochtigheid:
+          friendly_name: Garage
+
+    sensor.pressure_158d0002271b5e:
+      group:
+        group.climate_garage:
+          friendly_name: Luchtdruk
+
+    sensor.temperature_158d0002271b5e:
+      group:
+        group.climate_garage:
+          friendly_name: Temperatuur
+        history_graph.temperatuur:
+          friendly_name: Garage
+
+    sensor.temperature_158d0002271b5e_battery:
+      group:
+        group.battery_levels:
+          friendly_name: Temperatuursensor garage
+
+##
+# Groups
+##
+
+##
+# Scenes
+##
+
+##
+# Alerts
+##
+alert:
+  temperature_158d0002271b5e_battery_low:
+    name: Batterijniveau temperatuursensor garage onder 5%
+    entity_id: binary_sensor.temperature_158d0002271b5e_battery_low
+    repeat: 1440
+    notifiers:
+      - user_1
+      - user_2
+
+##
+# Automation
+##
+
+##
+# Scripts
+##

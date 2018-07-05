@@ -1,0 +1,66 @@
+##
+# natgas_sensor_158d000127c558.yaml
+#
+# Xiaomi Mijia natural gas sensor
+#
+# @category   Home Assistant
+# @package    Devices
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+
+##
+# Components
+##
+binary_sensor:
+  - platform: template
+    sensors:
+      natgas_sensor_all:
+        device_class: gas
+        friendly_name: 'Gaslek'
+        value_template: >-
+          {{ is_state('binary_sensor.natgas_sensor_158d000127c558', 'on')
+             or is_state('binary_sensor.natgas_sensor_158d00011176ee', 'on') }}
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    binary_sensor.natgas_sensor_158d000127c558:
+      device_class: gas
+      friendly_name: 'Gasmelder meterkast'
+
+  customize_glob:
+    binary_sensor.natgas_sensor_158d000127c558:
+      group:
+        group.security_gas:
+          friendly_name: Meterkast
+
+##
+# Groups
+##
+
+##
+# Scenes
+##
+
+##
+# Alerts
+##
+alert:
+  natgas_sensor_158d000127c558_leak_detected:
+    name: Gaslek meterkast gedetecteerd
+    entity_id: binary_sensor.natgas_sensor_158d000127c558
+    repeat: 15
+    notifiers:
+      - user_1
+      - user_2
+
+##
+# Automation
+##
+
+##
+# Scripts
+##

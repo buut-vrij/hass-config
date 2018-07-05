@@ -1,0 +1,112 @@
+##
+# water_leak_sensor_158d0001bc42ee.yaml
+#
+# Xiaomi Aqara water leak sensor
+#
+# @category   Home Assistant
+# @package    Devices
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+
+##
+# Components
+##
+
+binary_sensor:
+  - platform: template
+    sensors:
+      water_leak_sensor_158d0001bc42ee_battery_low:
+        device_class: battery
+        value_template: '{{ states.binary_sensor.water_leak_sensor_158d0001bc42ee.attributes.battery_level < 5 }}'
+
+sensor:
+  - platform: template
+    sensors:
+      water_leak_sensor_158d0001bc42ee_battery:
+        device_class: battery
+        friendly_name: 'Batterij waterlekkagesensor keuken afvoer'
+        unit_of_measurement: '%'
+        value_template: '{{ states.binary_sensor.water_leak_sensor_158d0001bc42ee.attributes.battery_level|int }}'
+        icon_template: >
+          {% set battery_level = states.sensor.water_leak_sensor_158d0001bc42ee_battery.state|default(0)|int %}
+          {% set battery_round = (battery_level / 10) |int * 10 %}
+          {% if battery_round >= 100 %}
+            mdi:battery
+          {% elif battery_round > 0 %}
+            mdi:battery-{{ battery_round }}
+          {% else %}
+            mdi:battery-alert
+          {% endif %}
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    binary_sensor.water_leak_sensor_158d0001bc42ee:
+      device_class: moisture
+      friendly_name: 'Waterlekkagesensor keuken afvoer'
+
+    sensor.water_leak_sensor_158d0001bc42ee_battery:
+      templates:
+        theme: >
+          if (state < 5) {
+            return 'alert-danger';
+          } else if (state < 10) {
+            return 'alert-warning';
+          }
+
+    binary_sensor.water_leak_sensor_158d0001bc42ee_battery_low:
+      hidden: true
+
+    sensor.water_leak_sensor_kitchensink:
+      templates:
+        rgb_color: 'if (state === "on") return [213, 0, 0]; elif (state === "off") return [255, 160, 0]; else return [56, 142, 60];'
+
+  customize_glob:
+    binary_sensor.water_leak_sensor_158d0001bc42ee:
+      group:
+        group.security_moisture:
+          friendly_name: Keuken afvoer
+
+    sensor.water_leak_sensor_158d0001bc42ee_battery:
+      group:
+        group.battery_levels:
+          friendly_name: Waterlekkagesensor keuken afvoer
+
+##
+# Groups
+##
+
+##
+# Scenes
+##
+
+##
+# Alerts
+##
+alert:
+  water_leak_sensor_158d0001bc42ee_battery_low:
+    name: Batterijniveau lekkagesensor keuken onder 5%
+    entity_id: binary_sensor.water_leak_sensor_158d0001bc42ee_battery_low
+    repeat: 1440
+    notifiers:
+      - user_1
+      - user_2
+
+  water_leak_sensor_158d0001bc42ee_leak_detected:
+    name: Waterlekkage keuken gedetecteerd
+    entity_id: binary_sensor.water_leak_sensor_158d0001bc42ee
+    repeat: 15
+    notifiers:
+      - user_1
+      - user_2
+
+##
+# Automation
+##
+
+##
+# Scripts
+##

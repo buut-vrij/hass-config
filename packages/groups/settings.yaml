@@ -1,0 +1,49 @@
+##
+# settings.yaml
+#
+# Settings group
+#
+# @category   Home Assistant
+# @package    Groups
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+
+##
+# Groups
+##
+group:
+  battery_levels:
+    entities:
+      - sensor.door_window_sensor_158d00019fd4c6_battery
+      - sensor.door_window_sensor_158d0001c0e526_battery
+      - sensor.door_window_sensor_158d0001d934e3_battery
+      - sensor.door_window_sensor_158d0001b77e9a_battery
+      - sensor.door_window_sensor_158d0001d8228c_battery
+      - sensor.door_window_sensor_158d0001ab5853_battery
+      - sensor.door_window_sensor_158d0001b77eb1_battery
+      - sensor.door_window_sensor_158d0001ab5797_battery
+      - sensor.door_window_sensor_158d0001f38318_battery
+      - sensor.door_window_sensor_158d0001f38976_battery
+      - sensor.temperature_158d0002271b5e_battery
+      - sensor.temperature_158d00022883df_battery
+      - sensor.temperature_158d00022883db_battery
+      - sensor.temperature_158d00022881a8_battery
+      - sensor.temperature_158d0002288396_battery
+      - sensor.water_leak_sensor_158d0001bb63a5_battery
+      - sensor.water_leak_sensor_158d0001bc42ee_battery
+      - sensor.water_leak_sensor_158d0001bc19c5_battery
+    name: Batterijniveaus
+
+  zwave_devices:
+    entities:
+      - zwave.zwaveme_razberry_controller_2016_zwave
+      - zwave.fibaro_system_fgd212_dimmer_2
+      - zwave.fibaro_system_fgd212_dimmer_2_2
+      - zwave.fibaro_system_fgd212_dimmer_2_3
+      - zwave.fibaro_system_fgd212_dimmer_2_4
+    name: Z-Wave apparaten
+
+##
+# Customize
+##

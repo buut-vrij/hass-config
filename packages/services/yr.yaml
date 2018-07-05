@@ -1,0 +1,218 @@
+##
+# yr.yaml
+#
+# YR weather
+# https://github.com/YR/weather-symbols
+#
+# @category   Home Assistant
+# @package    Service packages
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+
+##
+# Components
+##
+sensor:
+  - platform: yr
+
+  - platform: template
+    sensors:
+      yr_symbol_alt:
+        friendly_name: 'Weer'
+        icon_template: >-
+          {% if is_state('sensor.yr_symbol', '1') %}
+            mdi:weather-sunny
+          {% elif is_state('sensor.yr_symbol', '2') %}
+            mdi:weather-partlycloudy
+          {% elif is_state('sensor.yr_symbol', '3') %}
+            mdi:weather-partlycloudy
+          {% elif is_state('sensor.yr_symbol', '4') %}
+            mdi:weather-cloudy
+          {% elif is_state('sensor.yr_symbol', '5') %}
+            mdi:weather-rainy
+          {% elif is_state('sensor.yr_symbol', '6') %}
+            mdi:weather-lightning-rainy
+          {% elif is_state('sensor.yr_symbol', '7') %}
+            mdi:weather-hail
+          {% elif is_state('sensor.yr_symbol', '8') %}
+            mdi:weather-snowy
+          {% elif is_state('sensor.yr_symbol', '9') %}
+            mdi:weather-rainy
+          {% elif is_state('sensor.yr_symbol', '10') %}
+            mdi:weather-pouring
+          {% elif is_state('sensor.yr_symbol', '11') %}
+            mdi:weather-lightning-rainy
+          {% elif is_state('sensor.yr_symbol', '12') %}
+            mdi:weather-hail
+          {% elif is_state('sensor.yr_symbol', '13') %}
+            mdi:weather-snowy
+          {% elif is_state('sensor.yr_symbol', '14') %}
+            mdi:weather-lightning-rainy
+          {% elif is_state('sensor.yr_symbol', '15') %}
+            mdi:weather-fog
+          {% elif is_state('sensor.yr_symbol', '20') %}
+            mdi:weather-hail
+          {% elif is_state('sensor.yr_symbol', '21') %}
+            mdi:weather-snowy
+          {% elif is_state('sensor.yr_symbol', '22') %}
+            mdi:weather-lightning-rainy
+          {% elif is_state('sensor.yr_symbol', '23') %}
+            mdi:weather-hail
+          {% elif is_state('sensor.yr_symbol', '24') %}
+            mdi:weather-lightning-rainy
+          {% elif is_state('sensor.yr_symbol', '25') %}
+            mdi:weather-lightning-rainy
+          {% elif is_state('sensor.yr_symbol', '26') %}
+            mdi:weather-hail
+          {% elif is_state('sensor.yr_symbol', '27') %}
+            mdi:weather-hail
+          {% elif is_state('sensor.yr_symbol', '28') %}
+            mdi:weather-snowy
+          {% elif is_state('sensor.yr_symbol', '29') %}
+            mdi:weather-snowy
+          {% elif is_state('sensor.yr_symbol', '30') %}
+            mdi:weather-lightning-rainy
+          {% elif is_state('sensor.yr_symbol', '31') %}
+            mdi:weather-hail
+          {% elif is_state('sensor.yr_symbol', '32') %}
+            mdi:weather-hail
+          {% elif is_state('sensor.yr_symbol', '33') %}
+            mdi:weather-snowy
+          {% elif is_state('sensor.yr_symbol', '34') %}
+            mdi:weather-snowy
+          {% elif is_state('sensor.yr_symbol', '40') %}
+            mdi:weather-rainy
+          {% elif is_state('sensor.yr_symbol', '41') %}
+            mdi:weather-pouring
+          {% elif is_state('sensor.yr_symbol', '42') %}
+            mdi:weather-hail
+          {% elif is_state('sensor.yr_symbol', '43') %}
+            mdi:weather-hail
+          {% elif is_state('sensor.yr_symbol', '44') %}
+            mdi:weather-snowy
+          {% elif is_state('sensor.yr_symbol', '45') %}
+            mdi:weather-snowy
+          {% elif is_state('sensor.yr_symbol', '46') %}
+            mdi:weather-rainy
+          {% elif is_state('sensor.yr_symbol', '47') %}
+            mdi:weather-hail
+          {% elif is_state('sensor.yr_symbol', '48') %}
+            mdi:weather-hail
+          {% elif is_state('sensor.yr_symbol', '49') %}
+            mdi:weather-snowy
+          {% elif is_state('sensor.yr_symbol', '50') %}
+            mdi:weather-snowy
+          {% else %}
+            mdi:alert
+          {% endif %}
+        value_template: >-
+          {% if is_state('sensor.yr_symbol', '1') %}
+            Zon
+          {% elif is_state('sensor.yr_symbol', '2') %}
+            Zonnig
+          {% elif is_state('sensor.yr_symbol', '3') %}
+            Licht bewolkt
+          {% elif is_state('sensor.yr_symbol', '4') %}
+            Bewolkt
+          {% elif is_state('sensor.yr_symbol', '5') %}
+            Regenbuien
+          {% elif is_state('sensor.yr_symbol', '6') %}
+            Regenbuien met onweer
+          {% elif is_state('sensor.yr_symbol', '7') %}
+            Hagelbuien
+          {% elif is_state('sensor.yr_symbol', '8') %}
+            Sneeuwbuien
+          {% elif is_state('sensor.yr_symbol', '9') %}
+            Regen
+          {% elif is_state('sensor.yr_symbol', '10') %}
+            Zware regen
+          {% elif is_state('sensor.yr_symbol', '11') %}
+            Zware regen met onweer
+          {% elif is_state('sensor.yr_symbol', '12') %}
+            Hagel
+          {% elif is_state('sensor.yr_symbol', '13') %}
+            Sneeuw
+          {% elif is_state('sensor.yr_symbol', '14') %}
+            Sneeuw met onweer
+          {% elif is_state('sensor.yr_symbol', '15') %}
+            Mist
+          {% elif is_state('sensor.yr_symbol', '20') %}
+            Hagelbuien met onweer
+          {% elif is_state('sensor.yr_symbol', '21') %}
+            Sneeuwbuien met onweer
+          {% elif is_state('sensor.yr_symbol', '22') %}
+            Regen met onweer
+          {% elif is_state('sensor.yr_symbol', '23') %}
+            Hagel met onweer
+          {% elif is_state('sensor.yr_symbol', '24') %}
+            Lichte regenbuien met onweer
+          {% elif is_state('sensor.yr_symbol', '25') %}
+            Zware regenbuien met onweer
+          {% elif is_state('sensor.yr_symbol', '26') %}
+            Lichte hagelbuien met onweer
+          {% elif is_state('sensor.yr_symbol', '27') %}
+            Zware hagelbuien met onweer
+          {% elif is_state('sensor.yr_symbol', '28') %}
+            Lichte sneeuwbuien met onweer
+          {% elif is_state('sensor.yr_symbol', '29') %}
+            Zware sneeuwbuien met onweer
+          {% elif is_state('sensor.yr_symbol', '30') %}
+            Motregen met onweer
+          {% elif is_state('sensor.yr_symbol', '31') %}
+            Lichte hagel met onweer
+          {% elif is_state('sensor.yr_symbol', '32') %}
+            Zware hagel met onweer
+          {% elif is_state('sensor.yr_symbol', '33') %}
+            Lichte sneeuw met onweer
+          {% elif is_state('sensor.yr_symbol', '34') %}
+            Zware sneeuw met onweer
+          {% elif is_state('sensor.yr_symbol', '40') %}
+            Lichte regenbuien
+          {% elif is_state('sensor.yr_symbol', '41') %}
+            Zware regenbuien
+          {% elif is_state('sensor.yr_symbol', '42') %}
+            Lichte hagelbuien
+          {% elif is_state('sensor.yr_symbol', '43') %}
+            Zware hagelbuien
+          {% elif is_state('sensor.yr_symbol', '44') %}
+            Lichte sneeuwbuien
+          {% elif is_state('sensor.yr_symbol', '45') %}
+            Zware sneeuwbuien
+          {% elif is_state('sensor.yr_symbol', '46') %}
+            Motregen
+          {% elif is_state('sensor.yr_symbol', '47') %}
+            Lichte hagel
+          {% elif is_state('sensor.yr_symbol', '48') %}
+            Zware hagel
+          {% elif is_state('sensor.yr_symbol', '49') %}
+            Lichte sneeuw
+          {% elif is_state('sensor.yr_symbol', '50') %}
+            Zware sneeuw
+          {% else %}
+            Fout
+          {% endif %}
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    sensor.yr_symbol:
+      hidden: true
+
+##
+# Groups
+##
+
+##
+# Scenes
+##
+
+##
+# Automation
+##
+
+##
+# Scripts
+##

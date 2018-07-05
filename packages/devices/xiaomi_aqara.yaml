@@ -1,0 +1,115 @@
+##
+# xiaomi_aqara.yaml
+#
+# Xiaomi Aqara Gateway
+#
+# @category   Home Assistant
+# @package    Devices
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+
+##
+# Components
+##
+xiaomi_aqara:
+  discovery_retry: 10
+  gateways:
+    - mac: !secret xiaomi_aqara_basement_mac
+      key: !secret xiaomi_aqara_basement_key
+      host: !secret xiaomi_aqara_basement_host
+    - mac: !secret xiaomi_aqara_landing_mac
+      key: !secret xiaomi_aqara_landing_key
+      host: !secret xiaomi_aqara_landing_host
+    - mac: !secret xiaomi_aqara_living_mac
+      key: !secret xiaomi_aqara_living_key
+      host: !secret xiaomi_aqara_living_host
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    # Gateways
+    light.gateway_light_34ce0091d4d9:
+      friendly_name: Aqara Gateway woonkamer
+      icon: mdi:led-off
+
+    light.gateway_light_7811dcb266db:
+      friendly_name: Aqara Gateway overloop
+      icon: mdi:led-off
+
+    light.gateway_light_7811dcb7e406:
+      friendly_name: Aqara Gateway garage
+      icon: mdi:led-off
+
+    sensor.illumination_34ce0091d4d9:
+      device_class: illuminance
+      friendly_name: Lichtsterkte woonkamer
+      icon: mdi:white-balance-sunny
+
+    sensor.illumination_7811dcb266db:
+      device_class: illuminance
+      friendly_name: Lichtsterkte overloop
+      icon: mdi:white-balance-sunny
+
+    sensor.illumination_7811dcb7e406:
+      device_class: illuminance
+      friendly_name: Lichtsterkte garage
+      icon: mdi:white-balance-sunny
+    
+    # Switches
+    binary_sensor.switch_158d00016d9cfe:
+      friendly_name: Drukknop
+      icon: mdi:radiobox-blank
+
+  customize_glob:
+    light.gateway_light_34ce0091d4d9:
+      group:
+        group.lighting_living_room:
+          friendly_name: Veiligheidsverlichting
+
+    light.gateway_light_7811dcb266db:
+      group:
+        group.lighting_landing_upstairs:
+          friendly_name: Veiligheidsverlichting
+
+    light.gateway_light_7811dcb7e406:
+      group:
+        group.lighting_garage:
+          friendly_name: Veiligheidsverlichting
+
+    sensor.illumination_34ce0091d4d9:
+      group:
+        group.climate_living_room:
+          friendly_name: Lichtsterkte
+
+    sensor.illumination_7811dcb266db:
+      group:
+        group.climate_landing_upstairs:
+          friendly_name: Lichtsterkte
+
+    sensor.illumination_7811dcb7e406:
+      group:
+        group.climate_garage:
+          friendly_name: Lichtsterkte
+
+##
+# Groups
+##
+
+##
+# Scenes
+##
+
+##
+# Alerts
+##
+
+##
+# Automation
+##
+
+##
+# Scripts
+##

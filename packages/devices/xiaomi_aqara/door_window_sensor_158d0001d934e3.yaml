@@ -1,0 +1,98 @@
+##
+# door_window_sensor_158d0001d934e3.yaml
+#
+# Xiaomi Aqara door/window sensor
+#
+# @category   Home Assistant
+# @package    Devices
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+
+##
+# Components
+##
+
+binary_sensor:
+  - platform: template
+    sensors:
+      door_window_sensor_158d0001d934e3_battery_low:
+        device_class: battery
+        value_template: '{{ states.binary_sensor.door_window_sensor_158d0001d934e3.attributes.battery_level < 5 }}'
+
+sensor:
+  - platform: template
+    sensors:
+      door_window_sensor_158d0001d934e3_battery:
+        device_class: battery
+        friendly_name: 'Batterij deur-/raamsensor keukenraam links'
+        unit_of_measurement: '%'
+        value_template: '{{ states.binary_sensor.door_window_sensor_158d0001d934e3.attributes.battery_level|int }}'
+        icon_template: >
+          {% set battery_level = states.sensor.door_window_sensor_158d0001d934e3_battery.state|default(0)|int %}
+          {% set battery_round = (battery_level / 10) |int * 10 %}
+          {% if battery_round >= 100 %}
+            mdi:battery
+          {% elif battery_round > 0 %}
+            mdi:battery-{{ battery_round }}
+          {% else %}
+            mdi:battery-alert
+          {% endif %}
+
+# Sensor template in door_window_sensor_158d0001b77e9a.yaml
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    binary_sensor.door_window_sensor_158d0001d934e3:
+      device_class: window
+      friendly_name: 'Keukenraam links'
+      hidden: true
+
+    sensor.door_window_sensor_158d0001d934e3_battery:
+      templates:
+        theme: >
+          if (state < 5) {
+            return 'alert-danger';
+          } else if (state < 10) {
+            return 'alert-warning';
+          }
+
+    binary_sensor.door_window_sensor_158d0001d934e3_battery_low:
+      hidden: true
+
+  customize_glob:
+    sensor.door_window_sensor_158d0001d934e3_battery:
+      group:
+        group.battery_levels:
+          friendly_name: Deur-/raamsensor keukenraam links
+
+##
+# Groups
+##
+
+##
+# Scenes
+##
+
+##
+# Alerts
+##
+alert:
+  door_window_sensor_158d0001d934e3_battery_low:
+    name: Batterijniveau deur-/raamcontact keukenraam links onder 5%
+    entity_id: binary_sensor.door_window_sensor_158d0001d934e3_battery_low
+    repeat: 1440
+    notifiers:
+      - user_1
+      - user_2
+
+##
+# Automation
+##
+
+##
+# Scripts
+##

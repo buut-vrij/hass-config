@@ -1,0 +1,172 @@
+##
+# climate.yaml
+#
+# Climate group
+#
+# @category   Home Assistant
+# @package    Groups
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+
+##
+# Groups
+##
+group:
+  climate_bathroom:
+#    entities:
+    icon: mdi:hot-tub
+    name: Badkamer
+    view: false
+
+  climate_bedroom_ne:
+#    entities:
+    icon: mdi:school
+    name: Studeerkamer
+
+  climate_bedroom_nw:
+#    entities:
+    icon: mdi:hotel
+    name: Logeerkamer
+
+  climate_bedroom_se:
+    entities:
+      - fan.xiaomi_air_purifier_2
+    icon: mdi:hotel
+    name: Slaapkamer
+
+  climate_bedroom_sw:
+#    entities:
+    icon: mdi:tshirt-crew
+    name: Kleedkamer
+
+  climate_garage:
+    entities:
+      - sensor.temperature_158d0002271b5e
+      - sensor.humidity_158d0002271b5e
+      - sensor.pressure_158d0002271b5e
+      - sensor.illumination_7811dcb7e406
+    icon: mdi:car
+    name: Garage
+
+  climate_entryway:
+    entities:
+      - climate.entree
+      - sensor.temperature_158d00022883df
+      - sensor.humidity_158d00022883df
+      - sensor.pressure_158d00022883df
+    icon: mdi:glassdoor
+    name: Hal
+
+  climate_history:
+    entities:
+      - history_graph.temperatuur
+      - history_graph.luchtvochtigheid
+    icon: mdi:history
+    name: Geschiedenis
+
+  climate_kitchen:
+    entities:
+      - climate.keuken
+    icon: mdi:silverware-variant
+    name: Keuken
+
+  climate_landing_downstairs:
+#    entities:
+    icon: mdi:stairs
+    name: Trap/Kelder
+
+  climate_landing_upstairs:
+    entities:
+      - sensor.temperature_158d00022883db
+      - sensor.humidity_158d00022883db
+      - sensor.pressure_158d00022883db
+      - sensor.illumination_7811dcb266db
+    icon: mdi:stairs
+    name: Overloop
+
+  climate_laundry_room:
+    entities:
+      - sensor.temperature_158d0002288396
+      - sensor.humidity_158d0002288396
+      - sensor.pressure_158d0002288396
+    icon: mdi:washing-machine
+    name: Wasruimte
+
+  climate_living_room:
+    entities:
+      - climate.eethoek
+      - climate.zithoek
+      - sensor.illumination_34ce0091d4d9
+    icon: mdi:sofa
+    name: Woonkamer
+
+  climate_outdoor:
+    entities:
+      - sensor.yr_symbol_alt
+      - sensor.outdoor_temperature
+      - sensor.outdoor_humidity
+      - sensor.outdoor_precipitation
+      - sensor.outdoor_pressure
+      - sensor.outdoor_wind_force
+      - sensor.outdoor_wind_direction
+    icon: mdi:weather-partlycloudy
+    name: Buiten
+
+  climate_toilet:
+    entities:
+      - sensor.temperature_158d00022881a8
+      - sensor.humidity_158d00022881a8
+      - sensor.pressure_158d00022881a8
+    icon: mdi:human-male-female
+    name: Toilet
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    group.climate_bathroom:
+      order: 25
+
+    group.climate_bedroom_ne:
+      order: 21
+
+    group.climate_bedroom_nw:
+      order: 22
+
+    group.climate_bedroom_se:
+      order: 23
+
+    group.climate_bedroom_sw:
+      order: 24
+
+    group.climate_garage:
+      order: 32
+
+    group.climate_hallway:
+      order: 13
+
+    group.climate_history:
+      order: 1
+
+    group.climate_kitchen:
+      order: 12
+
+    group.climate_landing_downstairs:
+      order: 15
+
+    group.climate_landing_upstairs:
+      order: 26
+
+    group.climate_laundry_room:
+      order: 31
+
+    group.climate_living_room:
+      order: 11
+
+    group.climate_outdoor:
+      order: 10
+
+    group.climate_toilet:
+      order: 14

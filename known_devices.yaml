@@ -1,0 +1,21 @@
+# known_devices.yaml
+
+user_1:
+#  gravatar: !secret user_1_gravatar
+  hide_if_away: false
+  icon: mdi:human-male
+  mac: !secret user_1_mac
+  name: !secret user_1_name
+  picture:
+  track: true
+  vendor:
+
+user_2:
+#  gravatar: !secret user_2_gravatar
+  hide_if_away: false
+  icon: mdi:human-female
+  mac: !secret user_2_mac
+  name: !secret user_2_name
+  picture:
+  track: true
+  vendor:

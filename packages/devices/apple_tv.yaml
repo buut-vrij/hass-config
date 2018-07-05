@@ -1,0 +1,48 @@
+##
+# apple_tv.yaml
+#
+# Apple TV v4
+#
+# @category   Home Assistant
+# @package    Devices
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+
+##
+# Components
+##
+media_player:
+  - platform: apple_tv
+    host: !secret apple_tv_host
+    login_id: !secret apple_tv_login_id
+    start_off: true
+    credentials: !secret apple_tv_credentials
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    media_player.apple_tv:
+      friendly_name: Apple TV slaapkamer
+      icon: mdi:apple
+
+    remote.apple_tv:
+      hidden: true
+
+##
+# Groups
+##
+
+##
+# Scenes
+##
+
+##
+# Automation
+##
+
+##
+# Scripts
+##

@@ -1,0 +1,78 @@
+##
+# security.yaml
+#
+# Security group
+#
+# @category   Home Assistant
+# @package    Groups
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+
+##
+# Groups
+##
+group:
+  security_gas:
+    control: hidden
+    entities:
+      - binary_sensor.natgas_sensor_158d00011176ee
+      - binary_sensor.natgas_sensor_158d000127c558
+    icon: mdi:nuke
+    name: Aardgas
+
+  security_moisture:
+    control: hidden
+    entities:
+      - binary_sensor.water_leak_sensor_158d0001bc42ee
+      - binary_sensor.water_leak_sensor_158d0001bb63a5
+      - binary_sensor.water_leak_sensor_158d0001bc19c5
+    icon: mdi:water
+    name: Vocht
+
+  security_perimeter:
+    control: hidden
+    entities:
+      - binary_sensor.door_window_sensor_158d0001c0e526
+      - binary_sensor.door_window_sensor_158d00019fd4c6
+      - binary_sensor.door_window_sensor_158d0001f38976
+      - binary_sensor.door_window_sensor_158d0001f38318
+      - binary_sensor.door_window_sensor_kitchen_windows
+      - binary_sensor.door_window_sensor_158d0001ab5853
+      - binary_sensor.door_window_sensor_158d0001b77eb1
+      - binary_sensor.door_window_sensor_158d0001ab5797
+      - binary_sensor.door_window_sensor_158d0001d8228c
+    icon: mdi:home-outline
+    name: Perimeter
+
+  security_presence:
+    entities:
+      - group.aeotec_multisensor_6
+    icon: mdi:walk
+    name: Beweging
+
+  security_smoke:
+    control: hidden
+#    entities:
+    icon: mdi:fire
+    name: Brand
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    group.security_gas:
+      order: 5
+
+    group.security_moisture:
+      order: 6
+
+    group.security_perimeter:
+      order: 2
+
+    group.security_presence:
+      order: 3
+
+    group.security_smoke:
+      order: 4

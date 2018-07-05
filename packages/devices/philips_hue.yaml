@@ -1,0 +1,44 @@
+##
+# philips_hue.yaml
+#
+# Philips Hue
+#
+# @category   Home Assistant
+# @package    Devices
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+
+##
+# Components
+##
+hue:
+  bridges:
+    - host: !secret light_hue_host
+      allow_unreachable: true
+      allow_hue_groups: false
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    light.hue_color_lamp_1:
+      friendly_name: Lamp TV meubel
+      icon: mdi:lamp
+
+##
+# Groups
+##
+
+##
+# Scenes
+##
+
+##
+# Automation
+##
+
+##
+# Scripts
+##

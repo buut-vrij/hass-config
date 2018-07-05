@@ -1,0 +1,89 @@
+##
+# apc_back_ups.yaml
+#
+# APC Back-UPS
+#
+# @category   Home Assistant
+# @package    Devices
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+
+##
+# Components
+##
+binary_sensor:
+  - platform: template
+    sensors:
+      ups_online:
+        device_class: battery
+        friendly_name: Status
+        value_template: '{{ is_state("states.sensor.ups_status.attributes.status", "OL") }}'
+
+sensor:
+  - platform: nut
+    host: !secret ds114_host
+    name: ups
+    password: !secret ds114_password
+    username: !secret ds114_username
+    resources:
+      - battery.charge
+      - battery.charge.low
+      - battery.charge.warning
+      - battery.runtime
+      - ups.delay.shutdown
+      - ups.load
+      - ups.status
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    sensor.ups_battery_charge:
+      friendly_name: Resterende lading
+      icon: mdi:battery-charging
+
+    sensor.ups_battery_runtime:
+      friendly_name: Resterende tijd
+
+    sensor.ups_load:
+      friendly_name: Huidige belasting
+      icon: mdi:battery-alert
+
+    sensor.ups_low_battery_setpoint:
+      hidden: true
+
+    sensor.ups_status_data:
+      hidden: true
+
+    sensor.ups_ups_shutdown_delay:
+      hidden: true
+
+    sensor.ups_warning_battery_setpoint:
+      hidden: true
+
+##
+# Groups
+##
+group:
+  ups:
+    entities:
+      - binary_sensor.ups_online
+      - sensor.ups_load
+      - sensor.ups_battery_charge
+      - sensor.ups_battery_runtime
+    icon: mdi:car-battery
+    name: Noodstroomvoeding
+
+##
+# Scenes
+##
+
+##
+# Automation
+##
+
+##
+# Scripts
+##
