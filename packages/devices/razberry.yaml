@@ -1,0 +1,44 @@
+##
+# razberry.yaml
+#
+# Z-Wave.Me RaZberry v2
+#
+# @category   Home Assistant
+# @package    Device packages
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+
+##
+# Components
+##
+zwave:
+  usb_path: /dev/ttyAMA0
+  network_key: !secret zwave_network_key
+  polling_interval: 30000
+
+##
+# Customize
+##
+homeassistant:
+  customize_glob:
+    zwave.zwaveme_razberry_controller_2016_zwave:
+      group:
+        group.zwave_devices:
+          friendly_name: Controller
+
+##
+# Groups
+##
+
+##
+# Scenes
+##
+
+##
+# Automation
+##
+
+##
+# Scripts
+##
