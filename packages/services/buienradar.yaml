@@ -70,7 +70,7 @@ homeassistant:
       friendly_name: 'Luchtdruk buiten'
 
     sensor.outdoor_temperature:
-      friendly_name: 'Luchtvochtigheid buiten'
+      friendly_name: 'Temperatuur buiten'
 
     sensor.outdoor_wind_direction:
       friendly_name: 'Windrichting buiten'
