@@ -33,8 +33,8 @@ group:
   security_perimeter:
     control: hidden
     entities:
-      - binary_sensor.door_window_sensor_158d0001c0e526
       - binary_sensor.door_window_sensor_158d00019fd4c6
+      - binary_sensor.door_window_sensor_158d0001c0e526
       - binary_sensor.door_window_sensor_158d0001f38976
       - binary_sensor.door_window_sensor_158d0001f38318
       - binary_sensor.door_window_sensor_kitchen_windows
