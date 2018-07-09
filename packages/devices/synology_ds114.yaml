@@ -75,6 +75,12 @@ homeassistant:
     sensor.used_space_volume_1:
       hidden: true
 
+  customize_glob:
+    switch.synology_ds114:
+      group:
+        group.synology_ds114:
+          friendly_name: Wake-on-LAN
+
 ##
 # Groups
 ##
