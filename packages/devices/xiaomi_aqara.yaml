@@ -26,6 +26,16 @@ xiaomi_aqara:
       host: !secret xiaomi_aqara_living_host
 
 ##
+# Groups
+##
+group:
+  all_gateway_lights:
+    entities:
+      - light.gateway_light_34ce0091d4d9
+      - light.gateway_light_7811dcb266db
+      - light.gateway_light_7811dcb7e406
+
+##
 # Customize
 ##
 homeassistant:
@@ -63,6 +73,9 @@ homeassistant:
       friendly_name: Drukknop
       icon: mdi:radiobox-blank
 
+    all_gateway_lights:
+      hidden: true
+
   customize_glob:
     light.gateway_light_34ce0091d4d9:
       group:
@@ -95,12 +108,37 @@ homeassistant:
           friendly_name: Lichtsterkte
 
 ##
-# Groups
-##
-
-##
 # Scenes
 ##
+scene:
+  - name: All gateway lights danger
+    entities:
+      group.all_gateway_lights:
+        state: on
+        transition: 0
+        brightness_pct: 100
+        color_name: red
+  - name: All gateway lights info
+    entities:
+      group.all_gateway_lights:
+        state: on
+        transition: 0
+        brightness_pct: 100
+        color_name: blue
+  - name: All gateway lights success
+    entities:
+      group.all_gateway_lights:
+        state: on
+        transition: 0
+        brightness_pct: 100
+        color_name: green
+  - name: All gateway lights warning
+    entities:
+      group.all_gateway_lights:
+        state: on
+        transition: 0
+        brightness_pct: 100
+        color_name: gold
 
 ##
 # Alerts
@@ -109,7 +147,43 @@ homeassistant:
 ##
 # Automation
 ##
+automation:
+  - alias: flash_all_gateway_lights_start
+    trigger:
+    action:
+      service: script.turn_on
+      entity_id: script.flash_all_gateway_lights
+
+  - alias: flash_all_gateway_lights_stop
+    trigger:
+    action:
+      service: script.turn_off
+      entity_id: script.flash_all_gateway_lights
 
 ##
 # Scripts
 ##
+script:
+  flash_all_gateway_lights:
+    alias: Flash all gateway lights
+    sequence:
+      - service: homeassistant.turn_on
+        data:
+          entity_id: group.all_gateway_lights
+      - delay:
+          seconds: 1
+      - service: homeassistant.turn_off
+        data:
+          entity_id: group.all_gateway_lights
+      - service: script.turn_on
+        data:
+          entity_id: script.flash_all_gateway_lights_loop
+
+  flash_all_gateway_lights_loop:
+    alias: Flash all gateway lights loop
+    sequence:
+      - delay:
+          seconds: 1
+      - service: script.turn_on
+        data:
+          entity_id: script.flash_all_gateway_lights
