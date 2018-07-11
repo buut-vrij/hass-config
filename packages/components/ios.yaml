@@ -1,0 +1,35 @@
+##
+# ios.yaml
+#
+# Home Assistant iOS
+#
+# @category   Home Assistant
+# @package    Component packages
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+
+##
+# Components
+##
+ios:
+
+##
+# Customize
+##
+
+##
+# Groups
+##
+
+##
+# Scenes
+##
+
+##
+# Automation
+##
+
+##
+# Scripts
+##

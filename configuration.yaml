@@ -66,9 +66,6 @@ updater:
 # Enable Zeroconf/Bonjour/Avahi exposure
 zeroconf:
 
-# Manually load iOS component
-ios:
-
 # Discover some devices automatically
 discovery:
 
