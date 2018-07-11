@@ -26,6 +26,10 @@ homeassistant:
     light.hue_color_lamp_1:
       friendly_name: Lamp TV meubel
       icon: mdi:lamp
+      state_card_mode: hide-slider
+      stretch_slider: true
+      slider_theme:
+        report_when_not_changed: false
 
 ##
 # Groups
