@@ -8,10 +8,6 @@
 # @author     Jeroen Butenaerts
 # @version    1.0
 ##
-
-##
-# Components
-##
 customizer:
   custom_ui: hosted
 
@@ -22,18 +18,3 @@ homeassistant:
   customize_glob:
     "*.*":
       custom_ui_state_card: state-card-custom-ui
-##
-# Groups
-##
-
-##
-# Scenes
-##
-
-##
-# Automation
-##
-
-##
-# Scripts
-##

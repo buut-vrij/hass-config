@@ -8,10 +8,6 @@
 # @author     Jeroen Butenaerts
 # @version    1.0
 ##
-
-##
-# Components
-##
 sun:
 
 ##
@@ -20,20 +16,5 @@ sun:
 homeassistant:
   customize:
     sun.sun:
-      friendly_name: Zon
-
-##
-# Groups
-##
-
-##
-# Scenes
-##
-
-##
-# Automation
-##
-
-##
-# Scripts
-##
+      friendly_name: 'Zon'
+      hidden: true

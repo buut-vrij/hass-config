@@ -1,5 +1,5 @@
 ##
-# cloud.yaml
+# utility_meter.yaml
 #
 # Home Assistant Cloud
 #
@@ -8,4 +8,4 @@
 # @author     Jeroen Butenaerts
 # @version    1.0
 ##
-cloud:
+

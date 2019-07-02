@@ -10,10 +10,6 @@
 ##
 
 ##
-# Components
-##
-
-##
 # Customize
 ##
 homeassistant:
@@ -22,27 +18,11 @@ homeassistant:
       hidden: true
     sensor.iphone_van_veerle_dachard_battery_state:
       hidden: true
-    sensor.its_not_a_blender_battery_level:
+    sensor.buut_battery_level:
       hidden: true
-    sensor.its_not_a_blender_battery_state:
+    sensor.buut_battery_state:
       hidden: true
     sensor.swatter_battery_level:
       hidden: true
     sensor.swatter_battery_state:
       hidden: true
-
-##
-# Groups
-##
-
-##
-# Scenes
-##
-
-##
-# Automation
-##
-
-##
-# Scripts
-##

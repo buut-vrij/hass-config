@@ -8,33 +8,9 @@
 # @author     Jeroen Butenaerts
 # @version    1.0
 ##
-
-##
-# Components
-##
 notify:
-  - name: mobile_phones
-    platform: group
+  - platform: group
+    name: 'mobile_phones'
     services:
       - service: ios_iphone_jeroen
       - service: ios_iphone_veerle
-
-##
-# Customize
-##
-
-##
-# Groups
-##
-
-##
-# Scenes
-##
-
-##
-# Automation
-##
-
-##
-# Scripts
-##

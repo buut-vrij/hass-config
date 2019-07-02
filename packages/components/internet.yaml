@@ -8,57 +8,37 @@
 # @author     Jeroen Butenaerts
 # @version    1.0
 ##
+#binary_sensor:
+#  - platform: ping
+#    host: 8.8.8.8
+#    scan_interval: 60
 
-##
-# Components
-##
-binary_sensor:
-  - platform: ping
-    host: 8.8.8.8
-    scan_interval: 60
-
-  - platform: template
-    sensors:
-      internet_connection:
-        device_class: connectivity
-        friendly_name: Internet
-        value_template: >-
-          {% if is_state('binary_sensor.ping_binary_sensor', 'on') %}
-            Verbroken
-          {% else %}
-            Verbonden
-          {% endif %}
-        icon_template: >-
-          {% if is_state('binary_sensor.ping_binary_sensor', 'on') %}
-            mdi:earth
-          {% else %}
-            mdi:earth-off
-          {% endif %}
+#  - platform: template
+#    sensors:
+#      internet_connection:
+#        device_class: connectivity
+#        friendly_name: 'Internet'
+#        value_template: >-
+#          {% if is_state('binary_sensor.ping_binary_sensor', 'on') %}
+#            'Verbroken'
+#          {% else %}
+#            'Verbonden'
+#          {% endif %}
+#        icon_template: >-
+#          {% if is_state('binary_sensor.ping_binary_sensor', 'on') %}
+#            'mdi:earth'
+#          {% else %}
+#            'mdi:earth-off'
+#          {% endif %}
 
 ##
 # Customize
 ##
-homeassistant:
-  customize:
-    binary_sensor.ping_binary_sensor:
-      friendly_name: Google DNS ping
-      hidden: true
+#homeassistant:
+#  customize:
+#    binary_sensor.ping_binary_sensor:
+#      friendly_name: 'Google DNS ping'
+#      hidden: true
 
-    binary_sensor.internet_connection:
-      initial_state: on
-
-##
-# Groups
-##
-
-##
-# Scenes
-##
-
-##
-# Automation
-##
-
-##
-# Scripts
-##
+#    binary_sensor.internet_connection:
+#      initial_state: on

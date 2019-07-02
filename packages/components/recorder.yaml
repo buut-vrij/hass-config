@@ -1,0 +1,135 @@
+##
+# recorder.yaml
+#
+# Home Assistant recorder
+#
+# @category   Home Assistant
+# @package    Component packages
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+recorder:
+#  db_url: !secret recorder_db_url
+  include:
+    entities:
+      # Alarm
+      - alarm_control_panel.alarm
+      - binary_sensor.garage_loopdeur
+
+      # Door window sensors
+      - binary_sensor.door_window_sensor_158d00019fd4c6
+      - binary_sensor.door_window_sensor_158d0001ab5797
+      - binary_sensor.door_window_sensor_158d0001ab5853
+      - binary_sensor.door_window_sensor_158d0001b77e9a
+      - binary_sensor.door_window_sensor_158d0001b77eb1
+      - binary_sensor.door_window_sensor_158d0001c0e526
+      - binary_sensor.door_window_sensor_158d0001d8228c
+      - binary_sensor.door_window_sensor_158d0001d934e3
+      - binary_sensor.door_window_sensor_158d0001f38318
+      - binary_sensor.door_window_sensor_158d0001f38976
+
+      # Motion sensors
+      - binary_sensor.motion_sensor_158d000257a829
+      - binary_sensor.motion_sensor_158d0002e29c77
+      - binary_sensor.motion_sensor_158d0002ec7d7a
+      - binary_sensor.motion_sensor_158d000257a816
+      - binary_sensor.motion_sensor_158d000257b63f
+      - binary_sensor.motion_sensor_158d0002e275dd
+      - binary_sensor.motion_sensor_158d0002e275a0
+
+      # Natgas detectors
+      - binary_sensor.natgas_sensor_158d00011176ee
+      - binary_sensor.natgas_sensor_158d000127c558
+
+      # Smoke detectors
+      - binary_sensor.smoke_sensor_158d0001e80a3c
+      - binary_sensor.smoke_sensor_158d0001e80a40
+      - binary_sensor.smoke_sensor_158d0002153aba
+      - binary_sensor.smoke_sensor_158d000215a794
+      - binary_sensor.smoke_sensor_158d000215e268
+      - binary_sensor.smoke_sensor_158d000215e643
+
+      # Leak detectors
+      - binary_sensor.water_leak_sensor_158d0001bb63a5
+      - binary_sensor.water_leak_sensor_158d0001bb7922
+      - binary_sensor.water_leak_sensor_158d0001bc19c5
+      - binary_sensor.water_leak_sensor_158d0001bc42dc
+      - binary_sensor.water_leak_sensor_158d0001bc42ee
+
+      # Heating
+      - climate.eethoek
+      - climate.hal
+      - climate.keuken
+      - climate.zithoek
+
+      # Lights
+      - light.fibaro_system_fgd212_dimmer_2_level_2
+      - light.fibaro_system_fgd212_dimmer_2_level_4
+      - light.fibaro_system_fgd212_dimmer_2_level_6
+      - light.fibaro_system_fgd212_dimmer_2_level_11
+      - light.fibaro_system_fgd212_dimmer_2_level_13
+      - light.fibaro_system_fgd212_dimmer_2_level_15
+      - light.fibaro_system_fgd212_dimmer_2_level_16
+      - light.fibaro_system_fgd212_dimmer_2_level_19
+      - light.gateway_light_34ce0091d4d9
+      - light.gateway_light_7811dcb266db
+      - light.gateway_light_7811dcb7e406
+      - light.kastverlichting
+      - light.livingwhites_plug_1
+      - light.werkbladverlichting
+      - light.tv_lamp
+
+      # Media players
+      - media_player.chromecast_bedroom
+      - media_player.chromecast_living
+      - media_player.googlehome_basement
+      - media_player.googlehome_landing
+      - media_player.googlehome_living
+      - media_player.googlehome_kitchen
+      - media_player.receiver_woonkamer
+      - media_player.tv_woonkamer
+
+      # Persons
+      - person.jeroen
+      - person.veerle
+
+      # Humidity sensors
+      - sensor.humidity_158d0002271b5e
+      - sensor.humidity_158d00022881a8
+      - sensor.humidity_158d0002288396
+      - sensor.humidity_158d0002288396
+      - sensor.humidity_158d00022883df
+
+      # Illuminance sensors
+      - sensor.illumination_34ce0091d4d9
+      - sensor.illumination_7811dcb266db
+      - sensor.illumination_7811dcb7e406
+
+      # Air pressure sensors
+      - sensor.pressure_158d0002271b5e
+      - sensor.pressure_158d00022881a8
+      - sensor.pressure_158d0002288396
+      - sensor.pressure_158d00022883db
+      - sensor.pressure_158d00022883df
+
+      # Luminance sensors
+      - sensor.sensative_strips_comfort_luminance
+
+      # Temperature sensors
+      - sensor.sensative_strips_comfort_temperature
+      - sensor.temperature_158d0002271b5e
+      - sensor.temperature_158d00022881a8
+      - sensor.temperature_158d0002288396
+      - sensor.temperature_158d00022883db
+      - sensor.temperature_158d00022883df
+
+      # Weather data
+      - sensor.outdoor_humidity
+      - sensor.outdoor_precipitation
+      - sensor.outdoor_pressure
+      - sensor.outdoor_temperature
+      - sensor.outdoor_wind_direction
+      - sensor.outdoor_wind_force
+
+      # Sun
+      - sun.sun

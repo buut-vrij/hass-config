@@ -8,71 +8,380 @@
 # @author     Jeroen Butenaerts
 # @version    1.0
 ##
-
-##
-# Components
-##
 homekit:
   pincode: !secret homekit_pincode
+  auto_start: false
   filter:
-    exclude_domains:
-      - binary_sensor
-      - device_tracker
-      - light
-      - script
-      - sensor
-      - switch
     include_entities:
-      # FIBARO
-      - light.fibaro_system_fgd212_dimmer_2_level_2
-      - light.fibaro_system_fgd212_dimmer_2_level_4
-      - light.fibaro_system_fgd212_dimmer_2_level_6
-      - light.fibaro_system_fgd212_dimmer_2_level_8
-      # Philips Hue
-      - light.hue_color_lamp_1
-      # Xiaomi Aqara
-      - binary_sensor.door_window_sensor_158d00019fd4c6
-      - binary_sensor.door_window_sensor_158d0001c0e526
+      # Alarm
+      - alarm_control_panel.woonveilig
+
+      # Climate
+      - climate.eethoek
+      - climate.hal
+      - climate.keuken
+      - climate.zithoek
+
+      # Covers
+      - cover.curtain_158d0001fd240a_2 # Living room window
+      - cover.curtain_158d0001ef47a5_2 # Living room garden
+      - cover.living_room_all
+
+      # Door window sensors
+      - binary_sensor.door_window_sensor_158d00019fd4c6 # Garage door
+      - binary_sensor.door_window_sensor_158d0001ab5797 # Bedroom NE
+      - binary_sensor.door_window_sensor_158d0001ab5853 # Bedroom NW
+      - binary_sensor.door_window_sensor_158d0001b77eb1 # Bedroom SE
+      - binary_sensor.door_window_sensor_158d0001c0e526 # Garage-landing door
+      - binary_sensor.door_window_sensor_158d0001d8228c # Bedroom SW
+      - binary_sensor.door_window_sensor_158d0001dcce33 # Boiler room
+      - binary_sensor.door_window_sensor_158d0001f38318 # Garden doors
+      - binary_sensor.door_window_sensor_158d0001f38976 # Front door
       - binary_sensor.door_window_sensor_kitchen_windows
-      - binary_sensor.door_window_sensor_158d0001d8228c
-      - binary_sensor.door_window_sensor_158d0001ab5853
-      - binary_sensor.door_window_sensor_158d0001b77eb1
-      - binary_sensor.door_window_sensor_158d0001ab5797
-      - binary_sensor.door_window_sensor_158d0001f38318
-      - binary_sensor.door_window_sensor_158d0001f38976
-      - sensor.humidity_158d0002271b5e
-      - sensor.humidity_158d00022883df
-      - sensor.humidity_158d00022883db
-      - sensor.humidity_158d00022881a8
-      - sensor.humidity_158d0002288396
-      - sensor.illumination_34ce0091d4d9
-      - sensor.illumination_7811dcb266db
-      - sensor.illumination_7811dcb7e406
-      - sensor.temperature_158d0002271b5e
-      - sensor.temperature_158d00022883df
-      - sensor.temperature_158d00022883db
-      - sensor.temperature_158d00022881a8
-      - sensor.temperature_158d0002288396
-      - sensor.water_leak_sensor_158d0001bb63a5
-      - sensor.water_leak_sensor_158d0001bc42ee
-      - sensor.water_leak_sensor_158d0001bc19c5
+      - binary_sensor.garage_loopdeur
+
+      # Humidity sensors
+      - sensor.humidity_158d0002271b5e # Garage
+      - sensor.humidity_158d00022881a8 # Toilet
+      - sensor.humidity_158d00022883db # Landing upstairs
+      - sensor.humidity_158d00022883df # Entryway
+      - sensor.humidity_158d0002288396 # Boiler room
+
+      # Illumination sensors
+      - sensor.illumination_34ce0091d4d9 # Living room
+      - sensor.illumination_7811dcb266db # Landing upstairs
+      - sensor.illumination_7811dcb7e406 # Garage
+
+      # Lights
+      - light.fibaro_system_fgd212_dimmer_2_level_2 # Dining
+      - light.fibaro_system_fgd212_dimmer_2_level_4 # Living
+      - light.fibaro_system_fgd212_dimmer_2_level_6 # Entryway
+      - light.fibaro_system_fgd212_dimmer_2_level_11 # Kitchen
+      - light.fibaro_system_fgd212_dimmer_2_level_15 # Landing downstairs
+      - light.fibaro_system_fgd212_dimmer_2_level_17 # Boiler room
+      - light.kastverlichting
+      - light.livingwhites_plug_1 # Wire lamp
+      - light.plafondlampen_garage
+      - light.tv_lamp
+      - light.werkbladverlichting
+
+      # Media players
+      - media_player.receiver_woonkamer
+      - media_player.tv_woonkamer
+
+      # Motion sensors
+      - binary_sensor.motion_sensor_158d000257a816 # Kitchen
+      - binary_sensor.motion_sensor_158d000257b63f # Landing upstairs
+      - binary_sensor.motion_sensor_158d0002e275a0 # Living room
+      - binary_sensor.motion_sensor_158d0002e275dd # Boiler room
+      - binary_sensor.motion_sensor_158d0002e29c77 # Entryway
+      - binary_sensor.motion_sensor_158d0002ec7d7a # Landing downstairs
+      - binary_sensor.motion_sensor_garage
+
+      # Natgas sensors
+      - binary_sensor.natgas_sensor_158d00011176ee # Boiler
+      - binary_sensor.natgas_sensor_158d000127c558 # Meter cabinet
+
+      # Scenes
+      - scene.general_evening
+      - scene.activity_watching_tv
+      - scene.activity_watching_movie
+      - scene.activity_pausing_movie
+      - scene.activity_cooking
+
+      # Smoke sensors
+      - binary_sensor.smoke_sensor_158d0001e80a3c # Boiler room
+      - binary_sensor.smoke_sensor_158d0001e80a40 # Entryway
+      - binary_sensor.smoke_sensor_158d000215a794 # Garage
+      - binary_sensor.smoke_sensor_158d000215e268 # Landing upstairs
+      - binary_sensor.smoke_sensor_158d000215e643 # Kitchen
+      - binary_sensor.smoke_sensor_158d0002153aba # Living room
+
+      # Switches
+      - swith.fibaro_system_fgwpef_wall_plug_gen5_switch # Espresso machine
+
+      # Temperature sensors
+      - sensor.temperature_158d0002271b5e # Garage
+      - sensor.temperature_158d00022881a8 # Toilet
+      - sensor.temperature_158d0002288396 # Boiler room
+      - sensor.temperature_158d00022883db # Landing upstairs
+      - sensor.temperature_158d00022883df # Entryway
+
+      # Water leak sensors
+      - binary_sensor.water_leak_sensor_158d0001bb63a5 # Bathroom
+      - binary_sensor.water_leak_sensor_158d0001bb7922 # Garage
+      - binary_sensor.water_leak_sensor_158d0001bc19c5 # Sump
+      - binary_sensor.water_leak_sensor_158d0001bc42dc # Toilet
+      - binary_sensor.water_leak_sensor_158d0001bc42ee # Kitchen sink
+
+  ##
+  # Configuration
+  ##
+  entity_config:
+    # Alarm
+    alarm_control_panel.alarm:
+      code: 2274
+      name: 'Alarm'
+
+    # Climate
+    climate.eethoek:
+      name: 'Woonkamer Thermostaat eethoek'
+
+    climate.hal:
+      name: 'Hal Thermostaat'
+
+    climate.keuken:
+      name: 'Keuken Thermostaat'
+
+    climate.zithoek:
+      name: 'Woonkamer Thermostaat zithoek'
+
+    # Covers
+    cover.curtain_158d0001fd240a_2:
+      name: 'Woonkamer Gordijnen tuinkant'
+
+    cover.curtain_158d0001ef47a5_2:
+      name: 'Woonkamer Gordijnen raamkant'
+
+    cover.living_room_all:
+      name: 'Woonkamer Blindering'
+
+    # Door window sensors
+    binary_sensor.door_window_sensor_158d00019fd4c6:
+      name: 'Garage Garagepoort'
+
+    binary_sensor.door_window_sensor_158d0001ab5797:
+      name: 'Studeerkamer Raam'
+
+    binary_sensor.door_window_sensor_158d0001ab5853:
+      name: 'Logeerkamer Raam'
+
+    binary_sensor.door_window_sensor_158d0001b77eb1:
+      name: 'Slaapkamer Raam'
+
+    binary_sensor.door_window_sensor_158d0001c0e526:
+      name: 'Garage Deur kelderportaal'
+
+    binary_sensor.door_window_sensor_158d0001d8228c:
+      name: 'Kleedkamer Raam'
+
+    binary_sensor.door_window_sensor_158d0001dcce33:
+      name: 'Wasruimte Deur'
+
+    binary_sensor.door_window_sensor_158d0001f38318:
+      name: 'Woonkamer Tuindeuren'
+
+    binary_sensor.door_window_sensor_158d0001f38976:
+      name: 'Hal Voordeur'
+
+    binary_sensor.door_window_sensor_kitchen_windows:
+      name: 'Keuken Ramen'
+
+    binary_sensor.garage_loopdeur:
+      name: 'Garage Garagepoort loopdeur'
+
+    # Humidity sensors
+    sensor.humidity_158d0002271b5e:
+      name: 'Garage Luchtvochtigheid'
+
+    sensor.humidity_158d00022881a8:
+      name: 'Toilet Luchtvochtigheid'
+
+    sensor.humidity_158d00022883db:
+      name: 'Overloop Luchtvochtigheid'
+
+    sensor.humidity_158d00022883df:
+      name: 'Hal Luchtvochtigheid'
+
+    sensor.humidity_158d0002288396:
+      name: 'Wasruimte Luchtvochtigheid'
+
+    # Illumination sensors
+    sensor.illumination_34ce0091d4d9:
+      name: 'Woonkamer Lichtsterkte'
+
+    sensor.illumination_7811dcb266db:
+      name: 'Overloop Lichtsterkte'
+
+    sensor.illumination_7811dcb7e406:
+      name: 'Garage Lichtsterkte'
+
+    # Lights
+    light.fibaro_system_fgd212_dimmer_2_level_2:
+      name: 'Woonkamer Plafondlamp eethoek'
+    
+    light.fibaro_system_fgd212_dimmer_2_level_4:
+      name: 'Woonkamer Plafondlamp zithoek'
+    
+    light.fibaro_system_fgd212_dimmer_2_level_6:
+      name: 'Hal Plafondlamp'
+    
+    light.fibaro_system_fgd212_dimmer_2_level_11:
+      name: 'Keuken Plafondlamp'
+    
+    light.fibaro_system_fgd212_dimmer_2_level_15:
+      name: 'Kelderportaal Plafondlamp'
+    
+    light.fibaro_system_fgd212_dimmer_2_level_17:
+      name: 'Wasruimte Plafondlamp'
+    
+    light.kastverlichting:
+      name: 'Woonkamer Kast'
+    
+    light.livingwhites_plug_1:
+      name: 'Woonkamer Draadlamp'
+    
+    light.plafondlampen_garage:
+      name: 'Garage Plafondlampen'
+    
+    light.tv_lamp:
+      name: 'Woonkamer TV lamp'
+    
+    light.werkbladverlichting:
+      name: 'Keuken Werkblad'
+
+    # Media players
+    media_player.receiver_woonkamer:
+      name: 'Woonkamer Receiver'
+      feature_list:
+        - feature: 'on_off'
+        - feature: 'toggle_mute'
+
+    media_player.tv_woonkamer:
+      name: 'Woonkamer TV'
+      feature_list:
+        - feature: 'on_off'
+        - feature: 'play_pause'
+#        - feature: 'play_stop'
+        - feature: 'toggle_mute'
+#        - feature: 'select_source'
+
+    # Motion sensors
+    binary_sensor.motion_sensor_158d000257a816:
+      name: 'Keuken Beweging'
+
+    binary_sensor.motion_sensor_158d000257b63f:
+      name: 'Overloop Beweging'
+
+    binary_sensor.motion_sensor_158d0002e275a0:
+      name: 'Woonkamer Beweging'
+
+    binary_sensor.motion_sensor_158d0002e275dd:
+      name: 'Wasruimte Beweging'
+
+    binary_sensor.motion_sensor_158d0002e29c77:
+      name: 'Hal Beweging'
+
+    binary_sensor.motion_sensor_158d0002ec7d7a:
+      name: 'Kelderportaal Beweging'
+
+    binary_sensor.motion_sensor_garage:
+      name: 'Garage Beweging'
+
+    # Natgas sensors
+    binary_sensor.natgas_sensor_158d00011176ee:
+      name: 'Wasruimte Aardgas cv-ketel'
+
+    binary_sensor.natgas_sensor_158d000127c558:
+      name: 'Hal Aardgas meterkast'
+
+    # Scenes
+    scene.general_evening:
+      name: 'Scene avond'
+
+    scene.activity_watching_tv:
+      name: 'Scene TV afspelen'
+
+    scene.activity_watching_movie:
+      name: 'Scene film afspelen'
+
+    scene.activity_pausing_movie:
+      name: 'Scene film pauseren'
+
+    scene.activity_cooking:
+      name: 'Scene koken'
+
+    # Smoke sensors
+    binary_sensor.smoke_sensor_158d0001e80a3c:
+      name: 'Wasruimte Rook'
+
+    binary_sensor.smoke_sensor_158d0001e80a40:
+      name: 'Hal Rook'
+
+    binary_sensor.smoke_sensor_158d000215a794:
+      name: 'Garage Rook'
+
+    binary_sensor.smoke_sensor_158d000215e268:
+      name: 'Overloop Rook'
+
+    binary_sensor.smoke_sensor_158d000215e643:
+      name: 'Keuken Rook'
+
+    binary_sensor.smoke_sensor_158d0002153aba:
+      name: 'Woonkamer Rook'
+
+    # Switches
+    swith.fibaro_system_fgwpef_wall_plug_gen5_switch:
+      name: 'Keuken Espresso machine'
+
+    # Temperature sensors
+    sensor.temperature_158d0002271b5e:
+      name: 'Garage Temperatuur'
+
+    sensor.temperature_158d00022881a8:
+      name: 'Toilet Temperatuur'
+
+    sensor.temperature_158d0002288396:
+      name: 'Wasruimte Temperatuur'
+
+    sensor.temperature_158d00022883db:
+      name: 'Overloop Temperatuur'
+
+    sensor.temperature_158d00022883df:
+      name: 'Hal Temperatuur'
+
+    # Water leak sensors
+    binary_sensor.water_leak_sensor_158d0001bb63a5:
+      name: 'Badkamer Vocht'
+
+    binary_sensor.water_leak_sensor_158d0001bb7922:
+      name: 'Garage Vocht'
+
+    binary_sensor.water_leak_sensor_158d0001bc19c5:
+      name: 'Wasruimte Vocht pompput'
+
+    binary_sensor.water_leak_sensor_158d0001bc42dc:
+      name: 'Toilet Vocht'
+
+    binary_sensor.water_leak_sensor_158d0001bc42ee:
+      name: 'Keuken Vocht afvoer'
+
+##
+# Automations
+##
+automation:
+  ##
+  # Start HomeKit when z-wave network ready
+  ##
+  - alias: 'HomeKit start when z-wave network ready'
+    initial_state: on
+    trigger:
+      # When any z-wave network ready event received
+      - platform: event
+        event_type: zwave.network_ready
+      - platform: event
+        event_type: zwave.network_complete
+      - platform: event
+        event_type: zwave.network_complete_some_dead
+    action:
+      # Then start homekit
+      - service: homekit.start
 
 ##
 # Customize
 ##
-
-##
-# Groups
-##
-
-##
-# Scenes
-##
-
-##
-# Automation
-##
-
-##
-# Scripts
-##
+homeassistant:
+  customize:
+    automation.homekit_start_when_z_wave_network_ready:
+      friendly_name: 'HomeKit starten wanneer z-wave netwerk gereed is'
+      hidden: true
