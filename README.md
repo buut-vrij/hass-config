@@ -28,7 +28,7 @@
 **Media devices:**\
 1x Apple TV 4\
 1x Apple TV 4K\
-1x Denon X1300W\
+1x Denon AVR-X1300W\
 1x Google Chromecast\
 1x Google Chromecast Audio\
 1x Google Chromecast Ultra\
@@ -39,6 +39,8 @@
 1x Sony PlayStation 4\
 \
 **Other devices:**\
+1x Honeywell EvoHome\
+1x Egardia WoonVeilig\
 1x PowerWalker VI 750\
 3x Raspberry Pi 3\
 1x Raspberry Pi Zero W + ANAVI Infrared pHAT\
