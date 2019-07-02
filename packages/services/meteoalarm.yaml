@@ -1,0 +1,23 @@
+##
+# meteoalarm.yaml
+#
+# MeteoAlarm weather alerts
+#
+# @category   Home Assistant
+# @package    Service packages
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+binary_sensor:
+  - platform: meteoalarm
+    country: !secret meteoalarm_country
+    province: !secret meteoalarm_province
+    language: !secret meteoalarm_language
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    binary_sensor.meteoalarm:
+      friendly_name: 'Weeralarm'

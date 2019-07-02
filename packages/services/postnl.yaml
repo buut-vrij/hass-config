@@ -8,31 +8,7 @@
 # @author     Jeroen Butenaerts
 # @version    1.0
 ##
-
-##
-# Components
-##
-sensor:
-  - platform: postnl
-    username: !secret postnl_username
-    password: !secret postnl_password
-
-##
-# Customize
-##
-
-##
-# Groups
-##
-
-##
-# Scenes
-##
-
-##
-# Automation
-##
-
-##
-# Scripts
-##
+#sensor:
+#  - platform: postnl
+#    username: !secret postnl_username
+#    password: !secret postnl_password

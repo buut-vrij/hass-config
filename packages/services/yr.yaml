@@ -9,17 +9,11 @@
 # @author     Jeroen Butenaerts
 # @version    1.0
 ##
-
-##
-# Components
-##
 sensor:
   - platform: yr
-
   - platform: template
     sensors:
       yr_symbol_alt:
-        friendly_name: 'Weer'
         icon_template: >-
           {% if is_state('sensor.yr_symbol', '1') %}
             mdi:weather-sunny
@@ -29,7 +23,7 @@ sensor:
             mdi:weather-partlycloudy
           {% elif is_state('sensor.yr_symbol', '4') %}
             mdi:weather-cloudy
-          {% elif is_state('sensor.yr_symbol', '5') %}
+          {% elif is_state('sensr.yr_symbol', '5') %}
             mdi:weather-rainy
           {% elif is_state('sensor.yr_symbol', '6') %}
             mdi:weather-lightning-rainy
@@ -192,7 +186,6 @@ sensor:
           {% else %}
             Fout
           {% endif %}
-
 ##
 # Customize
 ##
@@ -200,19 +193,5 @@ homeassistant:
   customize:
     sensor.yr_symbol:
       hidden: true
-
-##
-# Groups
-##
-
-##
-# Scenes
-##
-
-##
-# Automation
-##
-
-##
-# Scripts
-##
+    sensor.yr_symbol_alt:
+      friendly_name: 'Weer'
