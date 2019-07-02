@@ -39,7 +39,10 @@
 1x Sony PlayStation 4\
 \
 **Other devices:**\
+1x PowerWalker VI 750\
 3x Raspberry Pi 3\
 1x Raspberry Pi Zero W + ANAVI Infrared pHAT\
 1x SolarEdge SE4K\
+1x Synology DS114\
+1x Synology RS214\
 1x Ubiquiti UniFi CloudKey
