@@ -1,0 +1,40 @@
+##
+# scene_activity_watching_tv.yaml
+#
+# Set up for watching tv
+#
+# @category   Home Assistant
+# @package    Scenes
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+scene:
+  - name: 'activity_watching_tv'
+    entities:
+      light.fibaro_system_fgd212_dimmer_2_level_4: # Living
+        state: off
+        transition: 5
+      light.tv_lamp:
+        state: on
+        brightness_pct: 25
+        transition: 5
+      light.fibaro_system_fgd212_dimmer_2_level_2: # Dining
+        state: off
+        transition: 5
+      light.kastverlichting:
+        state: on
+        brightness_pct: 50
+        transition: 5
+      light.livingwhites_plug_1:
+        state: on
+        transition: 5
+        brightness_pct: 25
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    scene.activity_watching_tv:
+      friendly_name: 'TV afspelen'
+      icon: 'mdi:television-classic'
