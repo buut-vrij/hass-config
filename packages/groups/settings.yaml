@@ -8,42 +8,78 @@
 # @author     Jeroen Butenaerts
 # @version    1.0
 ##
-
-##
-# Groups
-##
 group:
-  battery_levels:
+  # Alarm
+  settings_alarm:
+    name: 'Alarm'
+    icon: 'mdi:alarm-light-outline'
     entities:
-      - sensor.door_window_sensor_158d00019fd4c6_battery
-      - sensor.door_window_sensor_158d0001c0e526_battery
-      - sensor.door_window_sensor_158d0001d934e3_battery
-      - sensor.door_window_sensor_158d0001b77e9a_battery
-      - sensor.door_window_sensor_158d0001d8228c_battery
-      - sensor.door_window_sensor_158d0001ab5853_battery
-      - sensor.door_window_sensor_158d0001b77eb1_battery
-      - sensor.door_window_sensor_158d0001ab5797_battery
-      - sensor.door_window_sensor_158d0001f38318_battery
-      - sensor.door_window_sensor_158d0001f38976_battery
-      - sensor.temperature_158d0002271b5e_battery
-      - sensor.temperature_158d00022883df_battery
-      - sensor.temperature_158d00022883db_battery
-      - sensor.temperature_158d00022881a8_battery
-      - sensor.temperature_158d0002288396_battery
-      - sensor.water_leak_sensor_158d0001bb63a5_battery
-      - sensor.water_leak_sensor_158d0001bc42ee_battery
-      - sensor.water_leak_sensor_158d0001bc19c5_battery
-    name: Batterijniveaus
+      - input_number.alarm_entry_delay_time
+      - input_number.alarm_exit_delay_time
+      - input_number.alarm_trigger_time
+      - script.alarm_trigger_test
 
-  zwave_devices:
+  # Alarm notification
+  settings_alarm_notification:
+    name: 'Alarm notification'
+    icon: 'mdi:alarm-light-outline'
     entities:
-      - zwave.zwaveme_razberry_controller_2016_zwave
-      - zwave.fibaro_system_fgd212_dimmer_2
-      - zwave.fibaro_system_fgd212_dimmer_2_2
-      - zwave.fibaro_system_fgd212_dimmer_2_3
-      - zwave.fibaro_system_fgd212_dimmer_2_4
-    name: Z-Wave apparaten
+      - input_text.alarm_trigger_title
+      - input_text.alarm_trigger_moisture_title
+      - input_text.alarm_trigger_moisture_message
+      - input_text.alarm_trigger_moisture_color
+      - input_text.alarm_trigger_motion_title
+      - input_text.alarm_trigger_motion_message
+      - input_text.alarm_trigger_motion_color
+      - input_text.alarm_trigger_natgas_title
+      - input_text.alarm_trigger_natgas_message
+      - input_text.alarm_trigger_natgas_color
+      - input_text.alarm_trigger_opening_title
+      - input_text.alarm_trigger_opening_message
+      - input_text.alarm_trigger_opening_color
+      - input_text.alarm_trigger_smoke_title
+      - input_text.alarm_trigger_smoke_message
+      - input_text.alarm_trigger_smoke_color
+      - input_text.alarm_trigger_default_title
+      - input_text.alarm_trigger_default_message
+      - input_text.alarm_trigger_default_color
+
+  # Covers
+  settings_covers:
+    name: 'Covers'
+    icon: 'mdi:alarm-light-outline'
+    entities:
+      - input_number.covers_ground_auto_open_close_dawn_dusk_lux_threshold
+      - input_datetime.covers_ground_auto_open_dawn_time
+      - input_datetime.covers_ground_auto_close_dusk_time
+
+  # Presence simulation
+  settings_presence_simulation:
+    name: 'Presence simulation'
+    icon: 'mdi:alarm-light-outline'
+    entities:
+      - input_datetime.light_all_presence_simulation_waketime
+      - input_datetime.light_all_presence_simulation_departuretime
+      - input_datetime.light_all_presence_simulation_arrivaltime
+      - input_datetime.light_all_presence_simulation_sleeptime
 
 ##
 # Customize
 ##
+homeassistant:
+  customize:
+    group.settings_alarm:
+      friendly_name: 'Alarm'
+      order: 1
+
+    group.settings_alarm_notification:
+      friendly_name: 'Alarmmelding'
+      order: 2
+
+    group.settings_presence_simulation:
+      friendly_name: 'Aanwezigheidssimulatie'
+      order: 3
+
+    group.settings_covers:
+      friendly_name: 'Raambekleding'
+      order: 4

@@ -8,100 +8,116 @@
 # @author     Jeroen Butenaerts
 # @version    1.0
 ##
-
-##
-# Groups
-##
 group:
+  # Bathroom
   climate_bathroom:
+    name: 'Bathroom'
+    icon: 'mdi:hot-tub'
+    control: 'hidden'
 #    entities:
-    icon: mdi:hot-tub
-    name: Badkamer
-    view: false
 
+  # Bedroom northeast
   climate_bedroom_ne:
+    name: 'Studeerkamer'
+    icon: 'mdi:hotel'
+    control: 'hidden'
 #    entities:
-    icon: mdi:school
-    name: Studeerkamer
 
+  # Bedroom nortwest
   climate_bedroom_nw:
+    name: 'Bedroom nortwest'
+    icon: 'mdi:hotel'
+    control: 'hidden'
 #    entities:
-    icon: mdi:hotel
-    name: Logeerkamer
 
+  # Bedroom southeast
   climate_bedroom_se:
+    name: 'Bedroom southeast'
+    icon: 'mdi:hotel'
+    control: 'hidden'
     entities:
       - fan.xiaomi_air_purifier_2
-    icon: mdi:hotel
-    name: Slaapkamer
 
+  # Bedroom southwest
   climate_bedroom_sw:
+    name: 'Bedroom southwest'
+    icon: 'mdi:hotel'
+    control: 'hidden'
 #    entities:
-    icon: mdi:tshirt-crew
-    name: Kleedkamer
 
+  # Boiler room
+  climate_boiler_room:
+    name: 'Boiler room'
+    icon: 'mdi:washing-machine'
+    control: 'hidden'
+    entities:
+      - sensor.temperature_158d0002288396
+      - sensor.humidity_158d0002288396
+      - sensor.pressure_158d0002288396
+
+  # Garage
   climate_garage:
+    name: 'Garage'
+    icon: 'mdi:car'
+    control: 'hidden'
     entities:
       - sensor.temperature_158d0002271b5e
       - sensor.humidity_158d0002271b5e
       - sensor.pressure_158d0002271b5e
       - sensor.illumination_7811dcb7e406
-    icon: mdi:car
-    name: Garage
 
+  # Entryway
   climate_entryway:
+    name: 'Entryway'
+    icon: 'mdi:door-closed'
+    control: 'hidden'
     entities:
-      - climate.entree
+      - climate.hal
       - sensor.temperature_158d00022883df
       - sensor.humidity_158d00022883df
       - sensor.pressure_158d00022883df
-    icon: mdi:glassdoor
-    name: Hal
 
-  climate_history:
-    entities:
-      - history_graph.temperatuur
-      - history_graph.luchtvochtigheid
-    icon: mdi:history
-    name: Geschiedenis
-
+  # Kitchen
   climate_kitchen:
+    name: 'Kitchen'
+    icon: 'mdi:chef-hat'
+    control: 'hidden'
     entities:
       - climate.keuken
-    icon: mdi:silverware-variant
-    name: Keuken
 
+  # Landing downstairs
   climate_landing_downstairs:
+    name: 'Landing downstairs'
+    icon: 'mdi:stairs'
+    control: 'hidden'
 #    entities:
-    icon: mdi:stairs
-    name: Trap/Kelder
 
+  # Landing upstairs
   climate_landing_upstairs:
+    name: 'Landing upstairs'
+    icon: 'mdi:stairs'
+    control: 'hidden'
     entities:
       - sensor.temperature_158d00022883db
       - sensor.humidity_158d00022883db
       - sensor.pressure_158d00022883db
       - sensor.illumination_7811dcb266db
-    icon: mdi:stairs
-    name: Overloop
 
-  climate_laundry_room:
-    entities:
-      - sensor.temperature_158d0002288396
-      - sensor.humidity_158d0002288396
-      - sensor.pressure_158d0002288396
-    icon: mdi:washing-machine
-    name: Wasruimte
-
+  # Living room
   climate_living_room:
+    name: 'living_room'
+    icon: 'mdi:sofa'
+    control: 'hidden'
     entities:
       - climate.eethoek
       - climate.zithoek
       - sensor.illumination_34ce0091d4d9
-    icon: mdi:sofa
-    name: Woonkamer
 
+  # Outdoor
   climate_outdoor:
+    name: 'Outdoor'
+    icon: 'mdi:weather-partlycloudy'
+    control: 'hidden'
     entities:
       - sensor.yr_symbol_alt
       - sensor.outdoor_temperature
@@ -110,63 +126,81 @@ group:
       - sensor.outdoor_pressure
       - sensor.outdoor_wind_force
       - sensor.outdoor_wind_direction
-    icon: mdi:weather-partlycloudy
-    name: Buiten
+      - sensor.sensative_strips_comfort_luminance
 
+  # Toilet
   climate_toilet:
+    name: 'Toilet'
+    icon: 'mdi:human-male-female'
+    control: 'hidden'
     entities:
       - sensor.temperature_158d00022881a8
       - sensor.humidity_158d00022881a8
       - sensor.pressure_158d00022881a8
-    icon: mdi:human-male-female
-    name: Toilet
 
 ##
 # Customize
 ##
 homeassistant:
   customize:
-    group.climate_bathroom:
-      order: 25
+    group.climate_history:
+      friendly_name: 'Alarm'
+      order: 1
+
+    group.climate_outdoor:
+      friendly_name: 'Buiten'
+      order: 10
+
+    group.climate_living_room:
+      friendly_name: 'Woonkamer'
+      order: 11
+
+    group.climate_kitchen:
+      friendly_name: 'Keuken'
+      order: 12
+
+    group.climate_entryway:
+      friendly_name: 'Hal'
+      order: 13
+
+    group.climate_toilet:
+      friendly_name: 'Toilet'
+      order: 14
+
+    group.climate_landing_downstairs:
+      friendly_name: 'Kelderportaal'
+      order: 15
 
     group.climate_bedroom_ne:
+      friendly_name: 'Studeerkamer'
+      icon: 'mdi:school'
       order: 21
 
     group.climate_bedroom_nw:
+      friendly_name: 'Logeerkamer'
       order: 22
 
     group.climate_bedroom_se:
+      friendly_name: 'Slaapkamer'
       order: 23
 
     group.climate_bedroom_sw:
+      friendly_name: 'Kleedkamer'
+      icon: 'mdi:tshirt-crew'
       order: 24
 
-    group.climate_garage:
-      order: 32
-
-    group.climate_hallway:
-      order: 13
-
-    group.climate_history:
-      order: 1
-
-    group.climate_kitchen:
-      order: 12
-
-    group.climate_landing_downstairs:
-      order: 15
+    group.climate_bathroom:
+      friendly_name: 'Badkamer'
+      order: 25
 
     group.climate_landing_upstairs:
+      friendly_name: 'Overloop'
       order: 26
 
-    group.climate_laundry_room:
+    group.climate_boiler_room:
+      friendly_name: 'Wasruimte'
       order: 31
 
-    group.climate_living_room:
-      order: 11
-
-    group.climate_outdoor:
-      order: 10
-
-    group.climate_toilet:
-      order: 14
+    group.climate_garage:
+      friendly_name: 'Garage'
+      order: 32

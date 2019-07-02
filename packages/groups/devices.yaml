@@ -1,0 +1,82 @@
+##
+# devices.yaml
+#
+# Devices group
+#
+# @category   Home Assistant
+# @package    Groups
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+group:
+  # Basement
+  devices_basement:
+    name: 'Basement'
+    icon: 'mdi:car'
+    control: 'hidden'
+    entities:
+      - media_player.googlehome_basement
+
+  # Bedroom
+  devices_bedroom:
+    name: 'Bedroom'
+    icon: 'mdi:hotel'
+    control: 'hidden'
+    entities:
+      - media_player.appletv_bedroom
+      - media_player.chromecast_bedroom
+
+  # Kitchen
+  devices_kitchen:
+    name: 'Kitchen'
+    icon: 'mdi:chef-hat'
+    control: 'hidden'
+    entities:
+      - switch.fibaro_system_fgwpef_wall_plug_gen5_switch
+      - media_player.googlehome_kitchen
+
+  # Landing upstairs
+  devices_landing_upstairs:
+    name: 'Landing upstairs'
+    icon: 'mdi:stairs'
+    control: 'hidden'
+    entities:
+      - media_player.googlehome_landing
+
+  # Living room
+  devices_living_room:
+    name: 'Living room'
+    icon: 'mdi:sofa'
+    control: 'hidden'
+    entities:
+      - media_player.tv_woonkamer
+      - media_player.receiver_woonkamer
+      - media_player.playstation_living
+      - media_player.appletv_living
+      - media_player.chromecast_living
+      - media_player.googlehome_living
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    group.devices_living_room:
+      friendly_name: 'Woonkamer'
+      order: 1
+
+    group.devices_kitchen:
+      friendly_name: 'Keuken'
+      order: 2
+
+    group.devices_bedroom:
+      friendly_name: 'Slaapkamer'
+      order: 3
+
+    group.devices_basement:
+      friendly_name: 'Kelder'
+      order: 4
+
+    group.devices_landing_upstairs:
+      friendly_name: 'Overloop'
+      order: 5

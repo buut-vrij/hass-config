@@ -8,107 +8,137 @@
 # @author     Jeroen Butenaerts
 # @version    1.0
 ##
-
-##
-# Groups
-##
 group:
   #default_view:
   view_home:
-    entities:
-      - alarm_control_panel.alarm
-      - binary_sensor.door_window_sensor_all
-      - binary_sensor.water_leak_sensor_all
-      - binary_sensor.natgas_sensor_all
-      - binary_sensor.internet_connection
-      - group.home_tracker
-      - group.home_lighting
-      - history_graph.temperature
-      - history_graph.humidity
-    icon: mdi:home-assistant
-    name: Thuis
+    name: 'Home'
+    icon: 'mdi:home-assistant'
     view: true
-
-#  view_scenes:
-#    entities:
-#    icon: mdi:movie
-#    name: Scenes
-#    view: true
-
-  view_lighting:
     entities:
-      - group.lighting_living_room
-      - group.lighting_kitchen
-      - group.lighting_entryway
-      - group.lighting_landing_upstairs
-      - group.lighting_garage
-    icon: mdi:lightbulb
-    name: verlichting
-    view: true
+      - alarm_control_panel.woonveilig
+      - climate.thuis
+      - group.home_presence
+      - group.home_security
+      - group.home_lights
+      - group.home_blinds
 
-#  view_blinds:
-#    entities:
-#    icon: mdi:blinds
-#    name: Blindering
-#    view: true
+  view_lights_blinds:
+    name: 'Lights/blinds'
+    icon: 'mdi:white-balance-sunny'
+    view: true
+    entities:
+      - group.lights_blinds_presets
+      - group.lights_blinds_living_room
+      - group.lights_kitchen
+      - group.lights_entryway
+      - group.lights_toilet
+      - group.lights_landing_downstairs
+      - group.lights_boiler_room
+      - group.lights_garage
 
   view_climate:
+    name: 'Climate'
+    icon: 'mdi:leaf'
+    view: true
     entities:
+      - history_graph.temperatuur
+      - history_graph.luchtvochtigheid
       - group.climate_outdoor
       - group.climate_living_room
       - group.climate_kitchen
       - group.climate_entryway
       - group.climate_toilet
-      - group.climate_laundry_room
+      - group.climate_boiler_room
       - group.climate_garage
       - group.climate_landing_upstairs
-    icon: mdi:leaf
-    name: Klimaat
-    view: true
+      - group.climate_bedroom_se
 
-  view_media:
-    entities:
-      - media_player.receiver
-      - media_player.apple_tv
-      - media_player.chromecast
-      - media_player.begane_grond
-      - media_player.woonkamer
-      - media_player.keuken
-      - media_player.slaapkamer
-    icon: mdi:television-classic
-    name: Media
+  view_devices:
+    name: 'Devices'
+    icon: 'mdi:power'
     view: true
+    entities:
+      - group.devices_living_room
+      - group.devices_kitchen
+      - group.devices_bedroom
+      - group.devices_basement
+      - group.devices_landing_upstairs
 
   view_security:
-    entities:
-      - group.woonveilig
-      - group.security_perimeter
-      - group.security_presence
-      - group.security_smoke
-      - group.security_gas
-      - group.security_moisture
-    icon: mdi:security-home
-    name: Beveiliging
+    name: 'Security'
+    icon: 'mdi:shield-home'
     view: true
+    entities:
+      - group.security_door_window
+      - group.security_motion
+      - group.security_smoke
+      - group.security_natgas
+      - group.security_water_leak
+      - group.security_weather
+      - group.security_lights
 
-#  view_cctv:
-#    entities:
-#    icon: mdi:cctv
-#    name: Camera bewaking
-#    view: true
+  view_camera:
+    icon: 'mdi:cctv'
+    name: 'Surveillance'
+    view: true
+    entities:
+      - camera.camera_garage
+      - camera.camera_garden
 
-#  view_consumption:
-#    entities:
-#    icon: mdi:chart-line
-#    name: Verbruik
-#    view: true
+  view_consumption:
+    name: 'Verbruik'
+    icon: 'mdi:chart-line'
+    view: true
+    entities:
+      - group.consumption_devices
+      - group.consumption_lighting
 
   view_status:
+    name: 'Status'
+    icon: 'mdi:clipboard-pulse'
+    view: true
     entities:
+      - binary_sensor.remote_ui
       - group.zwave_devices
-      - group.synology_ds114
+      - group.synology_rs214
+      #- group.synology_ds114
       - group.ups
       - group.battery_levels
-    icon: mdi:clipboard-pulse
-    name: Status
+
+  view_settings:
+    name: 'Settings'
+    icon: 'mdi:settings'
     view: true
+    entities:
+      - group.settings_alarm
+      - group.settings_alarm_notification
+      - group.settings_presence_simulation
+      - group.settings_covers
+##
+# Customize
+##
+homeassistant:
+  customize:
+    group.view_home:
+      friendly_name: 'Thuis'
+
+    group.view_lights_blinds:
+      friendly_name: 'Verlichting/blindering'
+
+    group.view_devices:
+      friendly_name: 'Apparaten'
+
+    group.view_security:
+      friendly_name: 'Beveiliging'
+
+    group.view_camera:
+      friendly_name: 'Cameratoezicht'
+
+    group.view_consumption:
+      friendly_name: 'Verbruik'
+
+    group.view_status:
+      friendly_name: 'Status'
+
+    group.view_settings:
+      friendly_name: 'Instellingen'
