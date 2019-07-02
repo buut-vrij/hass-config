@@ -1,0 +1,45 @@
+##
+# fibaro_fgd212_boiler_room.yaml
+#
+# FIBARO Dimmer 2 FGD-212 (boiler room)
+#
+# @category   Home Assistant
+# @package    Device packages
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    light.fibaro_system_fgd212_dimmer_2_level_16:
+      friendly_name: 'Plafondlamp wasruimte (S2)'
+      hidden: true
+
+    light.fibaro_system_fgd212_dimmer_2_level_17:
+      friendly_name: 'Plafondlamp wasruimte'
+      icon: 'mdi:ceiling-light'
+
+    sensor.fibaro_system_fgd212_dimmer_2_energy_9:
+      friendly_name: 'Plafondlamp wasruimte'
+
+    zwave.fibaro_system_fgd212_dimmer_2_9:
+      friendly_name: 'Plafondlamp wasruimte'
+
+  customize_glob:
+    light.fibaro_system_fgd212_dimmer_2_level_17:
+      group:
+        group.lights_boiler_room:
+          friendly_name: 'Plafondlamp'
+
+    sensor.fibaro_system_fgd212_dimmer_2_energy_9:
+      group:
+        group.consumption_lighting:
+          icon: 'mdi:ceiling-light'
+
+    zwave.fibaro_system_fgd212_dimmer_2_9:
+      group:
+        group.zwave_devices:
+          friendly_name: 'Dimmer wasruimte'

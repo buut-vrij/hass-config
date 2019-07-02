@@ -1,0 +1,51 @@
+##
+# fibaro_fgd212_dining.yaml
+#
+# FIBARO Dimmer 2 FGD-212 (dining)
+#
+# @category   Home Assistant
+# @package    Device packages
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    light.fibaro_system_fgd212_dimmer_2_level:
+      friendly_name: 'Plafondlamp eethoek (S2)'
+      hidden: true
+
+    light.fibaro_system_fgd212_dimmer_2_level_2:
+      friendly_name: 'Plafondlamp eethoek'
+      icon: 'mdi:ceiling-light'
+      state_card_mode: break-slider-toggle
+      stretch_slider: true
+      slider_theme:
+        min: 1
+        off_when_min: false
+        report_when_not_changed: false
+
+    sensor.fibaro_system_fgd212_dimmer_2_energy:
+      friendly_name: 'Plafondlamp eethoek'
+
+    zwave.fibaro_system_fgd212_dimmer_2:
+      friendly_name: 'Plafondlamp eethoek'
+
+  customize_glob:
+    light.fibaro_system_fgd212_dimmer_2_level_2:
+      group:
+        group.lights_living_room:
+          friendly_name: 'Plafondlamp eethoek'
+
+    sensor.fibaro_system_fgd212_dimmer_2_energy:
+      group:
+        group.consumption_lighting:
+          icon: 'mdi:ceiling-light'
+
+    zwave.fibaro_system_fgd212_dimmer_2:
+      group:
+        group.zwave_devices:
+          friendly_name: 'Dimmer eethoek'

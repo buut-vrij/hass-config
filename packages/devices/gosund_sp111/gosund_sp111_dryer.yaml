@@ -1,0 +1,60 @@
+##
+# gosund_sp111_dryer.yaml
+#
+# Gosund SP111 (dryer)
+#
+# @category   Home Assistant
+# @package    Device packages
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+sensor:
+  - platform: mqtt
+    name: 'Plug dryer energy'
+    state_topic: 'tele/sonoff03/SENSOR'
+    value_template: "{{ value_json['ENERGY']['Total'] }}"
+    unit_of_measurement: 'kWh'
+
+  - platform: mqtt
+    name: 'Plug dryer power'
+    state_topic: 'tele/sonoff03/SENSOR'
+    value_template: "{{ value_json['ENERGY']['Power'] }}"
+    unit_of_measurement: 'W'
+
+  - platform: mqtt
+    name: 'Plug dryer voltage'
+    state_topic: 'tele/sonoff03/SENSOR'
+    value_template: "{{ value_json['ENERGY']['Voltage'] }}"
+    unit_of_measurement: 'V'
+
+  - platform: mqtt
+    name: 'Plug dryer current'
+    state_topic: 'tele/sonoff03/SENSOR'
+    value_template: "{{ value_json['ENERGY']['Current'] }}"
+    unit_of_measurement: 'A'
+
+  - platform: mqtt
+    name: 'Plug dryer uptime'
+    state_topic: 'tele/sonoff03/UPTIME'
+    value_template: "{{ value_json.uptime }}"
+    unit_of_measurement: 'U'
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    sensor.plug_dryer_enery:
+      friendly_name: 'Stroomverbruik droger'
+
+    sensor.plug_dryer_power:
+      friendly_name: 'Stroom droger'
+
+    sensor.plug_dryer_voltage:
+      friendly_name: 'Voltage droger'
+
+    sensor.plug_dryer_current:
+      friendly_name: 'Stroomsterkte droger'
+
+    sensor.plug_dryer_uptime:
+      friendly_name: 'Bedrijfstijd droger'

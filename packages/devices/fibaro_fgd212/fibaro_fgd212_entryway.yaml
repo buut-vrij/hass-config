@@ -1,0 +1,51 @@
+##
+# fibaro_fgd212_entryway.yaml
+#
+# FIBARO Dimmer 2 FGD-212 (entryway)
+#
+# @category   Home Assistant
+# @package    Device packages
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    light.fibaro_system_fgd212_dimmer_2_level_5:
+      friendly_name: 'Dimmer plafondlamp hal (S2)'
+      hidden: true
+
+    light.fibaro_system_fgd212_dimmer_2_level_6:
+      friendly_name: 'Plafondlamp hal'
+      icon: 'mdi:ceiling-light'
+      state_card_mode: break-slider-toggle
+      stretch_slider: true
+      slider_theme:
+        min: 1
+        off_when_min: false
+        report_when_not_changed: false
+
+    sensor.fibaro_system_fgd212_dimmer_2_energy_3:
+      friendly_name: 'Plafondlamp hal'
+
+    zwave.fibaro_system_fgd212_dimmer_2_4:
+      friendly_name: 'Plafondlamp hal'
+
+  customize_glob:
+    light.fibaro_system_fgd212_dimmer_2_level_6:
+      group:
+        group.lights_entryway:
+          friendly_name: 'Plafondlamp'
+
+    sensor.fibaro_system_fgd212_dimmer_2_energy_3:
+      group:
+        group.consumption_lighting:
+          icon: 'mdi:ceiling-light'
+
+    zwave.fibaro_system_fgd212_dimmer_2_4:
+      group:
+        group.zwave_devices:
+          friendly_name: 'Dimmer hal'
