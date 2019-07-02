@@ -1,0 +1,52 @@
+##
+# device_all_off_alarm_armed_away.yaml
+#
+# Turn all devices off when alarm is armed away
+#
+# @category   Home Assistant
+# @package    Automations
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+
+##
+# Automations
+##
+automation:
+  ##
+  # Turn off all devices when alarm is armed away
+  ##
+  - alias: 'Device all off alarm armed away'
+    initial_state: on
+    trigger:
+      # When the state of the physical alarm is set to armed away
+      platform: state
+      entity_id: alarm_control_panel.woonveilig
+      to: 'armed_away'
+    action:
+      # Then turn off all media players
+      service: media_player.turn_off
+      entity_id:
+        - media_player.appletv_bedroom
+        - media_player.appletv_living
+        - media_player.chromecast_bedroom
+        - media_player.chromecast_living
+        - media_player.googlehome_basement
+        - media_player.googlehome_kitchen
+        - media_player.googlehome_living
+        - media_player.playstation_living
+        - media_player.receiver_woonkamer
+        - media_player.tv_woonkamer
+      # Then turn off all switched devices
+      service: switch.turn_off
+      entity_id:
+        - switch.fibaro_system_fgwpef_wall_plug_gen5_switch
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    automation.device_all_off_alarm_armed_away:
+      friendly_name: 'Apparaten uitschakelen bij inschakelen alarm'
+      hidden: true

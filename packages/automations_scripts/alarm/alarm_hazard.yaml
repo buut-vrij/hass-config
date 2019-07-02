@@ -1,0 +1,82 @@
+##
+# alarm_hazard.yaml
+#
+# Automations for triggering the alarm when sensors detect hazards (moisture/natgas/smoke)
+#
+# @category   Home Assistant
+# @package    Automations-scripts
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+automation:
+  ##
+  # Throw hazard alarm trigger event on sensor event
+  ##
+  - alias: 'Alarm hazard throw trigger event on sensor event'
+    initial_state: on
+    trigger:
+      # When a sensor is triggered
+      platform: state
+      entity_id:
+        - binary_sensor.natgas_sensor_158d00011176ee # Cv-ketel
+        - binary_sensor.natgas_sensor_158d000127c558 # Meterkast
+        - binary_sensor.smoke_sensor_158d0001e80a3c # Wasruimte
+        - binary_sensor.smoke_sensor_158d0001e80a40 # Hal
+        - binary_sensor.smoke_sensor_158d000215a794 # Garage
+        - binary_sensor.smoke_sensor_158d000215e268 # Overloop
+        - binary_sensor.smoke_sensor_158d000215e643 # Keuken
+        - binary_sensor.smoke_sensor_158d0002153aba # Woonkamer
+        - binary_sensor.water_leak_sensor_158d0001bb63a5 # Badkamer
+        - binary_sensor.water_leak_sensor_158d0001bb7922 # Garage
+        - binary_sensor.water_leak_sensor_158d0001bc19c5 # Pompput
+        - binary_sensor.water_leak_sensor_158d0001bc42dc # Toilet
+        - binary_sensor.water_leak_sensor_158d0001bc42ee # Keuken afvoer
+      to: 'on'
+    action:
+      # Then throw the alarm_trigger event
+      event: alarm_trigger
+      event_data_template:
+        alarm_trigger_class: "{{ trigger.to_state.attributes.device_class }}"
+        alarm_trigger_name: >
+          {% if trigger.to_state.attributes.device_class == 'natgas' %}
+            {{ trigger.to_state.attributes.friendly_name|replace('Aardgas ', '')|lower() }}
+          {% elif trigger.to_state.attributes.device_class == 'smoke' %}
+            {{ trigger.to_state.attributes.friendly_name|replace('Rook ', '')|lower() }}
+          {% elif trigger.to_state.attributes.device_class == 'moisture' %}
+            {{ trigger.to_state.attributes.friendly_name|replace('Vocht ', '')|lower() }}
+          {% else %}
+            {{ trigger.to_state.attributes.friendly_name|lower() }}
+          {% endif %}
+
+  ##
+  # Throw hazard alarm stop event on sensor group clear
+  ##
+  - alias: 'Alarm hazard throw stop event on sensor group clear'
+    initial_state: on
+    trigger:
+      # When the state of an entire sensor group has returned to normal
+      platform: state
+      entity_id:
+        - binary_sensor.natgas_sensor_all
+        - binary_sensor.smoke_sensor_all
+        - binary_sensor.water_leak_sensor_all
+      to: 'off'
+    action:
+      # Then throw the alarm_stop event
+      event: alarm_stop
+      event_data_template:
+        alarm_trigger_class: "{{ trigger.to_state.attributes.device_class }}"
+##
+# Customize
+##
+homeassistant:
+  customize:
+    automation.alarm_hazard_throw_trigger_event_on_sensor_event:
+      friendly_name: 'Geef alarmmelding veiligheid bij registratie sensor'
+      hidden: true
+      icon: 'mdi:alarm-bell'
+
+    automation.alarm_hazard_throw_stop_event_on_sensor_group_clear:
+      friendly_name: 'Geef alarm-stop-melding veligheid bij'
+      hidden: true
+      icon: 'mdi:alarm-bell'

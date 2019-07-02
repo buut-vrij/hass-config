@@ -1,0 +1,89 @@
+##
+# media_player_activate_scene.yaml
+#
+# Activate scenes on media player state change
+#
+# @category   Home Assistant
+# @package    Automations
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+automation:
+  ##
+  # Activate scene when playing media in living room
+  ##
+  - alias: 'Media player living playing activate scene'
+    trigger:
+      # When the state of a living room media player is set to playing
+      - platform: state
+        entity_id: media_player.appletv_living
+        to: 'playing'
+      - platform: state
+        entity_id: media_player.tv_woonkamer
+        to: 'playing'
+    condition:
+      condition: and
+      conditions:
+        # While the sun is below the horizon
+        - condition: state
+          entity_id: sun.sun
+          state: 'below_horizon'
+        - condition: or
+          conditions:
+            # And source channel is netflix
+            - condition: template
+              value_template: "{{ state_attr('media_player.tv_woonkamer', 'source') == 'netflix' }}"
+            # Or source channel is npo
+            - condition: template
+              value_template: "{{ state_attr('media_player.tv_woonkamer', 'source') == 'npo' }}"
+    action:
+      # Then turn on activity_watching_movie scene
+      service: scene.turn_on
+      entity_id: scene.activity_watching_movie
+
+  ##
+  # Activate scene when stopped/paused media in living room
+  ##
+  - alias: 'Media player living stopped activate scene'
+    trigger:
+      # When the state of a living room media player is set to idle/paused
+      - platform: state
+        entity_id: media_player.tv_woonkamer
+        from: 'playing'
+        to: 'idle'
+      - platform: state
+        entity_id: media_player.tv_woonkamer
+        from: 'playing'
+        to: 'paused'
+    condition:
+      condition: and
+      conditions:
+        # While the sun is below the horizon
+        - condition: state
+          entity_id: sun.sun
+          state: 'below_horizon'
+        - condition: or
+          conditions:
+            # And source channel is netflix
+            - condition: template
+              value_template: "{{ state_attr('media_player.tv_woonkamer', 'source') == 'netflix' }}"
+            # Or source channel is npo
+            - condition: template
+              value_template: "{{ state_attr('media_player.tv_woonkamer', 'source') == 'npo' }}"
+    action:
+      # Then turn on activity_pausing_movie scene
+      service: scene.turn_on
+      entity_id: scene.activity_pausing_movie
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    automation.media_player_living_playing_activate_scene:
+      friendly_name: ''
+      hidden: true
+
+    automation.media_player_living_stopped_activate_scene:
+      friendly_name: ''
+      hidden: true

@@ -1,0 +1,538 @@
+##
+# alarm_trigger.yaml
+#
+# Automations and scripts for handling alarm trigger procedures
+#
+# @category   Home Assistant
+# @package    Automations-scripts
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+input_boolean:
+  alarm_trigger_active:
+    name: 'Alarm notification active'
+  alarm_trigger_muted:
+    name: 'Alarm notification muted'
+
+input_text:
+  # Notification
+  alarm_trigger_title:
+    name: 'Alarm notificatie titel'
+    initial: 'Alarmmelding'
+  # Moisture notification
+  alarm_trigger_moisture_title:
+    name: 'Alarm vocht gedetecteerd notificatie titel'
+    initial: 'Vocht gedetecteerd'
+  alarm_trigger_moisture_message:
+    name: 'Alarm moisture detected notificatie bericht'
+    initial: 'Vocht gedetecteerd in'
+  alarm_trigger_moisture_color:
+    name: 'Alarm moisture detected notificatie kleur'
+    initial: 'blue'
+  # Motion notification
+  alarm_trigger_motion_title:
+    name: 'Alarm motion detected notificatie titel'
+    initial: 'Beweging gedetecteerd'
+  alarm_trigger_motion_message:
+    name: 'Alarm motion detected notificatie bericht'
+    initial: 'Beweging gedetecteerd in'
+  alarm_trigger_motion_color:
+    name: 'Alarm motion detected notificatie kleur'
+    initial: 'white'
+  # Natgas notification
+  alarm_trigger_natgas_title:
+    name: 'Alarm natgas detected notificatie titel'
+    initial: 'Aardgas gedetecteerd'
+  alarm_trigger_natgas_message:
+    name: 'Alarm natgas detected notificatie bericht'
+    initial: 'Aardgas gedetecteerd bij'
+  alarm_trigger_natgas_color:
+    name: 'Alarm natgas detected notificatie kleur'
+    initial: 'green'
+  # Opening notification
+  alarm_trigger_opening_title:
+    name: 'Alarm opening detected notificatie titel'
+    initial: 'Opening gedetecteerd'
+  alarm_trigger_opening_message:
+    name: 'Alarm opening detected notificatie bericht'
+    initial: 'geopend'
+  alarm_trigger_opening_color:
+    name: 'Alarm opening detected notificatie kleur'
+    initial: 'white'
+  # Smoke notification
+  alarm_trigger_smoke_title:
+    name: 'Alarm smoke detected notificatie titel'
+    initial: 'Rook gedetecteerd'
+  alarm_trigger_smoke_message:
+    name: 'Alarm smoke detected notificatie bericht'
+    initial: 'Rook gedetecteerd in'
+  alarm_trigger_smoke_color:
+    name: 'Alarm smoke detected notificatie kleur'
+    initial: 'red'
+  # Default notification
+  alarm_trigger_default_title:
+    name: 'Alarm default notificatie titel'
+    initial: 'Alarm notificatie'
+  alarm_trigger_default_message:
+    name: 'Alarm default notificatie bericht'
+    initial: 'Probleem gedetecteerd in'
+  alarm_trigger_default_color:
+    name: 'Alarm default notificatie kleur'
+    initial: 'yellow'
+  # Current notification
+  alarm_trigger_current_type:
+    name: 'alarm_trigger_current_type'
+  alarm_trigger_current_color:
+    name: 'alarm_trigger_current_color'
+  alarm_trigger_current_message:
+    name: 'alarm_trigger_current_message'
+  alarm_trigger_current_title:
+    name: 'alarm_trigger_current_title'
+
+automation:
+  ##
+  # Catch alarm trigger event and pass to script
+  ##
+  - alias: 'Catch alarm trigger event'
+    initial_state: on
+    trigger:
+      - platform: event
+        event_type: alarm_trigger
+    action:
+      - service: script.alarm_trigger
+        data_template:
+          alarm_trigger_class: "{{ trigger.event.data.alarm_trigger_class }}"
+          alarm_trigger_name: "{{ trigger.event.data.alarm_trigger_name }}"
+      # Send notification to Home Assistant frontend
+#      - service: persistent_notification.create
+#        data_template:
+#          title: 'catch_alarm_trigger_event'
+#          message: "class: {{ trigger.event.data.alarm_trigger_class }}, name: {{ trigger.event.data.alarm_trigger_name }}"
+
+  ##
+  # Catch alarm disarm event and pass to script
+  ##
+  - alias: 'Catch alarm disarmed event'
+    initial_state: on
+    trigger:
+      - platform: event
+        event_type: alarm_disarmed
+#    condition:
+#      - condition: template
+#        value_template: "{{ (states('input_text.alarm_trigger_current_type') == 'door') }}"
+    action:
+      service: script.alarm_trigger_stop
+
+  ##
+  # Catch alarm trigger mute event and pass to script
+  ##
+  - alias: 'Catch alarm mute event'
+    initial_state: on
+    trigger:
+      - platform: event
+        event_type: alarm_mute
+      - platform: event
+        event_type: ios.notification_action_fired
+        event_data:
+          actionName: 'ALARM_MUTE'
+    condition:
+      - condition: template
+        value_template: "{{ (states('trigger.event.data.alarm_type')) == (states('input_text.alarm_trigger_current_type')) }}"
+    action:
+      - service: script.alarm_trigger_mute
+
+script:
+  ##
+  # Tests
+  ##
+  alarm_trigger_test:
+    sequence:
+#      - event: alarm_trigger
+#        event_data:
+#          alarm_trigger_class: 'moisture'
+#          alarm_trigger_name: 'keuken afvoer'
+#      - delay:
+#          seconds: 30
+      - event: alarm_trigger
+        event_data:
+          alarm_trigger_class: 'motion'
+          alarm_trigger_name: 'garage'
+#      - delay:
+#          seconds: 30
+#      - event: alarm_trigger
+#        event_data:
+#          alarm_trigger_class: 'natgas'
+#          alarm_trigger_name: 'cv-ketel'
+#      - delay:
+#          seconds: 30
+#      - event: alarm_trigger
+#        event_data:
+#          alarm_trigger_class: 'opening'
+#          alarm_trigger_name: 'tuindeuren'
+#      - delay:
+#          seconds: 30
+#      - event: alarm_trigger
+#        event_data:
+#          alarm_trigger_class: 'smoke'
+#          alarm_trigger_name: 'woonkamer'
+
+  ##
+  # Start alarm notification (one-off actions)
+  ##
+  alarm_trigger:
+    alias: 'Alarm trigger start'
+    sequence:
+      # Set boolean active
+      - service: input_boolean.turn_on
+        entity_id: input_boolean.alarm_trigger_active
+      # Set current notification type
+      - service: input_text.set_value
+        data_template:
+          entity_id: input_text.alarm_trigger_current_type
+          value: "{{ alarm_trigger_class }}"
+      # Set current notification title
+      - service: input_text.set_value
+        data_template:
+          entity_id: input_text.alarm_trigger_current_title
+          value: >
+            {% if is_state('input_text.alarm_trigger_current_type', 'moisture') %}
+              {{ states('input_text.alarm_trigger_moisture_title') }}
+            {% elif is_state('input_text.alarm_trigger_current_type', 'motion') %}
+              {{ states('input_text.alarm_trigger_motion_title') }}
+            {% elif is_state('input_text.alarm_trigger_current_type', 'natgas') %}
+              {{ states('input_text.alarm_trigger_natgas_title') }}
+            {% elif is_state('input_text.alarm_trigger_current_type', 'opening') %}
+              {{ states('input_text.alarm_trigger_opening_title') }}
+            {% elif is_state('input_text.alarm_trigger_current_type', 'smoke') %}
+              {{ states('input_text.alarm_trigger_smoke_title') }}
+            {% else %}
+              {{ states('input_text.alarm_trigger_default_title') }}
+            {% endif %}
+      # Set current notification message
+      - service: input_text.set_value
+        data_template:
+          entity_id: input_text.alarm_trigger_current_message
+          value: >
+            {% if is_state('input_text.alarm_trigger_current_type', 'moisture') %}
+              {{ states('input_text.alarm_trigger_moisture_message') }} {{ alarm_trigger_name }}
+            {% elif is_state('input_text.alarm_trigger_current_type', 'motion') %}
+              {{ states('input_text.alarm_trigger_motion_message') }} {{ alarm_trigger_name }}
+            {% elif is_state('input_text.alarm_trigger_current_type', 'natgas') %}
+              {{ states('input_text.alarm_trigger_natgas_message') }} {{ alarm_trigger_name }}
+            {% elif is_state('input_text.alarm_trigger_current_type', 'opening') %}
+              {{ alarm_trigger_name }} {{ states('input_text.alarm_trigger_opening_message') }}
+            {% elif is_state('input_text.alarm_trigger_current_type', 'smoke') %}
+              {{ states('input_text.alarm_trigger_smoke_message') }} {{ alarm_trigger_name }}
+            {% else %}
+              {{ states('input_text.alarm_trigger_default_message') }} {{ alarm_trigger_name }}
+            {% endif %}
+      # Set current notification color
+      - service: input_text.set_value
+        data_template:
+          entity_id: input_text.alarm_trigger_current_color
+          value: >
+            {% if is_state('input_text.alarm_trigger_current_type', 'moisture') %}
+              {{ states('input_text.alarm_trigger_moisture_color') }}
+            {% elif is_state('input_text.alarm_trigger_current_type', 'motion') %}
+              {{ states('input_text.alarm_trigger_motion_color') }}
+            {% elif is_state('input_text.alarm_trigger_current_type', 'natgas') %}
+              {{ states('input_text.alarm_trigger_natgas_color') }}
+            {% elif is_state('input_text.alarm_trigger_current_type', 'opening') %}
+              {{ states('input_text.alarm_trigger_opening_color') }}
+            {% elif is_state('input_text.alarm_trigger_current_type', 'smoke') %}
+              {{ states('input_text.alarm_trigger_smoke_color') }}
+            {% else %}
+              {{ states('input_text.alarm_trigger_default_color') }}
+            {% endif %}
+      # Start audible notification
+#      - service: script.turn_on
+#        entity_id: script.alarm_trigger_audible
+      # Start visual notification
+      - service: script.turn_on
+        entity_id: script.alarm_trigger_visual
+      # Send notification to iOS devices
+      - service: notify.mobile_phones
+        data_template:
+          title: "{{ states('input_text.alarm_trigger_title') }}"
+          message: "{{ states('input_text.alarm_trigger_current_message') }}"
+          data:
+            subtitle: "{{ states('input_text.alarm_trigger_current_title') }}"
+            push:
+              category: >
+                {% if is_state('input_text.alarm_trigger_current_type', 'motion') or is_state('input_text.alarm_trigger_current_type', 'opening') %}
+                  alarm_intrusion
+                {% else %}
+                  alarm_hazard
+                {% endif %}
+              thread-id: 'alarm'
+            action_data:
+              alarm_type: "{{ states('input_text.alarm_trigger_current_type') }}"
+      # Send notification to Home Assistant frontend
+      - service: persistent_notification.create
+        data_template:
+          title: "{{ states('input_text.alarm_trigger_current_title') }}"
+          message: "{{ states('input_text.alarm_trigger_current_message') }}"
+
+  ##
+  # Audible alarm notification
+  ##
+  alarm_trigger_audible:
+    alias: 'Alarm trigger audible'
+    sequence:
+      # Check boolean active and not muted
+      - condition: state
+        entity_id: input_boolean.alarm_trigger_active
+        state: 'on'
+      - condition: state
+        entity_id: input_boolean.alarm_trigger_muted
+        state: 'off'
+      # Stop Google Home devices
+      - service: media_player.media_stop
+        entity_id:
+          - media_player.googlehome_basement
+          - media_player.googlehome_kitchen
+          - media_player.googlehome_landing
+          - media_player.googlehome_living
+      # Set volume on Google Home devices
+      - service: media_player.volume_set
+        entity_id:
+          - media_player.googlehome_basement
+          - media_player.googlehome_kitchen
+          - media_player.googlehome_landing
+          - media_player.googlehome_living
+        data:
+          volume_level: '0.90'
+      # Play TTS notification on Google Home devices
+      - service: tts.google_translate_say
+        entity_id:
+          - media_player.googlehome_basement
+          - media_player.googlehome_kitchen
+          - media_player.googlehome_landing
+          - media_player.googlehome_living
+        data_template:
+          message: "{{ states('input_text.alarm_trigger_current_message') }}"
+          language: 'nl'
+      - delay:
+          seconds: 4
+      # Play alarm sound on Google Home devices
+#      - service: media_player.play_media
+#        entity_id:
+#          - media_player.googlehome_basement
+#          - media_player.googlehome_kitchen
+#          - media_player.googlehome_landing
+#          - media_player.googlehome_living
+#        data:
+#          media_content_id: 'https://xxxxxxxxxxxx/local/submarine_diving_alarm.mp3'
+#          media_content_type: 'audio/mp3'
+      # Play alarm sound on Aqara gateways
+#      - service: xiaomi_aqara.play_ringtone
+#        data:
+#          gw_mac: !secret xiaomi_aqara_basement_mac
+#          ringtone_id: 1001
+#          ringtone_vol: 8
+#      - service: xiaomi_aqara.play_ringtone
+#        data:
+#          gw_mac: !secret xiaomi_aqara_landing_mac
+#          ringtone_id: 1001
+#          ringtone_vol: 8
+#      - service: xiaomi_aqara.play_ringtone
+#        data:
+#          gw_mac: !secret xiaomi_aqara_living_mac
+#          ringtone_id: 1001
+#          ringtone_vol: 8
+#      - delay:
+#          seconds: 1
+      # Call repeat
+      - service: script.turn_on
+        entity_id: script.alarm_trigger_audible_repeat
+
+  alarm_trigger_audible_repeat:
+    alias: 'Alarm trigger audible (repeat)'
+    sequence:
+      # Check boolean active and not muted
+      - condition: state
+        entity_id: input_boolean.alarm_trigger_active
+        state: 'on'
+      - condition: state
+        entity_id: input_boolean.alarm_trigger_muted
+        state: 'off'
+      - delay:
+          seconds: 1
+      # Call original
+      - service: script.turn_on
+        entity_id: script.alarm_trigger_audible
+
+  ##
+  # Visual alarm notification
+  ##
+  alarm_trigger_visual:
+    alias: 'Alarm trigger visual'
+    sequence:
+      # Check boolean active
+      - condition: state
+        entity_id: input_boolean.alarm_trigger_active
+        state: 'on'
+      # Flash Xiaomi Aqara gateway light
+      - service: light.turn_on
+        entity_id: light.gateway_light_all
+        data_template:
+          brightness_pct: 100
+          color_name: "{{ states('input_text.alarm_trigger_current_color') }}"
+      - delay:
+          milliseconds: 5
+      - service: light.turn_off
+        entity_id: light.gateway_light_all
+      - service: script.turn_on
+        entity_id: script.alarm_trigger_visual_repeat
+
+  alarm_trigger_visual_repeat:
+    alias: 'Alarm trigger visual (repeat)'
+    sequence:
+      # Check boolean active
+      - condition: state
+        entity_id: input_boolean.alarm_trigger_active
+        state: 'on'
+      - delay:
+          seconds: 1
+      # Call original
+      - service: script.turn_on
+        entity_id: script.alarm_trigger_visual
+
+  ##
+  # Stop alarm notification
+  ##
+  alarm_trigger_stop:
+    alias: 'Alarm trigger stop'
+    sequence:
+      # Set boolean active
+      - service: input_boolean.turn_off
+        entity_id: input_boolean.alarm_trigger_active
+      # Stop all scripts
+      - service: homeassistant.turn_off
+        entity_id:
+          - script.alarm_trigger
+          - script.alarm_trigger_audible
+          - script.alarm_trigger_audible_repeat
+          - script.alarm_trigger_visual
+          - script.alarm_trigger_visual_repeat
+          - script.alarm_silence
+      # Clear current notification
+      - service: input_text.set_value
+        data:
+          entity_id:
+            - input_text.alarm_trigger_current_type
+            - input_text.alarm_trigger_current_title
+            - input_text.alarm_trigger_current_message
+            - input_text.alarm_trigger_current_color
+          value: ''
+      # Turn off light on Xiaomi Aqara gateways
+      - service: light.turn_off
+        entity_id: light.gateway_light_all
+      # Set volume on Google Home devices
+      - service: media_player.volume_set
+        entity_id:
+          - media_player.googlehome_basement
+          - media_player.googlehome_kitchen
+          - media_player.googlehome_landing
+          - media_player.googlehome_living
+        data:
+          volume_level: '0.50'
+
+  ##
+  # Mute audible alarm notification
+  ##
+  alarm_trigger_mute:
+    alias: 'Alarm trigger mute'
+    sequence:
+      # Set boolean muted
+      - service: input_boolean.turn_on
+        entity_id: input_boolean.alarm_trigger_muted
+      # Stop audible scripts
+      - service: homeassistant.turn_off
+        entity_id:
+          - script.alarm_trigger_audible
+          - script.alarm_trigger_audible_repeat
+      # Set volume on Google Home devices
+      - service: media_player.volume_set
+        entity_id:
+          - media_player.googlehome_basement
+          - media_player.googlehome_kitchen
+          - media_player.googlehome_landing
+          - media_player.googlehome_living
+        data:
+          volume_level: '0.50'
+      # Wait
+      - delay:
+          minutes: 10
+      # Unmute
+      - service: script.turn_on
+        entity_id:
+          - script.alarm_trigger_unmute
+
+  alarm_trigger_unmute:
+    alias: 'Alarm trigger unmute'
+    sequence:
+      # Set boolean muted
+      - service: input_boolean.turn_off
+        entity_id: input_boolean.alarm_trigger_muted
+      # (Re)start audible scripts
+      - service: script.turn_on
+        entity_id:
+          - script.alarm_trigger_audible
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    input_boolean.alarm_trigger_active:
+      friendly_name: 'Alarm notificatie actief'
+      hidden: true
+
+    input_boolean.alarm_trigger_muted:
+      friendly_name: 'Alarm notificatie gedempt'
+      hidden: true
+
+    automation.catch_alarm_trigger_event:
+      hidden: true
+
+    automation.catch_alarm_mute_event:
+      hidden: true
+
+    automation.catch_alarm_disarmed_event:
+      hidden: true
+
+    script.alarm_trigger_test:
+      friendly_name: 'Alarm test'
+
+    script.alarm_trigger:
+      friendly_name: 'Alarmering starten'
+      hidden: true
+
+    script.alarm_trigger_mute:
+      friendly_name: 'Alarmering dempen'
+      hidden: true
+
+    script.alarm_trigger_unmute:
+      friendly_name: 'Alarmering dempen opheffen'
+      hidden: true
+
+    script.alarm_trigger_stop:
+      friendly_name: 'Alarmering stoppen'
+      hidden: true
+
+    script.alarm_trigger_audible:
+      friendly_name: 'Alarmering hoorbaar'
+      hidden: true
+
+    script.alarm_trigger_audible_repeat:
+      friendly_name: 'Alarmering hoorbaar (bis)'
+      hidden: true
+
+    script.alarm_trigger_visual:
+      friendly_name: 'Alarmering zichtbaar'
+      hidden: true
+
+    script.alarm_trigger_visual_repeat:
+      friendly_name: 'Alarmering zichtbaar (bis)'
+      hidden: true

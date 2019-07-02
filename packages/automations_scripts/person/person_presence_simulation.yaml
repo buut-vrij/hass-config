@@ -1,0 +1,77 @@
+##
+# person_presence_simulation.yaml
+#
+# Switch lights on/off to simulate presence
+#
+# https://github.com/mf-social/Home-Assistant/blob/master/homeassistant/packages/system/background/mockupancy.yaml
+#
+# @category   Home Assistant
+# @package    Automations
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+input_boolean:
+  person_presence_simulation_active:
+
+switch:
+  - platform: template
+    switches:
+      person_presence_simulation:
+        icon_template: >-
+          {% if is_state('input_boolean.person_presence_simulation_active', 'on') %}
+            mdi:account-box
+          {% else %}
+            mdi:account-box-outline
+          {% endif %}
+        value_template: "{{ is_state('input_boolean.person_presence_simulation_active', 'on') }}"
+        turn_on:
+          service: input_boolean.turn_on
+          data:
+            entity_id: input_boolean.person_presence_simulation_active
+        turn_off:
+          service: input_boolean.turn_off
+          data:
+            entity_id: input_boolean.person_presence_simulation_active
+
+##
+# Automations
+##
+automation:
+  ##
+  # Automatically switch on presence simulation after 48 hours
+  ##
+  - alias: 'Person presence simulation auto on'
+    initial_state: on
+    trigger:
+      # When nobody home for 48 hours
+      platform: state
+      entity_id: 'binary_sensor.person_any_home'
+      to: 'off'
+      for:
+        hours: 48
+    action:
+      # Switch on precense simulation
+      service: input_boolean.turn_on
+      entity_id: input_boolean.person_presence_simulation_active
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    automation.person_presence_simulation_auto_on:
+      friendly_name: 'Aanwezigheidssimulatie automatisch aan'
+      hidden: true
+
+    input_boolean.person_presence_simulation_active:
+      friendly_name: 'Aanwezigheidssimulatie actief'
+      hidden: true
+
+    switch.person_presence_simulation:
+      friendly_name: 'Aanwezigheidssimulatie'
+
+  customize_glob:
+    switch.person_presence_simulation:
+      group:
+        group.home_presence:
+          friendly_name: 'Simulatie'

@@ -1,0 +1,239 @@
+##
+# covers_open_close_outside_conditions.yaml
+#
+# Automatically open and close the covers based on luminance and outdoor/indoor temperature
+#
+# @category   Home Assistant
+# @package    Automations
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+input_number:
+  covers_open_close_outside_conditions_lux_threshold:
+    name: 'Threshold value for opening and closing the covers'
+    unit_of_measurement: 'lux'
+    initial: 25000
+    min: 1000
+    max: 100000
+    step: 1000
+
+automation:
+  ##
+  # Close covers to decrease indoor temperature rising by blocking sunlight
+  # * outdoor temp > current temp indoor
+  # * current temp indoor > target temp indoor
+  ##
+  - alias: 'Covers close to decrease temperature'
+    initial_state: on
+    trigger:
+      # When outside luminance is above or equal to specified threshold value
+      - platform: template
+        value_template: "{{ states('sensor.sensative_strips_comfort_luminance')|int >= states('input_number.covers_open_close_outside_conditions_lux_threshold')|int }}"
+      # And outside radiant heat is above inside temperature
+      - platform: template
+        value_template: "{{ states('sensor.sensative_strips_comfort_temperature')|int > state_attr('climate.zithoek', 'current_temperature')|int }}"
+    condition:
+      # While outside luminance is above or equal to specified threshold value
+      - condition: template
+        value_template: "{{ states('sensor.sensative_strips_comfort_luminance')|int >= states('input_number.covers_open_close_outside_conditions_lux_threshold')|int }}"
+      # And outside radiant heat is above inside temperature
+      - condition: template
+        value_template: "{{ states('sensor.sensative_strips_comfort_temperature')|int > state_attr('climate.zithoek', 'current_temperature')|int }}"
+      # And current inside temperature is above target inside temperature
+      - condition: template
+        value_template: "{{ state_attr('climate.zithoek', 'temperature')|int > state_attr('climate.zithoek', 'current_temperature')|int }}"
+      # And covers are open for at least 30 minutes
+      - condition: state
+        entity_id: cover.curtain_158d0001ef47a5_2
+        state: 'open'
+#        for:
+#          minutes: 30
+      - condition: state
+        entity_id: cover.curtain_158d0001fd240a_2
+        state: 'open'
+#        for:
+#          minutes: 30
+      # And no person is home
+      - condition: state
+        entity_id: binary_sensor.person_any_home
+        state: 'off'
+      # And presence simulation is not activated
+#      - condition: state
+#        entity_id: binary_sensor.routine_presence_simulation_active
+#        state: 'off'
+    action:
+      # Then close covers
+      service: cover.close_cover
+      entity_id:
+        - cover.curtain_158d0001ef47a5_2
+        - cover.curtain_158d0001fd240a_2
+  ##
+  # Close covers to increase indoor temperature through isolation from outdoor cold
+  # * outdoor temp < current temp indoor
+  # * current temp indoor < target temp indoor
+  ##
+  - alias: 'Covers close to increase temperature'
+    initial_state: on
+    trigger:
+      # When outside luminance is above or equal to specified threshold value
+      - platform: template
+        value_template: "{{ states('sensor.sensative_strips_comfort_luminance')|int >= states('input_number.covers_open_close_outside_conditions_lux_threshold')|int }}"
+      # And outside radiant heat is below inside temperature
+      - platform: template
+        value_template: "{{ states('sensor.sensative_strips_comfort_temperature')|int < state_attr('climate.zithoek', 'current_temperature')|int }}"
+    condition:
+      # While outside luminance is above or equal to specified threshold value
+      - condition: template
+        value_template: "{{ states('sensor.sensative_strips_comfort_luminance')|int >= states('input_number.covers_open_close_outside_conditions_lux_threshold')|int }}"
+      # And outside radiant heat is below inside temperature
+      - condition: template
+        value_template: "{{ states('sensor.sensative_strips_comfort_temperature')|int < state_attr('climate.zithoek', 'current_temperature')|int }}"
+      # And current inside temperature is below target inside temperature
+      - condition: template
+        value_template: "{{ state_attr('climate.zithoek', 'temperature')|int < state_attr('climate.zithoek', 'current_temperature')|int }}"
+      # And covers are open for at least 30 minutes
+      - condition: state
+        entity_id: cover.curtain_158d0001ef47a5_2
+        state: 'open'
+#        for:
+#          minutes: 30
+      - condition: state
+        entity_id: cover.curtain_158d0001fd240a_2
+        state: 'open'
+#        for:
+#          minutes: 30
+      # And no person is home
+      - condition: state
+        entity_id: binary_sensor.person_any_home
+        state: 'off'
+      # And presence simulation is not activated
+#      - condition: state
+#        entity_id: binary_sensor.routine_presence_simulation_active
+#        state: 'off'
+    action:
+      # Then close covers
+      service: cover.close_cover
+      entity_id:
+        - cover.curtain_158d0001ef47a5_2
+        - cover.curtain_158d0001fd240a_2
+  ##
+  # Open covers to decrease indoor temperature through outside cold
+  # * outdoor temp < current temp indoor
+  # * current temp indoor > target temp indoor
+  ##
+  - alias: 'Covers open to decrease temperature'
+    initial_state: on
+    trigger:
+      # When outside luminance is above or equal to specified threshold value
+      - platform: template
+        value_template: "{{ states('sensor.sensative_strips_comfort_luminance')|int >= states('input_number.covers_open_close_outside_conditions_lux_threshold')|int }}"
+      # And outside radiant heat is below inside temperature
+      - platform: template
+        value_template: "{{ states('sensor.sensative_strips_comfort_temperature')|int < state_attr('climate.zithoek', 'current_temperature')|int }}"
+    condition:
+      # While outside luminance is above or equal to specified threshold value
+      - condition: template
+        value_template: "{{ states('sensor.sensative_strips_comfort_luminance')|int >= states('input_number.covers_open_close_outside_conditions_lux_threshold')|int }}"
+      # And outside radiant heat is below inside temperature
+      - condition: template
+        value_template: "{{ states('sensor.sensative_strips_comfort_temperature')|int < state_attr('climate.zithoek', 'current_temperature')|int }}"
+      # And current inside temperature is above target inside temperature
+      - condition: template
+        value_template: "{{ state_attr('climate.zithoek', 'temperature')|int > state_attr('climate.zithoek', 'current_temperature')|int }}"
+      # And covers are closed for at least 30 minutes
+      - condition: state
+        entity_id: cover.curtain_158d0001ef47a5_2
+        state: 'close'
+#        for:
+#          minutes: 30
+      - condition: state
+        entity_id: cover.curtain_158d0001fd240a_2
+        state: 'close'
+#        for:
+#          minutes: 30
+      # And no person is home
+      - condition: state
+        entity_id: binary_sensor.person_any_home
+        state: 'off'
+      # And presence simulation is not activated
+#      - condition: state
+#        entity_id: binary_sensor.routine_presence_simulation_active
+#        state: 'off'
+    action:
+      # Then open covers
+      service: cover.open_cover
+      entity_id:
+        - cover.curtain_158d0001ef47a5_2
+        - cover.curtain_158d0001fd240a_2
+  ##
+  # Open covers to increase indoor temperature through sunlight
+  # * outdoor temp > current temp indoor
+  # * current temp indoor < target temp indoor
+  ##
+  - alias: 'Covers open to increase temperature'
+    initial_state: on
+    trigger:
+      # When outside luminance is above or equal to specified threshold value
+      - platform: template
+        value_template: "{{ states('sensor.sensative_strips_comfort_luminance')|int >= states('input_number.covers_open_close_outside_conditions_lux_threshold')|int }}"
+      # And outside radiant heat is above inside temperature
+      - platform: template
+        value_template: "{{ states('sensor.sensative_strips_comfort_temperature')|int > state_attr('climate.zithoek', 'current_temperature')|int }}"
+    condition:
+      # While outside luminance is above or equal to specified threshold value
+      - condition: template
+        value_template: "{{ states('sensor.sensative_strips_comfort_luminance')|int >= states('input_number.covers_open_close_outside_conditions_lux_threshold')|int }}"
+      # And outside outside radiant heat is above inside temperature
+      - condition: template
+        value_template: "{{ states('sensor.sensative_strips_comfort_temperature')|int > state_attr('climate.zithoek', 'current_temperature')|int }}"
+      # And current inside temperature is below target inside temperature
+      - condition: template
+        value_template: "{{ state_attr('climate.zithoek', 'temperature')|int < state_attr('climate.zithoek', 'current_temperature')|int }}"
+      # And covers are closed for at least 30 minutes
+      - condition: state
+        entity_id: cover.curtain_158d0001ef47a5_2
+        state: 'close'
+#        for:
+#          minutes: 30
+      - condition: state
+        entity_id: cover.curtain_158d0001fd240a_2
+        state: 'close'
+#        for:
+#          minutes: 30
+      # And no person is home
+      - condition: state
+        entity_id: binary_sensor.person_any_home
+        state: 'off'
+      # And presence simulation is not activated
+#      - condition: state
+#        entity_id: binary_sensor.routine_presence_simulation_active
+#        state: 'off'
+    action:
+      # Then open covers
+      service: cover.open_cover
+      entity_id:
+        - cover.curtain_158d0001ef47a5_2
+        - cover.curtain_158d0001fd240a_2
+##
+# Customize
+##
+homeassistant:
+  customize:
+    automation.covers_close_to_decrease_temperature:
+      friendly_name: 'Raambekleding sluiten om te koelen via zonlicht wering'
+      hidden: true
+
+    automation.covers_close_to_increase_temperature:
+      friendly_name: 'Raambekleding sluiten om te isoleren van buitentemperatuur'
+      hidden: true
+
+    automation.covers_open_to_decrease_temperature:
+      friendly_name: 'Raambekleding openen om te koelen door buitentemperatuur'
+      hidden: true
+
+    automation.covers_open_to_increase_temperature:
+      friendly_name: 'Raambekleding openen om te verwarmen via zonlicht'
+      hidden: true
+
+    input_number.covers_open_close_outside_conditions_lux_threshold:
+      friendly_name: 'Drempelwaarde lichtsterkte voor automatisch sluiten raambekleding'

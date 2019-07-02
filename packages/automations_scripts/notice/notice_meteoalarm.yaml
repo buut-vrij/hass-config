@@ -1,0 +1,49 @@
+##
+# notice_meteoalarm.yaml
+#
+# Send notifications in case of a weather alarm
+#
+# @category   Home Assistant
+# @package    Automations-scripts
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+automation:
+  ##
+  # Notify of weather alarm
+  ##
+  - alias: 'Notify of weather alarm'
+    initial_state: on
+    trigger:
+      # When meteoalarm state changes from off
+      platform: state
+      entity_id: binary_sensor.meteoalarm
+      from: 'off'
+#    condition:
+      # While type is thunderstorms (3), rain (10), flooding (12), rain/flooding (13)
+#      condition: template
+#      value_template: "{{ state_attr('binary_sensor.meteoalarm', 'awareness_type') in ['3; thunderstorms', '10; rain', '12; flooding', '13; rain-flooding'] }}"
+    action:
+      # Then send notification to iOS devices
+      - service: notify.mobile_phones
+        data_template:
+          title: 'Weeralarm'
+          message: "{{ state_attr('binary_sensor.meteoalarm', 'description') }} is effective on {{ state_attr('binary_sensor.meteoalarm', 'effective') }}"
+          data:
+            subtitle: "{{ state_attr('binary_sensor.meteoalarm', 'headline') }}"
+            push:
+              thread-id: 'alarm'
+      # And send notification to Home Assistant frontend
+      - service: persistent_notification.create
+        data_template:
+          title: 'Weeralarm'
+          message: "{{ state_attr('binary_sensor.meteoalarm', 'description') }} is effective on {{ state_attr('binary_sensor.meteoalarm', 'effective') }}. Awareness type: {{ state_attr('binary_sensor.meteoalarm', 'awareness_type') }}"
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    automation.notify_of_weather_alarm:
+      friendly_name: 'Weeralarm melden'
+      hidden: true
