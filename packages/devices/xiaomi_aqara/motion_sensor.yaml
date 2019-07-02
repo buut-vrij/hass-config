@@ -1,0 +1,105 @@
+##
+# motion_sensor.yaml
+#
+# Xiaomi Aqara door/window sensor
+#
+# @category   Home Assistant
+# @package    Devices
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+binary_sensor:
+  ##
+  # All combined
+  ##
+  - platform: template
+    sensors:
+      motion_sensor_all:
+        device_class: motion
+        value_template: >-
+          {{ is_state('binary_sensor.motion_sensor_158d0002e29c77', 'on')
+             or is_state('binary_sensor.motion_sensor_158d0002e275a0', 'on')
+             or is_state('binary_sensor.motion_sensor_158d0002e275dd', 'on')
+             or is_state('binary_sensor.motion_sensor_158d0002ec7d7a', 'on')
+             or is_state('binary_sensor.motion_sensor_158d000257a816', 'on')
+             or is_state('binary_sensor.motion_sensor_158d000257a829', 'on')
+             or is_state('binary_sensor.motion_sensor_158d0002ec3208', 'on')
+             or is_state('binary_sensor.motion_sensor_158d000257b63f', 'on') }}
+  ##
+  # All basement combined
+  ##
+  - platform: template
+    sensors:
+      motion_sensor_basement_all:
+        device_class: motion
+        value_template: >-
+          {{ is_state('binary_sensor.motion_sensor_158d0002e275dd', 'on')
+             or is_state('binary_sensor.motion_sensor_158d0002ec7d7a', 'on')
+             or is_state('binary_sensor.motion_sensor_158d000257a829', 'on')
+             or is_state('binary_sensor.motion_sensor_158d0002ec3208', 'on')
+             or is_state('binary_sensor.motion_sensor_158d000257b63f', 'on') }}
+  ##
+  # All ground floor combined
+  ##
+  - platform: template
+    sensors:
+      motion_sensor_ground_floor_all:
+        device_class: motion
+        value_template: >-
+          {{ is_state('binary_sensor.motion_sensor_158d0002e29c77', 'on')
+             or is_state('binary_sensor.motion_sensor_158d0002e275a0', 'on')
+             or is_state('binary_sensor.motion_sensor_158d000257a816', 'on') }}
+  ##
+  # Garage combined
+  ##
+  - platform: template
+    sensors:
+      motion_sensor_garage:
+        device_class: motion
+        value_template: >-
+          {{ is_state('binary_sensor.motion_sensor_158d000257a829', 'on')
+             or is_state('binary_sensor.motion_sensor_158d0002ec3208', 'on') }}
+
+  ##
+  # Living room combined
+  ##
+  - platform: template
+    sensors:
+      motion_sensor_living:
+        device_class: motion
+        value_template: >-
+          {{ is_state('binary_sensor.motion_sensor_158d0002e275a0', 'on')
+             or is_state('binary_sensor.motion_sensor_158d00032be5bd', 'on') }}
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    binary_sensor.motion_sensor_all:
+      friendly_name: 'Beweging'
+
+    binary_sensor.motion_sensor_basement_all:
+      friendly_name: 'Beweging kelder'
+      hidden: true
+
+    binary_sensor.motion_sensor_ground_floor_all:
+      friendly_name: 'Beweging begane grond'
+      hidden: true
+
+    binary_sensor.motion_sensor_garage:
+      friendly_name: 'Beweging garage'
+
+    binary_sensor.motion_sensor_living:
+      friendly_name: 'Beweging woonkamer'
+
+  customize_glob:
+    binary_sensor.motion_sensor_garage:
+      group:
+        group.security_motion:
+          friendly_name: 'Garage'
+
+    binary_sensor.motion_sensor_living:
+      group:
+        group.security_motion:
+          friendly_name: 'Woonkamer'

@@ -1,0 +1,29 @@
+##
+# natgas_sensor.yaml
+#
+# Xiaomi Mijia natural gas sensor
+#
+# @category   Home Assistant
+# @package    Devices
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+binary_sensor:
+  ##
+  # All combined
+  ##
+  - platform: template
+    sensors:
+      natgas_sensor_all:
+        device_class: gas
+        value_template: >-
+          {{ is_state('binary_sensor.natgas_sensor_158d00011176ee', 'on')
+             or is_state('binary_sensor.natgas_sensor_158d000127c558', 'on') }}
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    binary_sensor.natgas_sensor_all:
+      friendly_name: 'Aardgas'

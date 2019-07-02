@@ -8,28 +8,15 @@
 # @author     Jeroen Butenaerts
 # @version    1.0
 ##
-
-##
-# Components
-##
-
-binary_sensor:
-  - platform: template
-    sensors:
-      door_window_sensor_158d0001d934e3_battery_low:
-        device_class: battery
-        value_template: '{{ states.binary_sensor.door_window_sensor_158d0001d934e3.attributes.battery_level < 5 }}'
-
 sensor:
   - platform: template
     sensors:
       door_window_sensor_158d0001d934e3_battery:
         device_class: battery
-        friendly_name: 'Batterij deur-/raamsensor keukenraam links'
         unit_of_measurement: '%'
-        value_template: '{{ states.binary_sensor.door_window_sensor_158d0001d934e3.attributes.battery_level|int }}'
+        value_template: "{{ state_attr('binary_sensor.door_window_sensor_158d0001d934e3', 'battery_level')|int }}"
         icon_template: >
-          {% set battery_level = states.sensor.door_window_sensor_158d0001d934e3_battery.state|default(0)|int %}
+          {% set battery_level = state_attr('binary_sensor.door_window_sensor_158d0001d934e3', 'battery_level')|default(0)|int %}
           {% set battery_round = (battery_level / 10) |int * 10 %}
           {% if battery_round >= 100 %}
             mdi:battery
@@ -38,7 +25,6 @@ sensor:
           {% else %}
             mdi:battery-alert
           {% endif %}
-
 # Sensor template in door_window_sensor_158d0001b77e9a.yaml
 
 ##
@@ -52,47 +38,10 @@ homeassistant:
       hidden: true
 
     sensor.door_window_sensor_158d0001d934e3_battery:
-      templates:
-        theme: >
-          if (state < 5) {
-            return 'alert-danger';
-          } else if (state < 10) {
-            return 'alert-warning';
-          }
-
-    binary_sensor.door_window_sensor_158d0001d934e3_battery_low:
-      hidden: true
+      friendly_name: 'Batterij deur-/raamcontact keukenraam links'
 
   customize_glob:
     sensor.door_window_sensor_158d0001d934e3_battery:
       group:
         group.battery_levels:
-          friendly_name: Deur-/raamsensor keukenraam links
-
-##
-# Groups
-##
-
-##
-# Scenes
-##
-
-##
-# Alerts
-##
-alert:
-  door_window_sensor_158d0001d934e3_battery_low:
-    name: Batterijniveau deur-/raamcontact keukenraam links onder 5%
-    entity_id: binary_sensor.door_window_sensor_158d0001d934e3_battery_low
-    repeat: 1440
-    notifiers:
-      - user_1
-      - user_2
-
-##
-# Automation
-##
-
-##
-# Scripts
-##
+          friendly_name: 'Deur-/raamcontact keukenraam links'

@@ -1,5 +1,5 @@
 ##
-# water_leak_sensor_158d0001bc42ee.yaml
+# water_leak_sensor_158d0001bb7922.yaml
 #
 # Xiaomi Aqara water leak sensor
 #
@@ -11,12 +11,12 @@
 sensor:
   - platform: template
     sensors:
-      water_leak_sensor_158d0001bc42ee_battery:
+      water_leak_sensor_158d0001bb7922_battery:
         device_class: battery
         unit_of_measurement: '%'
-        value_template: "{{ state_attr('binary_sensor.water_leak_sensor_158d0001bc42ee', 'battery_level')|int }}"
+        value_template: "{{ state_attr('binary_sensor.water_leak_sensor_158d0001bb7922', 'battery_level')|int }}"
         icon_template: >
-          {% set battery_level = state_attr('binary_sensor.water_leak_sensor_158d0001bc42ee', 'battery_level')|default(0)|int %}
+          {% set battery_level = state_attr('binary_sensor.water_leak_sensor_158d0001bb7922', 'battery_level')|default(0)|int %}
           {% set battery_round = (battery_level / 10) |int * 10 %}
           {% if battery_round >= 100 %}
             mdi:battery
@@ -31,20 +31,20 @@ sensor:
 ##
 homeassistant:
   customize:
-    binary_sensor.water_leak_sensor_158d0001bc42ee:
+    binary_sensor.water_leak_sensor_158d0001bb7922:
       device_class: moisture
-      friendly_name: 'Vocht keuken afvoer'
+      friendly_name: 'Vocht garage'
 
-    sensor.water_leak_sensor_158d0001bc42ee_battery:
-      friendly_name: 'Batterij waterlekkagesensor keuken afvoer'
+    sensor.water_leak_sensor_158d0001bb7922_battery:
+      friendly_name: 'Batterij waterlekkagesensor garage'
 
   customize_glob:
-    binary_sensor.water_leak_sensor_158d0001bc42ee:
+    binary_sensor.water_leak_sensor_158d0001bb7922:
       group:
         group.security_water_leak:
-          friendly_name: 'Keuken afvoer'
+          friendly_name: 'Garage'
 
-    sensor.water_leak_sensor_158d0001bc42ee_battery:
+    sensor.water_leak_sensor_158d0001bb7922_battery:
       group:
         group.battery_levels:
-          friendly_name: 'Waterlekkagesensor keuken afvoer'
+          friendly_name: 'Waterlekkagesensor garage'

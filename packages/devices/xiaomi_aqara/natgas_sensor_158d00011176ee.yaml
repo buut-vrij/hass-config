@@ -8,11 +8,6 @@
 # @author     Jeroen Butenaerts
 # @version    1.0
 ##
-
-##
-# Components
-##
-
 ##
 # Customize
 ##
@@ -20,38 +15,10 @@ homeassistant:
   customize:
     binary_sensor.natgas_sensor_158d00011176ee:
       device_class: gas
-      friendly_name: 'Gasmelder centrale verwarming'
+      friendly_name: 'Aardgas cv-ketel'
 
   customize_glob:
     binary_sensor.natgas_sensor_158d00011176ee:
       group:
-        group.security_gas:
-          friendly_name: Centrale verwarming
-
-##
-# Groups
-##
-
-##
-# Scenes
-##
-
-##
-# Alerts
-##
-alert:
-  natgas_sensor_158d00011176ee_leak_detected:
-    name: Gaslek centrale verwarming gedetecteerd
-    entity_id: binary_sensor.natgas_sensor_158d00011176ee
-    repeat: 15
-    notifiers:
-      - user_1
-      - user_2
-
-##
-# Automation
-##
-
-##
-# Scripts
-##
+        group.security_natgas:
+          friendly_name: 'Cv-ketel'

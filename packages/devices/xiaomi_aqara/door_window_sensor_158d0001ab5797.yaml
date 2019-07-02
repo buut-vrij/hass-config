@@ -8,45 +8,15 @@
 # @author     Jeroen Butenaerts
 # @version    1.0
 ##
-
-##
-# Components
-##
-
-binary_sensor:
-  - platform: template
-    sensors:
-      door_window_sensor_158d0001ab5797_battery_low:
-        device_class: battery
-        value_template: '{{ states.binary_sensor.door_window_sensor_158d0001ab5797.attributes.battery_level < 5 }}'
-
-  - platform: template
-    sensors:
-      door_window_sensor_all:
-        device_class: opening
-        friendly_name: 'Perimeter'
-        value_template: >-
-          {{ is_state('binary_sensor.door_window_sensor_158d0001ab5797', 'on')
-             or is_state('binary_sensor.door_window_sensor_158d0001ab5853', 'on')
-             or is_state('binary_sensor.door_window_sensor_158d0001b77e9a', 'on')
-             or is_state('binary_sensor.door_window_sensor_158d0001b77eb1', 'on')
-             or is_state('binary_sensor.door_window_sensor_158d0001c0e526', 'on')
-             or is_state('binary_sensor.door_window_sensor_158d0001d934e3', 'on')
-             or is_state('binary_sensor.door_window_sensor_158d0001d8228c', 'on')
-             or is_state('binary_sensor.door_window_sensor_158d0001f38318', 'on')
-             or is_state('binary_sensor.door_window_sensor_158d0001f38976', 'on')
-             or is_state('binary_sensor.door_window_sensor_158d00019fd4c6', 'on') }}
-
 sensor:
   - platform: template
     sensors:
       door_window_sensor_158d0001ab5797_battery:
         device_class: battery
-        friendly_name: 'Batterij deur-/raamsensor studeerkamerraam'
         unit_of_measurement: '%'
-        value_template: '{{ states.binary_sensor.door_window_sensor_158d0001ab5797.attributes.battery_level|int }}'
+        value_template: "{{ state_attr('binary_sensor.door_window_sensor_158d0001ab5797', 'battery_level')|int }}"
         icon_template: >
-          {% set battery_level = states.sensor.door_window_sensor_158d0001ab5797_battery.state|default(0)|int %}
+          {% set battery_level = state_attr('binary_sensor.door_window_sensor_158d0001ab5797', 'battery_level')|default(0)|int %}
           {% set battery_round = (battery_level / 10) |int * 10 %}
           {% if battery_round >= 100 %}
             mdi:battery
@@ -55,25 +25,6 @@ sensor:
           {% else %}
             mdi:battery-alert
           {% endif %}
-
-#      door_window_sensor_bedroom_ne:
-#        friendly_name: 'Studeerkamerraam'
-#        value_template: >-
-#          {% if is_state('binary_sensor.door_window_sensor_158d0001ab5797', 'off') %}
-#            Gesloten
-#          {% elif is_state('binary_sensor.door_window_sensor_158d0001ab5797', 'on') %}
-#            Geopend
-#          {% else %}
-#            Fout
-#          {% endif %}
-#        icon_template: >-
-#          {% if is_state('binary_sensor.door_window_sensor_158d0001ab5797', 'off') %}
-#            mdi:window-closed
-#          {% elif is_state('binary_sensor.door_window_sensor_158d0001ab5797', 'on') %}
-#            mdi:window-open
-#          {% else %}
-#            mdi:alert-outline
-#          {% endif %}
 
 ##
 # Customize
@@ -85,6 +36,14 @@ homeassistant:
       friendly_name: 'Studeerkamerraam'
 
     sensor.door_window_sensor_158d0001ab5797_battery:
+      friendly_name: 'Batterij deur-/raamcontact studeerkamerraam'
+#      templates:
+#        theme: >
+#          {% if states('sensor.door_window_sensor_158d0001ab5797_battery')|int < 5 %}
+#            alert-danger
+#          {% elif states('sensor.door_window_sensor_158d0001ab5797_battery')|int < 10 %}
+#            alert-warning
+#          {% endif %}
       templates:
         theme: >
           if (state < 5) {
@@ -93,43 +52,8 @@ homeassistant:
             return 'alert-warning';
           }
 
-    binary_sensor.door_window_sensor_158d0001ab5797_battery_low:
-      hidden: true
-
-    sensor.door_window_sensor_bedroom_ne:
-      templates:
-        rgb_color: 'if (state === "on") return [213, 0, 0]; elif (state === "off") return [255, 160, 0]; else return [56, 142, 60];'
-
   customize_glob:
     sensor.door_window_sensor_158d0001ab5797_battery:
       group:
         group.battery_levels:
-          friendly_name: Deur-/raamsensor studeerkamerraam
-
-##
-# Groups
-##
-
-##
-# Scenes
-##
-
-##
-# Alerts
-##
-alert:
-  door_window_sensor_158d0001ab5797_battery_low:
-    name: Batterijniveau deur-/raamcontact studeerkamer onder 5%
-    entity_id: binary_sensor.door_window_sensor_158d0001ab5797_battery_low
-    repeat: 1440
-    notifiers:
-      - user_1
-      - user_2
-
-##
-# Automation
-##
-
-##
-# Scripts
-##
+          friendly_name: 'Deur-/raamcontact studeerkamerraam'

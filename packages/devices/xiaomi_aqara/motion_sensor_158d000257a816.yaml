@@ -1,0 +1,53 @@
+##
+# motion_sensor_158d000257a816.yaml
+#
+# Xiaomi Aqara motion sensor
+#
+# @category   Home Assistant
+# @package    Devices
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+sensor:
+  - platform: template
+    sensors:
+      motion_sensor_158d000257a816_battery:
+        device_class: battery
+        unit_of_measurement: '%'
+        value_template: "{{ state_attr('binary_sensor.motion_sensor_158d000257a816', 'battery_level')|int }}"
+        icon_template: >
+          {% set battery_level = state_attr('binary_sensor.motion_sensor_158d000257a816', 'battery_level')|default(0)|int %}
+          {% set battery_round = (battery_level / 10) |int * 10 %}
+          {% if battery_round >= 100 %}
+            mdi:battery
+          {% elif battery_round > 0 %}
+            mdi:battery-{{ battery_round }}
+          {% else %}
+            mdi:battery-alert
+          {% endif %}
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    binary_sensor.motion_sensor_158d000257a816:
+      device_class: motion
+      friendly_name: 'Beweging keuken'
+
+    sensor.illumination_158d000257a816:
+      hidden: true
+
+    sensor.motion_sensor_158d000257a816_battery:
+      friendly_name: 'Batterij bewegingssensor keuken'
+
+  customize_glob:
+    binary_sensor.motion_sensor_158d000257a816:
+      group:
+        group.security_motion:
+          friendly_name: 'Keuken'
+
+    sensor.motion_sensor_158d000257a816_battery:
+      group:
+        group.battery_levels:
+          friendly_name: 'Bewegingssensor keuken'

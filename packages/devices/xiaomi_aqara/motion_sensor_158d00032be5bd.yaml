@@ -1,0 +1,53 @@
+##
+# motion_sensor_158d00032be5bd.yaml
+#
+# Xiaomi Aqara motion sensor
+#
+# @category   Home Assistant
+# @package    Devices
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+sensor:
+  - platform: template
+    sensors:
+      motion_sensor_158d00032be5bd_battery:
+        device_class: battery
+        unit_of_measurement: '%'
+        value_template: "{{ state_attr('binary_sensor.motion_sensor_158d00032be5bd', 'battery_level')|int }}"
+        icon_template: >
+          {% set battery_level = state_attr('binary_sensor.motion_sensor_158d00032be5bd', 'battery_level')|default(0)|int %}
+          {% set battery_round = (battery_level / 10) |int * 10 %}
+          {% if battery_round >= 100 %}
+            mdi:battery
+          {% elif battery_round > 0 %}
+            mdi:battery-{{ battery_round }}
+          {% else %}
+            mdi:battery-alert
+          {% endif %}
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    binary_sensor.motion_sensor_158d00032be5bd:
+      device_class: motion
+      friendly_name: 'Beweging woonkamer zithoek'
+
+    sensor.illumination_158d00032be5bd:
+      hidden: true
+
+    sensor.motion_sensor_158d00032be5bd_battery:
+      friendly_name: 'Batterij bewegingssensor woonkamer zithoek'
+
+  customize_glob:
+    binary_sensor.motion_sensor_158d00032be5bd:
+      group:
+        group.security_motion:
+          friendly_name: 'Woonkamer zithoek'
+
+    sensor.motion_sensor_158d00032be5bd_battery:
+      group:
+        group.battery_levels:
+          friendly_name: 'Bewegingssensor woonkamer zithoek'
