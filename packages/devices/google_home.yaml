@@ -1,0 +1,16 @@
+##
+# google_home.yaml
+#
+# Google Home
+#
+# @category   Home Assistant
+# @package    Devices
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+#googlehome:
+#  devices:
+#    - host: !secret cast_host_googlehome_basement
+#    - host: !secret cast_host_googlehome_kitchen
+#    - host: !secret cast_host_googlehome_landing
+#    - host: !secret cast_host_googlehome_living

@@ -8,15 +8,9 @@
 # @author     Jeroen Butenaerts
 # @version    1.0
 ##
-
-##
-# Components
-##
-climate:
-  - platform: honeywell
-    username: !secret honeywell_username
-    password: !secret honeywell_password
-#    scan_interval: 600
+evohome:
+  username: !secret honeywell_username
+  password: !secret honeywell_password
 
 ##
 # Customize
@@ -24,36 +18,32 @@ climate:
 homeassistant:
   customize:
     climate.eethoek:
-      friendly_name: Verwarming eethoek
-    climate.entree:
-      friendly_name: Verwarming hal
+      friendly_name: 'Verwarming eethoek'
+
+    climate.hal:
+      friendly_name: 'Verwarming hal'
+
     climate.keuken:
-      friendly_name: Verwarming keuken
+      friendly_name: 'Verwarming keuken'
+
     climate.zithoek:
-      friendly_name: Verwarming zithoek
+      friendly_name: 'Verwarming zithoek'
+
+    climate.thuis:
+      friendly_name: 'Verwarming huis'
 
   customize_glob:
-    climate.entree:
+    climate.hal:
       group:
         group.climate_entryway:
-          friendly_name: Verwarming
+          friendly_name: 'Verwarming'
+
     climate.keuken:
       group:
         group.climate_kitchen:
-          friendly_name: Verwarming
+          friendly_name: 'Verwarming'
 
-##
-# Groups
-##
-
-##
-# Scenes
-##
-
-##
-# Automation
-##
-
-##
-# Scripts
-##
+    climate.thuis:
+      group:
+        group.view_home:
+          friendly_name: 'Verwarming'

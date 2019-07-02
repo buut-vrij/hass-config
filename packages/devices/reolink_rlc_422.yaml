@@ -1,0 +1,46 @@
+##
+# reolink_rlc_422.yaml
+#
+# Reolink RLC-422 camera
+#
+# @category   Home Assistant
+# @package    Packages
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+camera:
+  - platform: onvif
+    host: !secret onvif_camera_1_host
+    port: !secret onvif_camera_1_port
+    name: 'Camera garage'
+    username: !secret onvif_camera_1_username
+    password: !secret onvif_camera_1_password
+
+#  - platform: onvif
+#    host: !secret onvif_camera_2_host
+#    port: !secret onvif_camera_2_port
+#    name: 'Camera garden'
+#    username: !secret onvif_camera_2_username
+#    password: !secret onvif_camera_2_password
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    camera.camera_garage:
+      friendly_name: 'Camera garage'
+
+    camera.camera_garden:
+      friendly_name: 'Camera tuin'
+
+  customize_glob:
+    camera.camera_garage:
+      group:
+        group.view_cam:
+          friendly_name: 'Garage'
+
+    camera.camera_garden:
+      group:
+        group.view_cam:
+          friendly_name: 'Tuin'

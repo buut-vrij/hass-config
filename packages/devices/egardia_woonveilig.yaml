@@ -8,79 +8,30 @@
 # @author     Jeroen Butenaerts
 # @version    1.0
 ##
-
-##
-# Components
-##
 egardia:
   host: !secret woonveilig_host
   username: !secret woonveilig_username
   password: !secret woonveilig_password
-  version: GATE-03
-  name: Alarm
-#  report_server_enabled: true
-#  report_server_port: !secret woonveilig_report_server_port
-#  report_server_codes:
-#    arm: !secret woonveilig_arm_codes
-#    disarm: !secret woonveilig_disarm_codes
-#    home: !secret woonveilig_home_codes
-#    triggered: !secret woonveilig_trigger_codes
-#    ignore: !secret woonveilig_ignore_codes
+  version: 'GATE-03'
+  name: 'WoonVeilig'
+  report_server_enabled: true
+  report_server_port: !secret woonveilig_report_server_port
+  report_server_codes:
+    arm: !secret woonveilig_arm_codes
+    disarm: !secret woonveilig_disarm_codes
+    armhome: !secret woonveilig_armhome_codes
+    triggered: !secret woonveilig_trigger_codes
+    ignore: !secret woonveilig_ignore_codes
 
 ##
 # Customize
 ##
 homeassistant:
   customize:
-    script.woonveilig_arm_away:
-      can_cancel: false
-      friendly_name: Ingeschakeld weg
-      icon: mdi:lock
+    alarm_control_panel.woonveilig:
+      friendly_name: 'Alarm'
 
-    script.woonveilig_arm_home:
-      can_cancel: false
-      friendly_name: Ingeschakeld thuis
-      icon: mdi:lock-outline
-
-    script.woonveilig_disarm:
-      can_cancel: false
-      friendly_name: Uitgeschakeld
-      icon: mdi:lock-open
-
-##
-# Groups
-##
-group:
-  woonveilig:
-    control: hidden
-    entities:
-      - script.woonveilig_arm_away
-      - script.woonveilig_arm_home
-      - script.woonveilig_disarm
-    icon: mdi:alarm-bell
-    name: Alarm
-
-##
-# Scenes
-##
-
-##
-# Automation
-##
-
-##
-# Scripts
-##
-script:
-  woonveilig_arm_away:
-    sequence:
-      - service: alarm_control_panel.alarm_arm_away
-        entity_id: alarm_control_panel.alarm
-  woonveilig_arm_home:
-    sequence:
-      - service: alarm_control_panel.alarm_arm_home
-        entity_id: alarm_control_panel.alarm
-  woonveilig_disarm:
-    sequence:
-      - service: alarm_control_panel.alarm_disarm
-        entity_id: alarm_control_panel.alarm
+    binary_sensor.garage_loopdeur:
+      device_class: door
+      hidden: false
+      name: 'Garagepoort loopdeur'

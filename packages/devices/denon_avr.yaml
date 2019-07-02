@@ -8,35 +8,22 @@
 # @author     Jeroen Butenaerts
 # @version    1.0
 ##
-
-##
-# Components
-##
 media_player:
   - platform: denonavr
     host: !secret denonavr_host
+    name: 'Receiver woonkamer'
+    show_all_sources: false
 
 ##
 # Customize
 ##
 homeassistant:
   customize:
-    media_player.receiver:
-      friendly_name: Receiver woonkamer
-      icon: mdi:amplifier
+    media_player.receiver_woonkamer:
+      icon: 'mdi:speaker'
 
-##
-# Groups
-##
-
-##
-# Scenes
-##
-
-##
-# Automation
-##
-
-##
-# Scripts
-##
+  customize_glob:
+    media_player.receiver_woonkamer:
+      group:
+        group.devices_living_room:
+          friendly_name: 'Receiver'

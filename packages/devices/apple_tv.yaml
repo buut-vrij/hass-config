@@ -8,41 +8,46 @@
 # @author     Jeroen Butenaerts
 # @version    1.0
 ##
-
-##
-# Components
-##
-media_player:
-  - platform: apple_tv
-    host: !secret apple_tv_host
-    login_id: !secret apple_tv_login_id
+apple_tv:
+  - name: 'appletv_bedroom'
+    host: !secret apple_tv_bedroom_host
+    login_id: !secret apple_tv_bedroom_login_id
+#    credentials: !secret apple_tv_bedroom_credentials
     start_off: true
-    credentials: !secret apple_tv_credentials
+  - name: 'appletv_living'
+    host: !secret apple_tv_living_host
+    login_id: !secret apple_tv_living_login_id
+#    credentials: !secret apple_tv_living_credentials
+    start_off: true
 
 ##
 # Customize
 ##
 homeassistant:
   customize:
-    media_player.apple_tv:
-      friendly_name: Apple TV slaapkamer
-      icon: mdi:apple
+    media_player.appletv_bedroom:
+      friendly_name: 'Apple TV slaapkamer'
+      icon: 'mdi:apple'
 
-    remote.apple_tv:
+    media_player.appletv_living:
+      friendly_name: 'Apple TV woonkamer'
+      icon: 'mdi:apple'
+
+    remote.appletv_bedroom:
+      friendly_name: 'Apple TV slaapkamer'
       hidden: true
 
-##
-# Groups
-##
+    remote.appletv_living:
+      friendly_name: 'Apple TV woonkamer'
+      hidden: true
 
-##
-# Scenes
-##
+  customize_glob:
+    media_player.appletv_bedroom:
+      group:
+        group.devices_bedroom:
+          friendly_name: 'Apple TV'
 
-##
-# Automation
-##
-
-##
-# Scripts
-##
+    media_player.appletv_living:
+      group:
+        group.devices_living_room:
+          friendly_name: 'Apple TV'

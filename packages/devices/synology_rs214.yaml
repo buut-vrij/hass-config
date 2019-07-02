@@ -1,7 +1,7 @@
 ##
-# synology_ds114.yaml
+# synology_rs214.yaml
 #
-# Synology DiskStation DS114
+# Synology DiskStation RS214
 #
 # @category   Home Assistant
 # @package    Devices
@@ -10,9 +10,9 @@
 ##
 sensor:
   - platform: synologydsm
-    host: !secret ds114_host
-    password: !secret ds114_password
-    username: !secret ds114_username
+    host: !secret rs214_host
+    password: !secret rs214_password
+    username: !secret rs214_username
     monitored_conditions:
       - cpu_total_load
       - memory_available_real
@@ -25,11 +25,19 @@ sensor:
       - volume_size_total
       - volume_size_used
 
+#  - platform: template
+#    sensors:
+#      free_space_volume_1:
+#        friendly_name: 'Beschikbare ruimte'
+#        unit_of_measurement: 'MB'
+#        value_template: "{{ states('sensor.volume_size_total') - ( states('sensor.volume_size_used')|float / 1024 ) }}"
+#        icon_template: 'mdi:chart-pie'
+
 switch:
   - platform: wake_on_lan
-    mac_address: !secret ds114_mac
-    host: !secret ds114_host
-    name: 'Synology DS114'
+    mac_address: !secret rs214_mac
+    host: !secret rs214_host
+    name: 'Synology RS214'
 
 ##
 # Customize
@@ -79,12 +87,12 @@ homeassistant:
 # Groups
 ##
 group:
-  synology_ds114:
-    name: 'Bestandsserver (DS114)'
+  synology_rs214:
+    name: 'Bestandsserver (RS214)'
     icon: 'mdi:server'
     control: 'hidden'
     entities:
-      - switch.synology_ds114
+      - switch.synology_rs214
       - sensor.volume_status
 #      - sensor.free_space_volume_1
       - sensor.cpu_load_total
