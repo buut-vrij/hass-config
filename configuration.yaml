@@ -1,0 +1,104 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: !secret homeassistant_name
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret homeassistant_latitude
+  longitude: !secret homeassistant_longitude
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: !secret homeassistant_elevation
+  # metric for Metric, imperial for Imperial
+  unit_system: !secret homeassistant_unit_system
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: !secret homeassistant_time_zone
+  # Authentication
+  auth_providers:
+    - type: homeassistant
+    - type: trusted_networks
+      trusted_networks:
+#        - '172.17.0.1'
+        - '172.30.32.2'
+#        - '192.168.10.0/26'
+#        - '192.168.12.0/28'
+        - '192.168.20.0/27'
+        - '192.168.21.0/28'
+      trusted_users:
+        192.168.20.2: !secret person_3_user_id
+        192.168.20.3: !secret person_1_user_id
+        192.168.20.4: !secret person_1_user_id
+        192.168.20.5: !secret person_2_user_id
+        192.168.20.6: !secret person_2_user_id
+  # Enable Two factor authentication
+  auth_mfa_modules:
+    - type: totp
+  # Customization
+  packages: !include_dir_named packages/
+
+# Show links to resources in log and frontend
+#introduction:
+
+# Enables the frontend
+frontend:
+  themes:
+    alert-danger:
+      paper-item-icon-color: '#ff5252'
+      primary-text-color: '#ff5252'
+    alert-info:
+      paper-item-icon-color: '#1976d2'
+      primary-text-color: '#1976d2'
+    alert-success:
+      paper-item-icon-color: '#449d44'
+      primary-text-color: '#449d44'
+    alert-warning:
+      paper-item-icon-color: '#ffc107'
+      primary-text-color: '#ffc107'
+
+# Enables configuration UI
+config:
+
+http:
+  # Uncomment this if you are using SSL or running in Docker etc
+  base_url: !secret http_base_url
+  cors_allowed_origins: !secret http_cors_allowed_origins
+  use_x_forwarded_for: true
+  trusted_proxies: !secret http_trusted_proxies
+  ip_ban_enabled: true
+  login_attempts_threshold: 5
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Enable Zeroconf/Bonjour/Avahi exposure
+zeroconf:
+
+# Discover some devices automatically
+discovery:
+  ignore:
+    - denonavr
+    - google_cast
+    - philips_hue
+    - xiaomi_gw
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+#conversation:
+
+# View all events in a logbook
+logbook:
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+# System health
+system_health:
+
+# Enable device registration to person
+person:
+
+# Enable processing audio/video streams
+ffmpeg:
