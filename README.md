@@ -47,7 +47,7 @@
 1x SolarEdge SE4K\
 1x Synology DS114\
 1x Synology RS214\
-1x Ubiquiti UniFi CloudKey
+1x Ubiquiti UniFi CloudKey\
 \
 **Network devices:**\
 1x Ubiquiti UniFi USG PRO gateway\
