@@ -1,0 +1,85 @@
+##
+# status.yaml
+#
+# Status group
+#
+# @category   Home Assistant
+# @package    Groups
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+group:
+  # Battery levels
+  battery_levels:
+    name: 'Battery levels'
+    icon: 'mdi:battery-unknown'
+    control: 'hidden'
+    entities:
+      - sensor.motion_sensor_158d0002ec3208_battery
+      - sensor.motion_sensor_158d000257a829_battery
+      - sensor.motion_sensor_158d0002e29c77_battery
+      - sensor.motion_sensor_158d0002ec7d7a_battery
+      - sensor.motion_sensor_158d000257a816_battery
+      - sensor.motion_sensor_158d000257b63f_battery
+      - sensor.motion_sensor_158d0002e275dd_battery
+      - sensor.motion_sensor_158d0002e275a0_battery
+      - sensor.motion_sensor_158d00032be5bd_battery
+      - sensor.sensative_strips_comfort_battery
+      - sensor.door_window_sensor_158d0001c0e526_battery
+      - sensor.door_window_sensor_158d0001dcce33_battery
+      - sensor.door_window_sensor_158d00019fd4c6_battery
+      - sensor.door_window_sensor_158d0001d934e3_battery
+      - sensor.door_window_sensor_158d0001b77e9a_battery
+      - sensor.door_window_sensor_158d0001d8228c_battery
+      - sensor.door_window_sensor_158d0001ab5853_battery
+      - sensor.door_window_sensor_158d0001b77eb1_battery
+      - sensor.door_window_sensor_158d0001ab5797_battery
+      - sensor.door_window_sensor_158d0001f38318_battery
+      - sensor.door_window_sensor_158d0001f38976_battery
+      - sensor.smoke_sensor_158d000215a794_battery
+      - sensor.smoke_sensor_158d0001e80a40_battery
+      - sensor.smoke_sensor_158d000215e643_battery
+      - sensor.smoke_sensor_158d000215e268_battery
+      - sensor.smoke_sensor_158d0001e80a3c_battery
+      - sensor.smoke_sensor_158d0002153aba_battery
+      - sensor.temperature_158d0002271b5e_battery
+      - sensor.temperature_158d00022883df_battery
+      - sensor.temperature_158d00022883db_battery
+      - sensor.temperature_158d00022881a8_battery
+      - sensor.temperature_158d0002288396_battery
+      - sensor.water_leak_sensor_158d0001bb63a5_battery
+      - sensor.water_leak_sensor_158d0001bb7922_battery
+      - sensor.water_leak_sensor_158d0001bc42ee_battery
+      - sensor.water_leak_sensor_158d0001bc19c5_battery
+      - sensor.water_leak_sensor_158d0001bc42dc_battery
+
+  # Z-Wave devices
+  zwave_devices:
+    name: 'Z-Wave devices'
+    icon: 'mdi:z-wave'
+    control: 'hidden'
+    entities:
+      - zwave.sensative_strips_comfort
+      - zwave.aeotec_zw090_zstick_gen5_eu
+      - zwave.fibaro_system_fgd212_dimmer_2
+      - zwave.fibaro_system_fgd212_dimmer_2_10
+      - zwave.fibaro_system_fgd212_dimmer_2_11
+      - zwave.fibaro_system_fgd212_dimmer_2_4
+      - zwave.fibaro_system_fgd212_dimmer_2_8
+      - zwave.fibaro_system_fgd212_dimmer_2_6
+      - zwave.fibaro_system_fgd212_dimmer_2_7
+      - zwave.fibaro_system_fgd212_dimmer_2_9
+      - zwave.fibaro_system_fgd212_dimmer_2_2
+      - zwave.fibaro_system_fgwpef_wall_plug_gen5
+      - zwave.aeotec_zw117_range_extender_6
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    group.battery_levels:
+      friendly_name: 'Batterijniveaus'
+
+    group.zwave_devices:
+      friendly_name: 'Z-Wave apparaten'

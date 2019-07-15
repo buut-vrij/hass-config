@@ -1,0 +1,139 @@
+##
+# lights_blinds.yaml
+#
+# Lights & blinds group
+#
+# @category   Home Assistant
+# @package    Groups
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+group:
+  # Boiler room
+  lights_boiler_room:
+    name: 'Boiler room'
+    icon: 'mdi:washing-machine'
+    entities:
+      - light.fibaro_system_fgd212_dimmer_2_level_17
+
+  # Entryway
+  lights_entryway:
+    name: 'Entryway'
+    icon: 'mdi:door-closed'
+    entities:
+      - light.fibaro_system_fgd212_dimmer_2_level_6
+
+  # Garage
+  lights_garage:
+    name: 'Garage'
+    icon: 'mdi:car'
+    entities:
+      - light.plafondlampen_garage
+
+  # Kitchen
+  lights_kitchen:
+    name: 'Kitchen'
+    icon: 'mdi:chef-hat'
+    entities:
+      - light.fibaro_system_fgd212_dimmer_2_level_11
+      - light.werkbladverlichting
+
+  # Landing downstairs
+  lights_landing_downstairs:
+    name: 'Landing downstairs'
+    icon: 'mdi:stairs'
+    entities:
+      - light.fibaro_system_fgd212_dimmer_2_level_15
+
+  # Landing upstairs
+  lights_landing_upstairs:
+    name: 'Landing upstairs'
+    icon: 'mdi:stairs'
+#    entities:
+
+  # Living room
+  lights_living_room:
+    name: 'Living room'
+    icon: 'mdi:sofa'
+    entities:
+      - light.fibaro_system_fgd212_dimmer_2_level_4
+      - light.fibaro_system_fgd212_dimmer_2_level_2
+      - light.kastverlichting
+      - light.tv_lamp
+      - light.livingwhites_plug_1
+
+  lights_blinds_living_room:
+    name: 'Living room'
+    icon: 'mdi:sofa'
+    control: 'hidden'
+    entities:
+      - light.fibaro_system_fgd212_dimmer_2_level_4
+      - light.fibaro_system_fgd212_dimmer_2_level_2
+      - light.kastverlichting
+      - light.tv_lamp
+      - light.livingwhites_plug_1
+      - cover.curtain_158d0001fd240a_2
+      - cover.curtain_158d0001ef47a5_2
+
+  # Presets
+  lights_blinds_presets:
+    name: 'Presets'
+    icon: 'mdi:movie'
+    control: 'hidden'
+    entities:
+      - scene.general_evening
+      - scene.activity_watching_tv
+      - scene.activity_watching_movie
+      - scene.activity_pausing_movie
+      - scene.activity_cooking
+
+  # Toilet
+  lights_toilet:
+    name: 'Toilet'
+    icon: 'mdi:human-male-female'
+    entities:
+      - light.fibaro_system_fgd212_dimmer_2_level_13
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    group.lights_blinds_presets:
+      friendly_name: 'Presets'
+      order: 0
+
+    group.lights_blinds_living_room:
+      friendly_name: 'Woonkamer'
+      order: 1
+
+    group.lights_living_room:
+      friendly_name: 'Woonkamer'
+
+    group.lights_kitchen:
+      friendly_name: 'Keuken'
+      order: 2
+
+    group.lights_entryway:
+      friendly_name: 'Hal'
+      order: 3
+
+    group.lights_toilet:
+      friendly_name: 'Toilet'
+      order: 4
+
+    group.lights_landing_upstairs:
+      friendly_name: 'Overloop'
+      order: 11
+
+    group.lights_landing_downstairs:
+      friendly_name: 'Kelderportaal'
+      order: 21
+
+    group.lights_boiler_room:
+      friendly_name: 'Wasruimte'
+      order: 22
+
+    group.lights_garage:
+      friendly_name: 'Garage'
+      order: 23

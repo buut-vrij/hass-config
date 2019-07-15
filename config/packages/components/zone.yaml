@@ -1,0 +1,31 @@
+##
+# zone.yaml
+#
+# Zone specifications
+#
+# @category   Home Assistant
+# @package    Component packages
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+zone:
+  - zone:
+    name: !secret zone_1_name
+    icon: 'mdi:home'
+    latitude: !secret zone_1_latitude
+    longitude: !secret zone_1_longitude
+    radius: !secret zone_1_radius
+
+  - zone 2:
+    name: !secret zone_2_name
+    icon: 'mdi:domain'
+    latitude: !secret zone_2_latitude
+    longitude: !secret zone_2_longitude
+    radius: !secret zone_2_radius
+
+  - zone 3:
+    name: !secret zone_3_name
+    icon: 'mdi:domain'
+    latitude: !secret zone_3_latitude
+    longitude: !secret zone_3_longitude
+    radius: !secret zone_3_radius

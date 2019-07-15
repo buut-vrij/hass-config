@@ -1,0 +1,36 @@
+##
+# notice_dishwasher_ready.yaml
+#
+# 
+#
+# @category   Home Assistant
+# @package    Automations-scripts
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+automation:
+  ##
+  # Dishwasher state ready notification
+  ##
+  - alias: 'Dishwasher state ready notification'
+    initial_state: on
+    trigger:
+      # When dishwasher state is ready
+      platform: state
+      entity_id: input_select.dishwasher_state_select
+      to: 'Ready'
+    action:
+      # Then send notification to mobile phones
+      service: notify.mobile_phones
+      data_template:
+        title: 'Vaatwasser'
+        message: 'Wasprogramma klaar'
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    automation.dishwasher_state_ready_notification:
+      friendly_name: 'Vaatwasser status gereed melding'
+      hidden: true

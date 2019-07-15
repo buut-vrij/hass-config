@@ -1,0 +1,36 @@
+##
+# notice_washer_ready.yaml
+#
+# 
+#
+# @category   Home Assistant
+# @package    Automations-scripts
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+automation:
+  ##
+  # Washer state ready notification
+  ##
+  - alias: 'Washer state ready notification'
+    initial_state: on
+    trigger:
+      # When washer state is ready
+      platform: state
+      entity_id: input_select.washer_state_select
+      to: 'Ready'
+    action:
+      # Then send notification to mobile phones
+      service: notify.mobile_phones
+      data_template:
+        title: 'Wasmachine'
+        message: 'Wasprogramma klaar'
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    automation.washer_state_ready_notification:
+      friendly_name: 'Wasmachine status gereed melding'
+      hidden: true

@@ -1,0 +1,14 @@
+##
+# postnl.yaml
+#
+# PostNL delivery tracking
+#
+# @category   Home Assistant
+# @package    Service packages
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+#sensor:
+#  - platform: postnl
+#    username: !secret postnl_username
+#    password: !secret postnl_password

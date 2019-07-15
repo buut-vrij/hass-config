@@ -1,0 +1,72 @@
+##
+# notify.yaml
+#
+# Notify
+#
+# @category   Home Assistant
+# @package    Component packages
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+notify:
+  - platform: group
+    name: 'mobile_devices'
+    services:
+      - service: ios_ipad
+      - service: ios_iphone_jeroen
+      - service: ios_iphone_veerle
+
+  - platform: group
+    name: 'mobile_phones'
+    services:
+      - service: ios_iphone_jeroen
+      - service: ios_iphone_veerle
+
+script:
+  ##
+  # Notify mobile devices
+  ##
+  notify_mobile_devices:
+    sequence:
+      - service: notify.mobile_devices
+        data_template:
+          title: "{{ notify_title }}"
+          message: "{{ notify_message }}"
+          data:
+            subtitle: "{{ notify_subtitle }}"
+            push:
+              category: "{{ notify_category }}"
+              thread-id: "{{ notify_thread }}"
+
+  ##
+  # Notify mobile devices which are home
+  #
+  # https://community.home-assistant.io/t/trouble-with-notify-group/19790
+  ##
+  notify_mobile_devices_home:
+    sequence:
+      - service_template: >
+        {% %}
+        data_template:
+          title: "{{ notify_title }}"
+          message: "{{ notify_message }}"
+          data:
+            subtitle: "{{ notify_subtitle }}"
+            push:
+              category: "{{ notify_category }}"
+              thread-id: "{{ notify_thread }}"
+
+  ##
+  # Notify mobile phones
+  ##
+  notify_mobile_phones:
+    sequence:
+      - service: notify.mobile_phones
+        data_template:
+          title: "{{ notify_title }}"
+          message: "{{ notify_message }}"
+          data:
+            subtitle: "{{ notify_subtitle }}"
+            push:
+              category: "{{ notify_category }}"
+              thread-id: "{{ notify_thread }}"

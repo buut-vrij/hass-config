@@ -1,0 +1,145 @@
+##
+# view.yaml
+#
+# Views
+#
+# @category   Home Assistant
+# @package    Groups
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+group:
+  #default_view:
+  view_home:
+    name: 'Home'
+    icon: 'mdi:home-assistant'
+    view: true
+    entities:
+      - alarm_control_panel.woonveilig
+      - climate.thuis
+      - group.home_presence
+      - group.home_security
+      - group.home_lights
+      - group.home_blinds
+
+  view_lights_blinds:
+    name: 'Lights/blinds'
+    icon: 'mdi:white-balance-sunny'
+    view: true
+    entities:
+      - group.lights_blinds_presets
+      - group.lights_blinds_living_room
+      - group.lights_kitchen
+      - group.lights_entryway
+      - group.lights_toilet
+      - group.lights_landing_downstairs
+      - group.lights_boiler_room
+      - group.lights_garage
+
+  view_climate:
+    name: 'Climate'
+    icon: 'mdi:leaf'
+    view: true
+    entities:
+      - history_graph.temperatuur
+      - history_graph.luchtvochtigheid
+      - group.climate_outdoor
+      - group.climate_living_room
+      - group.climate_kitchen
+      - group.climate_entryway
+      - group.climate_toilet
+      - group.climate_boiler_room
+      - group.climate_garage
+      - group.climate_landing_upstairs
+      - group.climate_bedroom_se
+
+  view_devices:
+    name: 'Devices'
+    icon: 'mdi:power'
+    view: true
+    entities:
+      - group.devices_living_room
+      - group.devices_kitchen
+      - group.devices_bedroom
+      - group.devices_basement
+      - group.devices_boiler_room
+      - group.devices_landing_upstairs
+
+  view_security:
+    name: 'Security'
+    icon: 'mdi:shield-home'
+    view: true
+    entities:
+      - group.security_door_window
+      - group.security_motion
+      - group.security_smoke
+      - group.security_natgas
+      - group.security_water_leak
+      - group.security_weather
+      - group.security_lights
+
+  view_camera:
+    icon: 'mdi:cctv'
+    name: 'Surveillance'
+    view: true
+    entities:
+      - camera.camera_garage
+      - camera.camera_garden
+
+  view_consumption:
+    name: 'Verbruik'
+    icon: 'mdi:chart-line'
+    view: true
+    entities:
+      - group.consumption_devices
+      - group.consumption_lighting
+
+  view_status:
+    name: 'Status'
+    icon: 'mdi:clipboard-pulse'
+    view: true
+    entities:
+      - binary_sensor.remote_ui
+      - group.zwave_devices
+      - group.synology_rs214
+      #- group.synology_ds114
+      - group.ups
+      - group.battery_levels
+
+  view_settings:
+    name: 'Settings'
+    icon: 'mdi:settings'
+    view: true
+    entities:
+      - group.settings_alarm
+      - group.settings_alarm_notification
+      - group.settings_presence_simulation
+      - group.settings_covers
+##
+# Customize
+##
+homeassistant:
+  customize:
+    group.view_home:
+      friendly_name: 'Thuis'
+
+    group.view_lights_blinds:
+      friendly_name: 'Verlichting/blindering'
+
+    group.view_devices:
+      friendly_name: 'Apparaten'
+
+    group.view_security:
+      friendly_name: 'Beveiliging'
+
+    group.view_camera:
+      friendly_name: 'Cameratoezicht'
+
+    group.view_consumption:
+      friendly_name: 'Verbruik'
+
+    group.view_status:
+      friendly_name: 'Status'
+
+    group.view_settings:
+      friendly_name: 'Instellingen'

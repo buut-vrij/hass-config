@@ -1,0 +1,93 @@
+##
+# notice_low_battery.yaml
+#
+# 
+#
+# @category   Home Assistant
+# @package    Automations-scripts
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+automation:
+  ##
+  # Catch sensor low battery
+  ##
+  - alias: 'Catch sensor low battery'
+    initial_state: on
+    trigger:
+      # When a sensor battery goes below 5%
+      platform: numeric_state
+      entity_id:
+        - sensor.door_window_sensor_158d0001ab5797_battery
+        - sensor.door_window_sensor_158d0001ab5853_battery
+        - sensor.door_window_sensor_158d0001b77e9a_battery
+        - sensor.door_window_sensor_158d0001b77eb1_battery
+        - sensor.door_window_sensor_158d0001d934e3_battery
+        - sensor.door_window_sensor_158d0001d8228c_battery
+        - sensor.door_window_sensor_158d0001f38318_battery
+        - sensor.door_window_sensor_158d0001f38976_battery
+        - sensor.door_window_sensor_158d00019fd4c6_battery
+        - sensor.motion_sensor_158d0002e29c77_battery
+        - sensor.motion_sensor_158d0002e275a0_battery
+        - sensor.motion_sensor_158d0002e275dd_battery
+        - sensor.motion_sensor_158d0002ec7d7a_battery
+        - sensor.motion_sensor_158d000257a816_battery
+        - sensor.motion_sensor_158d000257a829_battery
+        - sensor.motion_sensor_158d000257b63f_battery
+        - sensor.smoke_sensor_158d0001e80a3c_battery
+        - sensor.smoke_sensor_158d0001e80a40_battery
+        - sensor.smoke_sensor_158d000215a794_battery
+        - sensor.smoke_sensor_158d000215e268_battery
+        - sensor.smoke_sensor_158d000215e643_battery
+        - sensor.smoke_sensor_158d0002153aba_battery
+        - sensor.temperature_sensor_158d0002271b5e_battery
+        - sensor.temperature_sensor_158d00022881a8_battery
+        - sensor.temperature_sensor_158d00022883db_battery
+        - sensor.temperature_sensor_158d00022883df_battery
+        - sensor.temperature_sensor_158d0002288396_battery
+        - sensor.water_leak_sensor_158d0001bb63a5_battery
+        - sensor.water_leak_sensor_158d0001bb7922_battery
+        - sensor.water_leak_sensor_158d0001bc19c5_battery
+        - sensor.water_leak_sensor_158d0001bc42dc_battery
+        - sensor.water_leak_sensor_158d0001bc42ee_battery
+      below: 5
+      for:
+        minutes: 60
+    action:
+      # Then call notify_of_low_battery script
+      service: script.notify_of_low_battery
+      data_template:
+        notice_low_battery_name: "{{ trigger.to_state.attributes.friendly_name }}"
+        notice_low_battery_value_current: "{{ trigger.to_state.state }}"
+        notice_low_battery_value_threshold: "{{ trigger.below }}"
+
+script:
+  ##
+  # Notify of low battery
+  ##
+  notify_of_low_battery:
+    alias: 'Notify of low battery'
+    sequence:
+      # Send notification to iOS devices
+      - service: notify.mobile_phones
+        data_template:
+          title: 'Batterijniveau laag'
+          message: "{{ notice_low_battery_name }} onder {{ notice_low_battery_value_threshold }}%"
+      # Send notification to Home Assistant frontend
+      - service: persistent_notification.create
+        data_template:
+          title: 'Batterijniveau laag'
+          message: "{{ notice_low_battery_name }} onder {{ notice_low_battery_value_threshold }}%"
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    automation.catch_sensor_low_battery:
+      friendly_name: 'Laag batterijniveau registratie opvangen'
+      hidden: true
+
+    script.notify_of_low_battery:
+      friendly_name: 'Laag batterijniveau melden'
+      hidden: true

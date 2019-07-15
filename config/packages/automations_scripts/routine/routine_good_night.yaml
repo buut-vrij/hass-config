@@ -1,0 +1,22 @@
+##
+# routine_good_night.yaml
+#
+# 'Good night' routine
+#
+# @category   Home Assistant
+# @package    Automations
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+script:
+  routine_good_night:
+    alias: 'Routine ''Good night'''
+    sequence:
+      # Alarm arm home
+      # Turn off all lights
+      # Turn off all switches
+      # Turn of all media players
+      - delay:
+          milliseconds: 1
+      - service: script.turn_on
+        entity_id: script.light_kitchen_counter_brighten

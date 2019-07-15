@@ -1,0 +1,146 @@
+##
+# history.yaml
+#
+# Home Assistant history
+#
+# @category   Home Assistant
+# @package    Component packages
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+
+##
+# Components
+##
+history:
+  use_include_order: true
+  include:
+    entities:
+      # Persons
+      - person.jeroen
+      - person.veerle
+
+      # Alarm
+      - alarm_control_panel.alarm
+
+      # Door window sensors
+      - binary_sensor.door_window_sensor_158d00019fd4c6
+      - binary_sensor.door_window_sensor_158d0001ab5797
+      - binary_sensor.door_window_sensor_158d0001ab5853
+      - binary_sensor.door_window_sensor_158d0001b77e9a
+      - binary_sensor.door_window_sensor_158d0001b77eb1
+      - binary_sensor.door_window_sensor_158d0001c0e526
+      - binary_sensor.door_window_sensor_158d0001d8228c
+      - binary_sensor.door_window_sensor_158d0001d934e3
+      - binary_sensor.door_window_sensor_158d0001dcce33
+      - binary_sensor.door_window_sensor_158d0001f38976
+      - binary_sensor.door_window_sensor_158d0001f38318
+      - binary_sensor.door_window_sensor_kitchen_windows
+      - binary_sensor.garage_loopdeur
+
+      # Motion sensors
+      - binary_sensor.motion_sensor_158d0002e275dd
+      - binary_sensor.motion_sensor_158d0002e29c77
+      - binary_sensor.motion_sensor_158d0002ec3208
+      - binary_sensor.motion_sensor_158d0002ec7d7a
+      - binary_sensor.motion_sensor_158d000257a816
+      - binary_sensor.motion_sensor_158d000257a829
+      - binary_sensor.motion_sensor_158d000257b63f
+      - binary_sensor.motion_sensor_158d0002e275a0
+      - binary_sensor.motion_sensor_158d00032be5bd
+      - binary_sensor.motion_sensor_garage
+      - binary_sensor.motion_sensor_living
+
+      # Natgas sensors
+      - binary_sensor.natgas_sensor_158d00011176ee
+      - binary_sensor.natgas_sensor_158d000127c558
+
+      # Smoke sensors
+      - binary_sensor.smoke_sensor_158d000215a794
+      - binary_sensor.smoke_sensor_158d0001e80a3c
+      - binary_sensor.smoke_sensor_158d0001e80a40
+      - binary_sensor.smoke_sensor_158d000215e643
+      - binary_sensor.smoke_sensor_158d0002153aba
+      - binary_sensor.smoke_sensor_158d000215e268
+
+      # Water leak sensors
+      - binary_sensor.water_leak_sensor_158d0001bc42ee
+      - binary_sensor.water_leak_sensor_158d0001bc42dc
+      - binary_sensor.water_leak_sensor_158d0001bb63a5
+      - binary_sensor.water_leak_sensor_158d0001bb7922
+      - binary_sensor.water_leak_sensor_158d0001bc19c5
+
+      # MeteoAlarm
+      - binary_sensor.meteoalarm
+
+      # Sun
+      - sun.sun
+
+      # Temperature
+      - sensor.temperature_158d0002271b5e
+#      - sensor.temperature_158d00022883df
+      - climate.hal
+      - climate.keuken
+      - sensor.temperature_158d00022883db
+      - sensor.temperature_158d00022881a8
+      - sensor.temperature_158d0002288396
+      - climate.eethoek
+      - climate.zithoek
+      - sensor.sensative_strips_comfort_temperature
+
+      # Humidity
+      - sensor.humidity_158d0002271b5e
+      - sensor.humidity_158d00022883df
+      - sensor.humidity_158d00022883db
+      - sensor.humidity_158d00022881a8
+      - sensor.humidity_158d0002288396
+      - sensor.outdoor_humidity
+
+      # Pressure
+      - sensor.pressure_158d0002271b5e
+      - sensor.pressure_158d00022883df
+      - sensor.pressure_158d00022883db
+      - sensor.pressure_158d00022881a8
+      - sensor.pressure_158d0002288396
+      - sensor.outdoor_pressure
+
+      # Illumination
+      - sensor.illumination_7811dcb7e406
+      - sensor.illumination_7811dcb266db
+      - sensor.illumination_34ce0091d4d9
+
+      # Luminance sensors
+      - sensor.sensative_strips_comfort_luminance
+
+      # Precipitation
+      - sensor.outdoor_precipitation
+
+      # Plugs
+      - sensor.plug_dishwasher_power
+      - sensor.plug_washer_power
+
+      # Weather
+      - sensor.yr_symbol_alt
+
+history_graph:
+  humidity:
+    name: 'Luchtvochtigheid'
+    refresh: 60
+    entities:
+      - sensor.outdoor_humidity
+      - sensor.humidity_158d0002271b5e
+      - sensor.humidity_158d00022881a8
+      - sensor.humidity_158d0002288396
+      - sensor.humidity_158d00022883db
+      - sensor.humidity_158d00022883df
+
+  temperature:
+    name: 'Temperatuur'
+    refresh: 60
+    entities:
+      - sensor.sensative_strips_comfort_temperature
+      - sensor.temperature_158d0002271b5e
+      - sensor.temperature_158d00022881a8
+      - sensor.temperature_158d0002288396
+      - sensor.temperature_158d00022883db
+      - sensor.temperature_158d00022883df

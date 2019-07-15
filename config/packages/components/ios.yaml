@@ -1,0 +1,44 @@
+##
+# ios.yaml
+#
+# Home Assistant iOS
+#
+# @category   Home Assistant
+# @package    Component packages
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+ios:
+  push:
+    categories:
+      # Intrusion alarm (motion/opening)
+      - name: Inbraakalarm
+        identifier: 'alarm_intrusion'
+        actions:
+          - identifier: 'ALARM_DISARM'
+            title: 'Alarm uitschakelen'
+            activationMode: 'background'
+            authenticationRequired: true
+            destructive: true
+            behavior: 'textInput'
+            textInputButtonTitle: 'Verzenden'
+            textInputPlaceholder: 'Pincode'
+          - identifier: 'ALARM_MUTE'
+            title: 'Geluid dempen'
+            activationMode: 'background'
+            authenticationRequired: true
+            destructive: false
+            behavior: 'default'
+      # Hazard alarm (moisture/natgas/smoke)
+      - name: Veiligheidsalarm
+        identifier: 'alarm_hazard'
+        actions:
+          - identifier: 'ALARM_MUTE'
+            title: 'Geluid dempen'
+            activationMode: 'background'
+            authenticationRequired: true
+            destructive: false
+            behavior: 'default'
+      # Information
+#      - name: 'Information'
+#        identifier: 'information'

@@ -1,0 +1,67 @@
+##
+# light_garage_sync.yaml
+#
+# Sync the garage ceiling lights
+#
+# @category   Home Assistant
+# @package    Automations
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+automation:
+  ##
+  # Sync garage 1 dimmer with garage 2 dimmer
+  ##
+  - alias: 'light_garage_2_sync_with_garage_1'
+    initial_state: on
+    trigger:
+      # When garage 2 button is pressed
+      platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.fibaro_system_fgd212_dimmer_2_10
+        scene_id: 16
+    action:
+      # Then set garage 1 light to same state as garage 2
+      service_template: >
+        {% if is_state('light.fibaro_system_fgd212_dimmer_2_level_19', 'off') %}
+          light.turn_on
+        {% else %}
+          light.turn_off
+        {% endif %}
+      entity_id: light.fibaro_system_fgd212_dimmer_2_level_21
+
+  ##
+  # Sync garage 2 dimmer with garage 1 dimmer
+  ##
+  - alias: 'light_garage_1_sync_with_garage_2'
+    initial_state: on
+    trigger:
+      # When garage 1 button is pressed
+      platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.fibaro_system_fgd212_dimmer_2_11
+        scene_id: 16
+    action:
+      # Then set garage 2 light to same state as garage 1
+      service_template: >
+        {% if is_state('light.fibaro_system_fgd212_dimmer_2_level_21', 'off') %}
+          light.turn_on
+        {% else %}
+          light.turn_off
+        {% endif %}
+      entity_id: light.fibaro_system_fgd212_dimmer_2_level_19
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    automation.light_garage_2_sync_with_garage_1:
+      friendly_name: 'Licht garage 2 sync met garage 1'
+      hidden: true
+
+    automation.light_garage_1_sync_with_garage_2:
+      friendly_name: 'Licht garage 1 sync met garage 2'
+      hidden: true

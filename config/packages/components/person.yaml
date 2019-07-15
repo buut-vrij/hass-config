@@ -1,0 +1,57 @@
+##
+# person.yaml
+#
+# Person
+#
+# @category   Home Assistant
+# @package    Component packages
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+#person:
+#  - name: !secret person_1_name
+#    id: !secret person_1_id
+#    user_id: !secret person_1_user_id
+#    device_trackers:
+#      - !secret person_1_device_tracker_1
+#  - name: !secret person_2_name
+#    id: !secret person_2_id
+#    user_id: !secret person_2_user_id
+#    device_trackers:
+#      - !secret person_2_device_tracker_1
+
+binary_sensor:
+  - platform: template
+    sensors:
+      person_any_home:
+        device_class: presence
+        entity_id:
+          - sensor.time
+        value_template: >
+          {% set ns = namespace(found=false) %}
+          {% for state in states.person %}
+            {% if state.state == 'home' %}
+              {% set ns.found = true %}
+            {% endif %}
+          {% endfor %}
+          {{ns.found}}
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    binary_sensor.person_any_home:
+      friendly_name: 'Presentie'
+      hidden: true
+
+  customize_glob:
+    person.jeroen:
+      group:
+        group.home_presence:
+          icon: 'mdi:human-male'
+
+    person.veerle:
+      group:
+        group.home_presence:
+          icon: 'mdi:human-female'

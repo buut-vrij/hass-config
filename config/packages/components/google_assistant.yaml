@@ -1,0 +1,296 @@
+##
+# google_assistant.yaml
+#
+# Google Assistant
+#
+# @category   Home Assistant
+# @package    Component packages
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+cloud:
+  google_actions:
+    filter:
+      include_entities:
+        # Cameras
+        - camera.camera_garage
+        - camera.camera_garden
+
+        # Covers
+        - cover.curtain_158d0001fd240a_2 # Living room window
+        - cover.curtain_158d0001ef47a5_2 # Living room garden
+        - cover.living_room_all
+
+        # Lights
+        - light.fibaro_system_fgd212_dimmer_2_level_2 # Dining
+        - light.fibaro_system_fgd212_dimmer_2_level_4 # Living
+        - light.fibaro_system_fgd212_dimmer_2_level_6 # Entryway
+        - light.fibaro_system_fgd212_dimmer_2_level_11 # Kitchen
+        - light.fibaro_system_fgd212_dimmer_2_level_15 # Landing downstairs
+        - light.fibaro_system_fgd212_dimmer_2_level_17 # Boiler room
+        - light.kastverlichting
+        - light.livingwhites_plug_1 # Wire lamp
+        - light.plafondlampen_garage
+        - light.tv_lamp
+        - light.werkbladverlichting
+
+        # Media players
+        - media_player.appletv_bedroom
+        - media_player.appletv_living
+        - media_player.receiver_woonkamer
+        - media_player.tv_woonkamer
+
+        # Scenes
+        - scene.general_evening
+        - scene.activity_watching_tv
+        - scene.activity_watching_movie
+        - scene.activity_pausing_movie
+        - scene.activity_cooking
+
+        # Switches
+        - swith.fibaro_system_fgwpef_wall_plug_gen5_switch # Espresso machine
+
+    ##
+    # Configuration
+    ##
+    entity_config:
+      # Cameras
+      camera.camera_garage:
+        name: 'Camera'
+        aliases:
+          - 'Beeld garage'
+          - 'Beeld garagedeur'
+          - 'Beeld garagedeuren'
+          - 'Beeld garagepoort'
+          - 'Beeld oprit'
+          - 'Camera garage'
+          - 'Camera garagedeur'
+          - 'Camera garagedeuren'
+          - 'Camera garagepoort'
+          - 'Camera oprit'
+        room: 'Garage'
+
+      camera.camera_garden:
+        name: 'Camera'
+        aliases:
+          - 'Beeld achter'
+          - 'Beeld achtertuin'
+          - 'Beeld tuin'
+          - 'Camera achter'
+          - 'Camera achtertuin'
+          - 'Camera tuin'
+        room: 'Tuin'
+
+      # Covers
+      cover.curtain_158d0001ef47a5_2:
+        name: 'Gordijnen tuinkant'
+        aliases:
+          - 'Gordijn eethoek'
+          - 'Gordijn links'
+          - 'Gordijn tuin'
+          - 'Gordijn tuindeur'
+          - 'Gordijn tuindeuren'
+          - 'Gordijn tuinkant'
+          - 'Gordijnen eethoek'
+          - 'Gordijnen links'
+          - 'Gordijnen tuin'
+          - 'Gordijnen tuindeur'
+          - 'Gordijnen tuindeuren'
+        room: 'Woonkamer'
+
+      cover.curtain_158d0001fd240a_2:
+        name: 'Gordijnen raamkant'
+        aliases:
+          - 'Gordijn raam'
+          - 'Gordijn raamkant'
+          - 'Gordijn rechts'
+          - 'Gordijn zithoek'
+          - 'Gordijnen raam'
+          - 'Gordijnen rechts'
+          - 'Gordijnen zithoek'
+        room: 'Woonkamer'
+
+      cover.living_room_all:
+        name: 'Blindering'
+        aliases:
+          - 'Blindering woonkamer'
+          - 'Gordijn'
+          - 'Gordijn woonkamer'
+          - 'Gordijnen'
+          - 'Gordijnen woonkamer'
+        room: 'Woonkamer'
+
+      # Lights
+      light.fibaro_system_fgd212_dimmer_2_level_2:
+        name: 'Plafondlamp eethoek'
+        aliases:
+          - 'Hanglamp'
+          - 'Hanglamp eethoek'
+          - 'Hanglamp eettafel'
+          - 'Lamp eethoek'
+          - 'Lamp eettafel'
+          - 'Licht eethoek'
+          - 'Licht eettafel'
+          - 'Plafondlamp eettafel'
+          - 'Verlichting eethoek'
+          - 'Verlichting eettafel'
+        room: 'Woonkamer'
+
+      light.fibaro_system_fgd212_dimmer_2_level_4:
+        name: 'Plafondlamp zithoek'
+        aliases:
+          - 'Lamp living'
+          - 'Lamp salon'
+          - 'Lamp zithoek'
+          - 'Licht living'
+          - 'Licht salon'
+          - 'Licht zithoek'
+          - 'Plafondlamp living'
+          - 'Plafondlamp salon'
+          - 'Verlichting living'
+          - 'Verlichting salon'
+          - 'Verlichting zithoek'
+        room: 'Woonkamer'
+
+      light.fibaro_system_fgd212_dimmer_2_level_6:
+        name: 'Plafondlamp'
+        aliases:
+          - 'Lamp'
+          - 'Licht'
+          - 'Verlichting'
+        room: 'Hal'
+
+      light.werkbladverlichting:
+        name: 'Werkbladverlichting'
+        aliases:
+          - 'Aanrecht'
+          - 'Aanrechtlamp'
+          - 'Aanrechtlicht'
+          - 'Aanrechtverlichting'
+          - 'Lamp aanrecht'
+          - 'Lamp werkblad'
+          - 'Licht aanrecht'
+          - 'Licht werkblad'
+          - 'Werkblad'
+          - 'Werkbladlamp'
+          - 'Werkbladlicht'
+          - 'Verlichting aanrecht'
+          - 'Verlichting werkblad'
+        room: 'Keuken'
+
+      light.fibaro_system_fgd212_dimmer_2_level_11:
+        name: 'Plafondlamp'
+        aliases:
+          - 'Lamp'
+          - 'Licht'
+          - 'Verlichting'
+        room: 'Keuken'
+
+      light.fibaro_system_fgd212_dimmer_2_level_15:
+        name: 'Plafondlamp'
+        aliases:
+          - 'Lamp'
+          - 'Licht'
+          - 'Verlichting'
+        room: 'Kelderportaal'
+
+      light.fibaro_system_fgd212_dimmer_2_level_17:
+        name: 'Plafondlamp'
+        aliases:
+          - 'Lamp'
+          - 'Licht'
+          - 'Verlichting'
+        room: 'Wasruimte'
+
+      light.fibaro_system_fgd212_dimmer_2_level_19:
+        name: 'Plafondlamp'
+        aliases:
+          - 'Lamp'
+          - 'Licht'
+          - 'Verlichting'
+        room: 'Garage'
+
+      light.kastverlichting:
+        name: 'Kastverlichting'
+        aliases:
+          - 'Kast'
+          - 'Lamp kast'
+          - 'Licht kast'
+          - 'Kastlicht'
+          - 'Verlichting kast'
+        room: 'Woonkamer'
+
+      light.livingwhites_plug_1:
+        name: 'Draadlamp'
+        aliases:
+          - 'Staande lamp'
+          - 'Vloerlamp'
+        room: 'Woonkamer'
+
+      light.tv_lamp:
+        name: 'Lamp TV meubel'
+        aliases:
+          - 'Lamp TV'
+        room: 'Woonkamer'
+
+      # Media players
+      media_player.appletv_bedroom:
+        name: 'Apple TV'
+        aliases:
+          - 'Apple TV slaapkamer'
+        room: 'Slaapkamer'
+
+      media_player.appletv_living:
+        name: 'Apple TV'
+        aliases:
+          - 'Apple TV woonkamer'
+        room: 'Woonkamer'
+
+      media_player.receiver_woonkamer:
+        name: 'Receiver'
+        aliases:
+          - 'Receiver woonkamer'
+          - 'Versterker'
+          - 'Versterker woonkamer'
+        room: 'Woonkamer'
+
+      media_player.tv_woonkamer:
+        name: 'Televisie'
+        aliases:
+          - 'Televisie woonkamer'
+          - 'TV'
+          - 'TV woonkamer'
+        room: 'Woonkamer'
+
+      # Scenes
+      scene.general_evening:
+        name: 'Avond'
+        aliases:
+          - 'Scene avond'
+
+      scene.activity_watching_tv:
+        name: 'TV afspelen'
+        aliases:
+          - 'Scene TV afspelen'
+
+      scene.activity_watching_movie:
+        name: 'Film afspelen'
+        aliases:
+          - 'Scene film afspelen'
+
+      scene.activity_pausing_movie:
+        name: 'Film pauseren'
+        aliases:
+          - 'Scene film pauseren'
+
+      scene.activity_cooking:
+        name: 'Koken'
+        aliases:
+          - 'Scene koken'
+
+      # Switches
+      switch.fibaro_system_fgwpef_wall_plug_gen5_switch:
+        name: 'Espressomachine'
+        aliases:
+          - 'Espresso apparaat'
+        room: 'Keuken'

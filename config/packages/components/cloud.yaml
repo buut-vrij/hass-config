@@ -1,0 +1,11 @@
+##
+# cloud.yaml
+#
+# Home Assistant Cloud
+#
+# @category   Home Assistant
+# @package    Component packages
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+cloud:

@@ -1,0 +1,220 @@
+##
+# light_kitchen_counter_toggle_dim.yaml
+#
+# Toggle and dim the kitchen counter light strip on use of dimmer switch
+#
+# @category   Home Assistant
+# @package    Automations
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+automation:
+  ##
+  # Toggle kitchen counter light
+  ##
+  - alias: 'Light kitchen counter toggle'
+    initial_state: on
+    trigger:
+      # When secondary button is pressed
+      platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.fibaro_system_fgd212_dimmer_2_6
+        scene_id: 26
+    action:
+      # Then toggle the light
+      service: light.toggle
+      entity_id: light.werkbladverlichting
+
+  ##
+  # Set kitchen counter light to max brightness
+  ##
+  - alias: 'Light kitchen counter set to max brightness'
+    initial_state: on
+    trigger:
+      # When secondary button is double-pressed
+      platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.fibaro_system_fgd212_dimmer_2_6
+        scene_id: 24
+    action:
+      # Then turn the light on to maximum brightness
+      service: light.turn_on
+      entity_id: light.werkbladverlichting
+      data_template:
+        brightness: 254
+        color_temp: 200
+
+  ##
+  # Start dimming kitchen counter light
+  ##
+  - alias: 'Light kitchen counter dimming start'
+    initial_state: on
+    trigger:
+      # When secondary button is pressed and hold
+      platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.fibaro_system_fgd212_dimmer_2_6
+        scene_id: 22
+    action:
+      # Then call the brighten script when light brightness is below 128 or the dim script when it is above
+      service: script.turn_on
+      data_template:
+        entity_id: >
+          {% if state_attr('light.hue_lightstrip_plus_1', 'brightness')|default(254)|int < 128 %}
+            script.light_kitchen_counter_brighten
+          {% else %}
+            script.light_kitchen_counter_dim
+          {% endif %}
+
+  ##
+  # Stop dimming kitchen counter light
+  ##
+  - alias: 'Light kitchen counter dimming stop'
+    initial_state: on
+    trigger:
+      # When secondary button is released after hold
+      platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.fibaro_system_fgd212_dimmer_2_6
+        scene_id: 23
+    action:
+      # Then turn of all brighten/dimming scripts
+      service: script.turn_off
+      entity_id:
+        - script.light_kitchen_counter_brighten
+        - script.light_kitchen_counter_brighten_repeat
+        - script.light_kitchen_counter_dim
+        - script.light_kitchen_counter_dim_repeat
+
+##
+# Scripts
+##
+script:
+  ##
+  # Brighten kitchen counter light
+  ##
+  light_kitchen_counter_brighten:
+    alias: 'Light kitchen counter brighten'
+    sequence:
+      # Turn light on and add 20 brightness
+      - service: light.turn_on
+        entity_id: light.werkbladverlichting
+        data_template:
+          brightness: >
+            {% set current = state_attr('light.hue_lightstrip_plus_1', 'brightness')|default(0)|int %}
+            {% set next = current + 20 %}
+            {% if next > 254 %}
+              {% set next = 254 %}
+            {% endif %}
+            {{ next }}
+          color_temp: >
+            {% set current = state_attr('light.hue_lightstrip_plus_1', 'color_temp')|default(0)|int %}
+            {% set next = current - 20 %}
+            {% if next < 200 %}
+              {% set next = 200 %}
+            {% endif %}
+            {{ next }}
+      # If maximum brightness is not reached then call repeat brighten script
+      - service_template: >
+          {% if state_attr('light.hue_lightstrip_plus_1', 'brightness')|default(0)|int < 254 %}
+            script.turn_on
+          {% else %}
+            script.turn_off
+          {% endif %}
+        data:
+          entity_id: script.light_kitchen_counter_brighten_repeat
+
+  light_kitchen_counter_brighten_repeat:
+    alias: 'Light kitchen counter brighten (repeat)'
+    sequence:
+      # Wait
+      - delay:
+          milliseconds: 1
+      # Call brighten script
+      - service: script.turn_on
+        entity_id: script.light_kitchen_counter_brighten
+
+  ##
+  # Dim kitchen counter light
+  ##
+  light_kitchen_counter_dim:
+    alias: 'Light kitchen counter dim'
+    sequence:
+      # Turn light on and deduct 20 brightness
+      - service: light.turn_on
+        entity_id: light.werkbladverlichting
+        data_template:
+          brightness: >
+            {% set current = state_attr('light.hue_lightstrip_plus_1', 'brightness')|default(0)|int %}
+            {% set next = current - 20 %}
+            {% if next < 50 %}
+              {% set next = 50 %}
+            {% endif %}
+            {{ next }}
+          color_temp: >
+            {% set current = state_attr('light.hue_lightstrip_plus_1', 'color_temp')|default(0)|int %}
+            {% set next = current + 20 %}
+            {% if next > 400 %}
+              {% set next = 400 %}
+            {% endif %}
+            {{ next }}
+      # If minimum brightness is not reached then call repeat dim script
+      - service_template: >
+          {% if state_attr('light.hue_lightstrip_plus_1', 'brightness')|default(0)|int > 50 %}
+            script.turn_on
+          {% else %}
+            script.turn_off
+          {% endif %}
+        data:
+          entity_id: script.light_kitchen_counter_dim_repeat
+
+  light_kitchen_counter_dim_repeat:
+    alias: 'Light kitchen counter dim (repeat)'
+    sequence:
+      # Wait
+      - delay:
+          milliseconds: 1
+      # Call dim script
+      - service: script.turn_on
+        entity_id: script.light_kitchen_counter_dim
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    automation.light_kitchen_counter_toggle:
+      friendly_name: 'Licht keuken werkblad aan/uit'
+      hidden: true
+
+    automation.light_kitchen_counter_set_to_max_brightness:
+      friendly_name: 'Licht keuken werkblad naar maximale helderheid'
+      hidden: true
+
+    automation.light_kitchen_counter_dimming_start:
+      friendly_name: 'Licht keuken werkblad dimmen start'
+      hidden: true
+
+    automation.light_kitchen_counter_dimming_stop:
+      friendly_name: 'Licht keuken werkblad dimmen stop'
+      hidden: true
+
+    script.light_kitchen_counter_brighten:
+      friendly_name: 'Licht keuken werkblad verhelderen'
+      hidden: true
+
+    script.light_kitchen_counter_brighten_repeat:
+      friendly_name: 'Licht keuken werkblad verhelderen (bis)'
+      hidden: true
+
+    script.light_kitchen_counter_dim:
+      friendly_name: 'Licht keuken werkblad verduisteren'
+      hidden: true
+
+    script.light_kitchen_counter_dim_repeat:
+      friendly_name: 'Licht keuken werkblad verduisteren (bis)'
+      hidden: true

@@ -1,0 +1,10 @@
+##
+# mqtt.yaml
+#
+# Mosquitto broker
+#
+# @category   Home Assistant
+# @package    Component packages
+# @author     Jeroen Butenaerts
+# @version    1.0
+##

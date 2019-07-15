@@ -1,0 +1,126 @@
+##
+# security.yaml
+#
+# Security group
+#
+# @category   Home Assistant
+# @package    Groups
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+group:
+  # Door/window sensors
+  security_door_window:
+    name: 'Door/window'
+    icon: 'mdi:home-outline'
+    control: 'hidden'
+    entities:
+      - binary_sensor.door_window_sensor_158d00019fd4c6 # Garage door
+      - binary_sensor.garage_loopdeur
+      - binary_sensor.door_window_sensor_158d0001c0e526 # Garage-landing door
+      - binary_sensor.door_window_sensor_158d0001dcce33 # Boiler room
+      - binary_sensor.door_window_sensor_158d0001f38976 # Front door
+      - binary_sensor.door_window_sensor_158d0001f38318 # Garden doors
+      - binary_sensor.door_window_sensor_kitchen_windows
+      - binary_sensor.door_window_sensor_158d0001ab5853 # Bedroom NW
+      - binary_sensor.door_window_sensor_158d0001b77eb1 # Bedroom SE
+      - binary_sensor.door_window_sensor_158d0001ab5797 # Bedroom NE
+      - binary_sensor.door_window_sensor_158d0001d8228c # Bedroom SW
+
+  # Lights
+  security_lights:
+    name: 'Lights'
+    icon: 'mdi:alarm-light-outline'
+    entities:
+      - light.gateway_light_7811dcb7e406 # Garage
+      - light.gateway_light_34ce0091d4d9 # Living room
+      - light.gateway_light_7811dcb266db # Landing upstairs
+
+  # Motion sensors
+  security_motion:
+    name: 'Motion'
+    icon: 'mdi:walk'
+    control: 'hidden'
+    entities:
+      - binary_sensor.motion_sensor_garage
+      - binary_sensor.motion_sensor_158d0002e29c77 # Entryway
+      - binary_sensor.motion_sensor_158d0002ec7d7a # Landing downstairs
+      - binary_sensor.motion_sensor_158d000257a816 # Kitchen
+      - binary_sensor.motion_sensor_158d000257b63f # Landing upstairs
+      - binary_sensor.motion_sensor_158d0002e275dd # Boiler room
+      - binary_sensor.motion_sensor_living
+
+  # Natural gas sensors
+  security_natgas:
+    name: 'Natural gas'
+    icon: 'mdi:nuke'
+    control: 'hidden'
+    entities:
+      - binary_sensor.natgas_sensor_158d00011176ee # Boiler
+      - binary_sensor.natgas_sensor_158d000127c558 # Meter cabinet
+
+  # Smoke sensors
+  security_smoke:
+    name: 'Smoke'
+    icon: 'mdi:fire'
+    control: 'hidden'
+    entities:
+      - binary_sensor.smoke_sensor_158d000215a794 # Garage
+      - binary_sensor.smoke_sensor_158d0001e80a40 # Entryway
+      - binary_sensor.smoke_sensor_158d000215e643 # Kitchen
+      - binary_sensor.smoke_sensor_158d000215e268 # Landing upstairs
+      - binary_sensor.smoke_sensor_158d0001e80a3c # Boiler room
+      - binary_sensor.smoke_sensor_158d0002153aba # Living room
+
+  # Water leak sensors
+  security_water_leak:
+    name: 'Water leak'
+    icon: 'mdi:water'
+    control: 'hidden'
+    entities:
+      - binary_sensor.water_leak_sensor_158d0001bb63a5 # Bathroom
+      - binary_sensor.water_leak_sensor_158d0001bb7922 # Garage
+      - binary_sensor.water_leak_sensor_158d0001bc42ee # Kitchen sink
+      - binary_sensor.water_leak_sensor_158d0001bc19c5 # Sump
+      - binary_sensor.water_leak_sensor_158d0001bc42dc # Toilet
+
+  # Weather sensors
+  security_weather:
+    name: 'Weer'
+    icon: 'mdi:fire'
+    control: 'hidden'
+    entities:
+      - binary_sensor.meteoalarm
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    group.security_door_window:
+      friendly_name: 'Perimeter'
+      order: 2
+
+    group.security_motion:
+      friendly_name: 'Beweging'
+      order: 3
+
+    group.security_smoke:
+      friendly_name: 'Rook'
+      order: 4
+
+    group.security_natgas:
+      friendly_name: 'Aardgas'
+      order: 5
+
+    group.security_water_leak:
+      friendly_name: 'Vocht'
+      order: 6
+
+    group.security_weather:
+      friendly_name: 'Weer'
+      order: 7
+
+    group.security_lights:
+      friendly_name: 'Verlichting'
+      order: 8

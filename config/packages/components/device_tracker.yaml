@@ -1,0 +1,32 @@
+##
+# device_tracker.yaml
+#
+# Device tracker specifications
+#
+# @category   Home Assistant
+# @package    Component packages
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+device_tracker:
+  # UniFi local network tracking
+  - platform: unifi
+    host: !secret unifi_host
+    username: !secret unifi_username
+    password: !secret unifi_password
+    verify_ssl: false
+    ssid_filter: !secret unifi_ssid
+    interval_seconds: 60
+    consider_home: 180
+##
+# Customize
+##
+homeassistant:
+  customize:
+    device_tracker.iphone_jeroen:
+      hidden: true
+    device_tracker.iphone_veerle:
+      hidden: true
+    device_tracker.swatter:
+      friendly_name: 'iPad'
+      hidden: true
