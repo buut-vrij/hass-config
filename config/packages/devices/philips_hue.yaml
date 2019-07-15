@@ -1,0 +1,87 @@
+##
+# philips_hue.yaml
+#
+# Philips Hue
+#
+# @category   Home Assistant
+# @package    Devices
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+hue:
+  bridges:
+    - host: !secret light_hue_host
+      allow_unreachable: true
+      allow_hue_groups: false
+
+light:
+  - platform: group
+    name: 'Kastverlichting'
+    entities:
+      - light.dimmable_light_1
+      - light.dimmable_light_2
+
+  - platform: group
+    name: 'Werkbladverlichting'
+    entities:
+      - light.hue_lightstrip_plus_1
+      - light.hue_lightstrip_plus_1_3
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    light.dimmable_light_1:
+      friendly_name: 'Kastverlichting 1'
+      hidden: true
+
+    light.dimmable_light_2:
+      friendly_name: 'Kastverlichting 2'
+      hidden: true
+
+    light.kastverlichting:
+      icon: 'mdi:grid'
+      state_card_mode: break-slider-toggle
+      stretch_slider: true
+      slider_theme:
+        min: 1
+        off_when_min: false
+        report_when_not_changed: false
+
+    light.tv_lamp:
+      friendly_name: 'Lamp TV meubel'
+      icon: 'mdi:lamp'
+      state_card_mode: break-slider-toggle
+      stretch_slider: true
+      slider_theme:
+        min: 1
+        off_when_min: false
+        report_when_not_changed: false
+
+    light.livingwhites_plug_1:
+      friendly_name: 'Draadlamp'
+      icon: 'mdi:floor-lamp'
+      state_card_mode: break-slider-toggle
+      stretch_slider: true
+      slider_theme:
+        min: 1
+        off_when_min: false
+        report_when_not_changed: false
+
+    light.hue_lightstrip_plus_1:
+      friendly_name: 'Werkbladverlichting links'
+      hidden: true
+
+    light.hue_lightstrip_plus_1_3:
+      friendly_name: 'Werkbladverlichting rechts'
+      hidden: true
+
+    light.werkbladverlichting:
+      icon: 'mdi:spotlight'
+      state_card_mode: break-slider-toggle
+      stretch_slider: true
+      slider_theme:
+        min: 1
+        off_when_min: false
+        report_when_not_changed: false

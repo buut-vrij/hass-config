@@ -1,0 +1,25 @@
+##
+# curtain_158d0001ef47a5.yaml
+#
+# Xiaomi Aqara curtain motor
+#
+# @category   Home Assistant
+# @package    Devices
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    cover.curtain_158d0001ef47a5_2:
+      device_class: curtain
+      friendly_name: 'Gordijnen woonkamer tuinkant'
+
+  customize_glob:
+    cover.curtain_158d0001ef47a5_2:
+      group:
+        group.lights_blinds_living_room:
+          friendly_name: 'Gordijnen tuinkant'

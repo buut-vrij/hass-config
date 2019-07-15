@@ -1,0 +1,229 @@
+##
+# template_washer_state.yaml
+#
+# Template sensor (washer)
+#
+# @category   Home Assistant
+# @package    Device packages
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+input_select:
+  washer_state_select:
+    name: 'Washer state'
+    options:
+      - 'Off'
+      - 'Idle'
+      - 'Rinsing'
+      - 'Washing'
+      - 'Spinning'
+      - 'Ready'
+
+# Pre-wash
+# Wash
+# Rinse
+# Interim spin
+# Final spin
+# Anti-crease
+
+sensor:
+  - platform: template
+    sensors:
+      washer_state:
+        friendly_name: 'Washer'
+        icon_template: 'mdi:washing-machine'
+        value_template: >-
+          {% if states('input_select.washer_state_select') == 'Off' %}
+            Uit
+          {% elif states('input_select.washer_state_select') == 'Idle' %}
+            Inactief
+          {% elif states('input_select.washer_state_select') == 'Rinsing' %}
+            Spoelen
+          {% elif states('input_select.washer_state_select') == 'Washing' %}
+            Wassen
+          {% elif states('input_select.washer_state_select') == 'Spinning' %}
+            Centrifugeren
+          {% elif states('input_select.washer_state_select') == 'Ready' %}
+            Gereed
+          {% endif %}
+
+##
+# Automations
+##
+automation:
+  ##
+  # Change washer state to idle
+  ##
+  - alias: 'Washer state change to idle'
+    initial_state: on
+    hide_entity: true
+    trigger:
+      # When washer plug power goes above 20 W
+      platform: numeric_state
+      entity_id: sensor.plug_washer_power
+      above: 20
+    condition:
+      # While washer current state is off
+      condition: state
+      entity_id: input_select.washer_state_select
+      state: 'Off'
+    action:
+      # Then update state to idle
+      service: input_select.select_option
+      data:
+        entity_id: input_select.washer_state_select
+        option: 'Idle'
+
+  ##
+  # Change washer state to rinsing
+  ##
+  - alias: 'Washer state change to rinsing'
+    initial_state: on
+    hide_entity: true
+    trigger:
+      # When washer plug power goes above 50 W
+      platform: numeric_state
+      entity_id: sensor.plug_washer_power
+      above: 50
+    condition:
+      # While washer current state is off/idle
+      condition: or
+      conditions:
+        - condition: state
+          entity_id: input_select.washer_state_select
+          state: 'Off'
+        - condition: state
+          entity_id: input_select.washer_state_select
+          state: 'Idle'
+    action:
+      # Then update state to rinsing
+      service: input_select.select_option
+      data:
+        entity_id: input_select.washer_state_select
+        option: 'Rinsing'
+
+  ##
+  # Change washer state to washing
+  ##
+  - alias: 'Washer state change to washing'
+    initial_state: on
+    hide_entity: true
+    trigger:
+      # When washer plug power goes between 20 W and 150 W for 5 minutes
+      platform: numeric_state
+      entity_id: sensor.plug_washer_power
+      below: 150
+      above: 20
+      for:
+        minutes: 5
+    condition:
+      # While washer current state is rinsing/spinning
+      condition: or
+      conditions:
+        - condition: state
+          entity_id: input_select.washer_state_select
+          state: 'Rinsing'
+        - condition: state
+          entity_id: input_select.washer_state_select
+          state: 'Spinning'
+    action:
+      # Then update state to washing
+      service: input_select.select_option
+      data:
+        entity_id: input_select.washer_state_select
+        option: 'Washing'
+
+  ##
+  # Change washer state from washing to spinning
+  ##
+  - alias: 'Washer state change to spinning'
+    initial_state: on
+    hide_entity: true
+    trigger:
+      # When washer plug power goes between 200 W and 300 W
+      platform: numeric_state
+      entity_id: sensor.plug_washer_power
+      above: 200
+      below: 300
+    condition:
+      # While washer current state is rinsing/washing
+      condition: or
+      conditions:
+        - condition: state
+          entity_id: input_select.washer_state_select
+          state: 'Rinsing'
+        - condition: state
+          entity_id: input_select.washer_state_select
+          state: 'Washing'
+    action:
+      # Then update state to drying
+      service: input_select.select_option
+      data:
+        entity_id: input_select.washer_state_select
+        option: 'Spinning'
+ 
+  ##
+  # Change washer state to ready
+  ##
+  - alias: 'Washer state change to ready'
+    initial_state: on
+    hide_entity: true
+    trigger:
+      # When washer plug power goes between 0 W and 50 W for 5 minutes
+      platform: numeric_state
+      entity_id: sensor.plug_washer_power
+      above: 0
+      below: 50
+      for:
+        minutes: 5
+    condition:
+      # While washer current state is rinsing/washing/spinning
+      condition: or
+      conditions:
+        - condition: state
+          entity_id: input_select.washer_state_select
+          state: 'Rinsing'
+        - condition: state
+          entity_id: input_select.washer_state_select
+          state: 'Washing'
+        - condition: state
+          entity_id: input_select.washer_state_select
+          state: 'Spinning'
+    action:
+      # Then update state to ready
+      service: input_select.select_option
+      data:
+        entity_id: input_select.washer_state_select
+        option: 'Ready'
+ 
+  ##
+  # Change washer state to off
+  ##
+  - alias: 'Washer state change to off'
+    initial_state: on
+    hide_entity: true
+    trigger:
+      # When washer plug power is below 20 W for 5 minutes
+      platform: numeric_state
+      entity_id: sensor.plug_washer_power
+      below: 20
+      for:
+        minutes: 5
+    action:
+      # Then update state to off
+      service: input_select.select_option
+      data:
+        entity_id: input_select.washer_state_select
+        option: 'Off'
+ 
+##
+# Customize
+##
+homeassistant:
+  customize:
+    input_select.washer_state_select:
+      friendly_name: 'Wasmachine status'
+      hidden: true
+
+    sensor.washer_state:
+      friendly_name: 'Wasmachine'

@@ -1,0 +1,53 @@
+##
+# door_window_sensor.yaml
+#
+# Xiaomi Aqara door/window sensor
+#
+# @category   Home Assistant
+# @package    Devices
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+binary_sensor:
+  ##
+  # All combined
+  ##
+  - platform: template
+    sensors:
+      door_window_sensor_all:
+        device_class: opening
+        value_template: >-
+          {{ is_state('binary_sensor.door_window_sensor_158d0001ab5797', 'on')
+             or is_state('binary_sensor.door_window_sensor_158d0001ab5853', 'on')
+             or is_state('binary_sensor.door_window_sensor_158d0001b77e9a', 'on')
+             or is_state('binary_sensor.door_window_sensor_158d0001b77eb1', 'on')
+             or is_state('binary_sensor.door_window_sensor_158d0001d934e3', 'on')
+             or is_state('binary_sensor.door_window_sensor_158d0001d8228c', 'on')
+             or is_state('binary_sensor.door_window_sensor_158d0001f38318', 'on')
+             or is_state('binary_sensor.door_window_sensor_158d0001f38976', 'on')
+             or is_state('binary_sensor.door_window_sensor_158d00019fd4c6', 'on')
+             or is_state('binary_sensor.garage_loopdeur', 'on') }}
+#             or is_state('binary_sensor.door_window_sensor_158d0001c0e526', 'on')
+#             or is_state('binary_sensor.door_window_sensor_158d0001dcce33', 'on')
+
+  ##
+  # Kitchen windows combined
+  ##
+  - platform: template
+    sensors:
+      door_window_sensor_kitchen_windows:
+        device_class: window
+        value_template: >-
+          {{ is_state('binary_sensor.door_window_sensor_158d0001b77e9a', 'on')
+             or is_state('binary_sensor.door_window_sensor_158d0001d934e3', 'on') }}
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    binary_sensor.door_window_sensor_all:
+      friendly_name: 'Perimeter'
+
+    binary_sensor.door_window_sensor_kitchen_windows:
+      friendly_name: 'Keukenramen'

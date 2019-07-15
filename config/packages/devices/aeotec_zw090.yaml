@@ -1,0 +1,24 @@
+##
+# aeotec_zw090.yaml
+#
+# Aeotec ZW090 Z-Stick Gen 5
+#
+# @category   Home Assistant
+# @package    Packages
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+zwave:
+  usb_path: '/dev/ttyACM0'
+  network_key: !secret zwave_network_key
+#  polling_interval: 30000
+
+##
+# Customize
+##
+homeassistant:
+  customize_glob:
+    zwave.aeotec_zw090_zstick_gen5_eu:
+      group:
+        group.zwave_devices:
+          friendly_name: 'Controller'

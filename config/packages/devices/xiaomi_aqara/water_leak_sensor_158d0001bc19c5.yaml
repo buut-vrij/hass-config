@@ -1,0 +1,50 @@
+##
+# water_leak_sensor_158d0001bc19c5.yaml
+#
+# Xiaomi Aqara water leak sensor
+#
+# @category   Home Assistant
+# @package    Devices
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+sensor:
+  - platform: template
+    sensors:
+      water_leak_sensor_158d0001bc19c5_battery:
+        device_class: battery
+        unit_of_measurement: '%'
+        value_template: "{{ state_attr('binary_sensor.water_leak_sensor_158d0001bc19c5', 'battery_level')|int }}"
+        icon_template: >
+          {% set battery_level = state_attr('binary_sensor.water_leak_sensor_158d0001bc19c5', 'battery_level')|default(0)|int %}
+          {% set battery_round = (battery_level / 10) |int * 10 %}
+          {% if battery_round >= 100 %}
+            mdi:battery
+          {% elif battery_round > 0 %}
+            mdi:battery-{{ battery_round }}
+          {% else %}
+            mdi:battery-alert
+          {% endif %}
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    binary_sensor.water_leak_sensor_158d0001bc19c5:
+      device_class: moisture
+      friendly_name: 'Vocht pompput'
+
+    sensor.water_leak_sensor_158d0001bc19c5_battery:
+      friendly_name: 'Batterij waterlekkagesensor pompput'
+
+  customize_glob:
+    binary_sensor.water_leak_sensor_158d0001bc19c5:
+      group:
+        group.security_water_leak:
+          friendly_name: 'Pompput'
+
+    sensor.water_leak_sensor_158d0001bc19c5_battery:
+      group:
+        group.battery_levels:
+          friendly_name: 'Waterlekkagesensor pompput'

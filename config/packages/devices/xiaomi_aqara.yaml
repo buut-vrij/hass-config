@@ -1,0 +1,105 @@
+##
+# xiaomi_aqara.yaml
+#
+# Xiaomi Aqara Gateway
+#
+# @category   Home Assistant
+# @package    Devices
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+xiaomi_aqara:
+  discovery_retry: 10
+  gateways:
+    - mac: !secret xiaomi_aqara_basement_mac
+      key: !secret xiaomi_aqara_basement_key
+      host: !secret xiaomi_aqara_basement_host
+    - mac: !secret xiaomi_aqara_landing_mac
+      key: !secret xiaomi_aqara_landing_key
+      host: !secret xiaomi_aqara_landing_host
+    - mac: !secret xiaomi_aqara_living_mac
+      key: !secret xiaomi_aqara_living_key
+      host: !secret xiaomi_aqara_living_host
+
+light:
+  - platform: group
+    name: 'gateway_light_all'
+    entities:
+      - light.gateway_light_34ce0091d4d9
+      - light.gateway_light_7811dcb266db
+      - light.gateway_light_7811dcb7e406
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    binary_sensor.switch_158d00016d9cfe:
+      friendly_name: 'Drukknop'
+      icon: 'mdi:radiobox-blank'
+
+    group.gateway_lights_all:
+      friendly_name: 'Veiligheidsverlichting'
+      icon: 'mdi:alarm-light-outline'
+      hidden: true
+
+    light.gateway_light_34ce0091d4d9:
+      friendly_name: 'Veiligheidsverlichting woonkamer'
+      icon: 'mdi:alarm-light-outline'
+
+    light.gateway_light_7811dcb266db:
+      friendly_name: 'Veiligheidsverlichting overloop'
+      icon: 'mdi:alarm-light-outline'
+
+    light.gateway_light_7811dcb7e406:
+      friendly_name: 'Veiligheidsverlichting garage'
+      icon: 'mdi:alarm-light-outline'
+
+    light.gateway_light_all:
+      hidden: true
+
+    sensor.illumination_34ce0091d4d9:
+      device_class: illuminance
+      friendly_name: 'Lichtsterkte woonkamer'
+      icon: 'mdi:white-balance-sunny'
+
+    sensor.illumination_7811dcb266db:
+      device_class: illuminance
+      friendly_name: 'Lichtsterkte overloop'
+      icon: 'mdi:white-balance-sunny'
+
+    sensor.illumination_7811dcb7e406:
+      device_class: illuminance
+      friendly_name: 'Lichtsterkte garage'
+      icon: 'mdi:white-balance-sunny' 
+
+  customize_glob:
+    light.gateway_light_34ce0091d4d9:
+      group:
+        group.security_lights:
+          friendly_name: 'Woonkamer'
+
+    light.gateway_light_7811dcb266db:
+      group:
+        group.security_lights:
+          friendly_name: 'Overloop'
+
+    light.gateway_light_7811dcb7e406:
+      group:
+        group.security_lights:
+          friendly_name: 'Garage'
+
+    sensor.illumination_34ce0091d4d9:
+      group:
+        group.climate_living_room:
+          friendly_name: 'Lichtsterkte'
+
+    sensor.illumination_7811dcb266db:
+      group:
+        group.climate_landing_upstairs:
+          friendly_name: 'Lichtsterkte'
+
+    sensor.illumination_7811dcb7e406:
+      group:
+        group.climate_garage:
+          friendly_name: 'Lichtsterkte'

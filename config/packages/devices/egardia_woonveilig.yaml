@@ -1,0 +1,37 @@
+##
+# egardia.yaml
+#
+# Egardia WoonVeilig alarm
+#
+# @category   Home Assistant
+# @package    Devices
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+egardia:
+  host: !secret woonveilig_host
+  username: !secret woonveilig_username
+  password: !secret woonveilig_password
+  version: 'GATE-03'
+  name: 'WoonVeilig'
+  report_server_enabled: true
+  report_server_port: !secret woonveilig_report_server_port
+  report_server_codes:
+    arm: !secret woonveilig_arm_codes
+    disarm: !secret woonveilig_disarm_codes
+    armhome: !secret woonveilig_armhome_codes
+    triggered: !secret woonveilig_trigger_codes
+    ignore: !secret woonveilig_ignore_codes
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    alarm_control_panel.woonveilig:
+      friendly_name: 'Alarm'
+
+    binary_sensor.garage_loopdeur:
+      device_class: door
+      hidden: false
+      name: 'Garagepoort loopdeur'

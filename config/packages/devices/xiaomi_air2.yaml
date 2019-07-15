@@ -1,0 +1,25 @@
+##
+# xiaomi_air2.yaml
+#
+# Xiaomi Air Purifier 2
+#
+# @category   Home Assistant
+# @package    Devices
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+fan:
+  - platform: xiaomi_miio
+    model: 'zhimi.airpurifier.v2'
+    name: 'Xiaomi Air Purifier 2'
+    host: !secret xiaomi_air2_host
+    token: !secret xiaomi_air2_token
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    fan.xiaomi_air_purifier_2:
+      friendly_name: 'Luchtreiniger'
+      icon: 'mdi:air-purifier'

@@ -1,0 +1,44 @@
+##
+# light_group.yaml
+#
+# Light groups
+#
+# @category   Home Assistant
+# @package    Devices
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+light:
+  - platform: group
+    name: 'Basement all'
+    entities:
+      - light.fibaro_system_fgd212_dimmer_2_level_15
+      - light.fibaro_system_fgd212_dimmer_2_level_17
+      - light.fibaro_system_fgd212_dimmer_2_level_19
+      - light.fibaro_system_fgd212_dimmer_2_level_21
+  - platform: group
+    name: 'Ground floor all'
+    entities:
+      - light.dimmable_light_1
+      - light.dimmable_light_2
+      - light.fibaro_system_fgd212_dimmer_2_level_2
+      - light.fibaro_system_fgd212_dimmer_2_level_4
+      - light.fibaro_system_fgd212_dimmer_2_level_6
+      - light.fibaro_system_fgd212_dimmer_2_level_11
+      - light.hue_lightstrip_plus_1
+      - light.hue_lightstrip_plus_1_3
+      - light.livingwhites_plug_1
+      - light.tv_lamp
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    light.basement_all:
+      friendly_name: 'Lichten kelder'
+      hidden: true
+
+    light.ground_floor_all:
+      friendly_name: 'Lichten begane grond'
+      hidden: true

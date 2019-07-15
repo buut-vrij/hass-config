@@ -1,0 +1,30 @@
+##
+# curtain_all.yaml
+#
+# Xiaomi Aqara door/window sensor
+#
+# @category   Home Assistant
+# @package    Devices
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+cover:
+  - platform: group
+    name: 'Living room all'
+    entities:
+      - cover.curtain_158d0001ef47a5_2 # Living room garden
+      - cover.curtain_158d0001fd240a_2 # Living room window
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    cover.living_room_all:
+      friendly_name: 'Blindering woonkamer'
+
+  customize_glob:
+    cover.living_room_all:
+      group:
+        group.home_blinds:
+          friendly_name: 'Woonkamer'

@@ -1,0 +1,57 @@
+##
+# gosund_sp111_dishwasher.yaml
+#
+# Gosund SP111 (dishwasher)
+#
+# @category   Home Assistant
+# @package    Device packages
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+sensor:
+  - platform: mqtt
+    name: 'Plug dishwasher energy'
+    state_topic: 'tele/sonoff_2447/SENSOR'
+    value_template: "{{ value_json['ENERGY']['Total'] }}"
+    unit_of_measurement: 'kWh'
+
+  - platform: mqtt
+    name: 'Plug dishwasher power'
+    state_topic: 'tele/sonoff_2447/SENSOR'
+    value_template: "{{ value_json['ENERGY']['Power'] }}"
+    unit_of_measurement: 'W'
+
+#  - platform: mqtt
+#    name: 'Plug dishwasher voltage'
+#    state_topic: 'tele/sonoff_2447/SENSOR'
+#    value_template: "{{ value_json['ENERGY']['Voltage'] }}"
+#    unit_of_measurement: 'V'
+
+#  - platform: mqtt
+#    name: 'Plug dishwasher current'
+#    state_topic: 'tele/sonoff_2447/SENSOR'
+#    value_template: "{{ value_json['ENERGY']['Current'] }}"
+#    unit_of_measurement: 'A'
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    sensor.plug_dishwasher_energy:
+      friendly_name: 'Stroomverbruik vaatwasser'
+      icon: 'mdi:flash-circle'
+
+    sensor.plug_dishwasher_power:
+      friendly_name: 'Stroom vaatwasser'
+      icon: 'mdi:flash'
+
+    sensor.dishwasher_state:
+      friendly_name: 'Vaatwasser'
+
+  customize_glob:
+    sensor.plug_dishwasher_energy:
+      group:
+        group.consumption_devices:
+          friendly_name: 'Vaatwasser'
+          icon: 'mdi:dishwasher'

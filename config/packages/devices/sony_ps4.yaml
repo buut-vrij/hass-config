@@ -1,0 +1,29 @@
+##
+# sony_ps4.yaml
+#
+# SONY PlayStation 4
+#
+# @category   Home Assistant
+# @package    Device packages
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+#media_player:
+#  - platform: ps4
+#    host: !secret ps4_host
+#    name: 'PlayStation woonkamer'
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    media_player.playstation:
+      friendly_name: 'PlayStation woonkamer'
+      icon: 'mdi:playstation'
+
+  customize_glob:
+    media_player.playstation:
+      group:
+        group.devices_living_room:
+          friendly_name: 'PlayStation'

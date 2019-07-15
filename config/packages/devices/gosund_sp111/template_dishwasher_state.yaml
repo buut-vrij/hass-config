@@ -1,0 +1,211 @@
+##
+# template_dishwasher_state.yaml
+#
+# Template sensor (dishwasher)
+#
+# @category   Home Assistant
+# @package    Device packages
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+input_select:
+  dishwasher_state_select:
+    name: 'Dishwasher state'
+    options:
+      - 'Off'
+      - 'Idle'
+      - 'Rinsing'
+      - 'Washing'
+      - 'Drying'
+      - 'Ready'
+
+sensor:
+  - platform: template
+    sensors:
+      dishwasher_state:
+        friendly_name: 'Dishwasher state'
+        icon_template: 'mdi:dishwasher'
+        value_template: >-
+          {% if states('input_select.dishwasher_state_select') == 'Off' %}
+            Uit
+          {% elif states('input_select.dishwasher_state_select') == 'Idle' %}
+            Inactief
+          {% elif states('input_select.dishwasher_state_select') == 'Rinsing' %}
+            Spoelen
+          {% elif states('input_select.dishwasher_state_select') == 'Washing' %}
+            Wassen
+          {% elif states('input_select.dishwasher_state_select') == 'Drying' %}
+            Drogen
+          {% elif states('input_select.dishwasher_state_select') == 'Ready' %}
+            Gereed
+          {% endif %}
+
+##
+# Automations
+##
+automation:
+  ##
+  # Change dishwasher state to idle
+  ##
+  - alias: 'Dishwasher state change to idle'
+    initial_state: on
+    hide_entity: true
+    trigger:
+      # When dishwasher plug power goes above 4 W
+      platform: numeric_state
+      entity_id: sensor.plug_dishwasher_power
+      above: 4
+    condition:
+      # While dishwasher current state is off
+      condition: state
+      entity_id: input_select.dishwasher_state_select
+      state: 'Off'
+    action:
+      # Then update state to idle
+      service: input_select.select_option
+      data:
+        entity_id: input_select.dishwasher_state_select
+        option: 'Idle'
+
+  ##
+  # Change dishwasher state to rinsing
+  ##
+  - alias: 'Dishwasher state change to rinsing'
+    initial_state: on
+    hide_entity: true
+    trigger:
+      # When dishwasher plug power goes above 1500 W
+      platform: numeric_state
+      entity_id: sensor.plug_dishwasher_power
+      above: 1500
+    condition:
+      # While dishwasher current state is off/idle
+      condition: or
+      conditions:
+        - condition: state
+          entity_id: input_select.dishwasher_state_select
+          state: 'Off'
+        - condition: state
+          entity_id: input_select.dishwasher_state_select
+          state: 'Idle'
+    action:
+      # Then update state to washing
+      service: input_select.select_option
+      data:
+        entity_id: input_select.dishwasher_state_select
+        option: 'Rinsing'
+
+  ##
+  # Change dishwasher state to washing
+  ##
+  - alias: 'Dishwasher state change to washing'
+    initial_state: on
+    hide_entity: true
+    trigger:
+      # When dishwasher plug power goes between 10 W and 100 W for 5 minutes
+      platform: numeric_state
+      entity_id: sensor.plug_dishwasher_power
+      below: 100
+      above: 10
+      for:
+        minutes: 5
+    condition:
+      # While dishwasher current state is rinsing
+      condition: state
+      entity_id: input_select.dishwasher_state_select
+      state: 'Rinsing'
+    action:
+      # Then update state to washing
+      service: input_select.select_option
+      data:
+        entity_id: input_select.dishwasher_state_select
+        option: 'Washing'
+
+  ##
+  # Change dishwasher state from washing to drying
+  ##
+  - alias: 'Dishwasher state change to drying'
+    initial_state: on
+    hide_entity: true
+    trigger:
+      # When dishwasher plug power goes above 1500 W
+      platform: numeric_state
+      entity_id: sensor.plug_dishwasher_power
+      above: 1500
+    condition:
+      # While dishwasher current state is washing
+      condition: state
+      entity_id: input_select.dishwasher_state_select
+      state: 'Washing'
+    action:
+      # Then update state to drying
+      service: input_select.select_option
+      data:
+        entity_id: input_select.dishwasher_state_select
+        option: 'Drying'
+ 
+  ##
+  # Change dishwasher state to ready
+  ##
+  - alias: 'Dishwasher state change to ready'
+    initial_state: on
+    hide_entity: true
+    trigger:
+      # When dishwasher plug power goes between 0 W and 25 W for 5 minutes
+      platform: numeric_state
+      entity_id: sensor.plug_dishwasher_power
+      above: 0
+      below: 25
+      for:
+        minutes: 5
+    condition:
+      # While dishwasher current state is rinsing/washing/drying
+      condition: or
+      conditions:
+        - condition: state
+          entity_id: input_select.dishwasher_state_select
+          state: 'Rinsing'
+        - condition: state
+          entity_id: input_select.dishwasher_state_select
+          state: 'Washing'
+        - condition: state
+          entity_id: input_select.dishwasher_state_select
+          state: 'Drying'
+    action:
+      # Then update state to ready
+      service: input_select.select_option
+      data:
+        entity_id: input_select.dishwasher_state_select
+        option: 'Ready'
+ 
+  ##
+  # Change dishwasher state to off
+  ##
+  - alias: 'Dishwasher state change to off'
+    initial_state: on
+    hide_entity: true
+    trigger:
+      # When dishwasher plug power is below 4 W for 5 minutes
+      platform: numeric_state
+      entity_id: sensor.plug_dishwasher_power
+      below: 4
+      for:
+        minutes: 5
+    action:
+      # Then update state to off
+      service: input_select.select_option
+      data:
+        entity_id: input_select.dishwasher_state_select
+        option: 'Off'
+ 
+##
+# Customize
+##
+homeassistant:
+  customize:
+    input_select.dishwasher_state_select:
+      friendly_name: 'Vaatwasser status'
+      hidden: true
+
+    sensor.dishwasher_state:
+      friendly_name: 'Vaatwasser'

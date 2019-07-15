@@ -1,0 +1,24 @@
+##
+# natgas_sensor_158d00011176ee.yaml
+#
+# Xiaomi Mijia natural gas sensor
+#
+# @category   Home Assistant
+# @package    Devices
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+##
+# Customize
+##
+homeassistant:
+  customize:
+    binary_sensor.natgas_sensor_158d00011176ee:
+      device_class: gas
+      friendly_name: 'Aardgas cv-ketel'
+
+  customize_glob:
+    binary_sensor.natgas_sensor_158d00011176ee:
+      group:
+        group.security_natgas:
+          friendly_name: 'Cv-ketel'

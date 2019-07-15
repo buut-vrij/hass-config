@@ -1,0 +1,24 @@
+##
+# aeotec_zw117.yaml
+#
+# Aeotec ZW117 Range Extender 6
+#
+# @category   Home Assistant
+# @package    Device packages
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    zwave.aeotec_zw117_range_extender_6:
+      friendly_name: 'Z-Wave versterker'
+
+  customize_glob:
+    zwave.aeotec_zw117_range_extender_6:
+      group:
+        group.zwave_devices:
+          friendly_name: 'Versterker'

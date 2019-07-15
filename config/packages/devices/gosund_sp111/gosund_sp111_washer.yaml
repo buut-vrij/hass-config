@@ -1,0 +1,54 @@
+##
+# gosund_sp111_washer.yaml
+#
+# Gosund SP111 (washer)
+#
+# @category   Home Assistant
+# @package    Device packages
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+sensor:
+  - platform: mqtt
+    name: 'Plug washer energy'
+    state_topic: 'tele/sonoff_3616/SENSOR'
+    value_template: "{{ value_json['ENERGY']['Total'] }}"
+    unit_of_measurement: 'kWh'
+
+  - platform: mqtt
+    name: 'Plug washer power'
+    state_topic: 'tele/sonoff_3616/SENSOR'
+    value_template: "{{ value_json['ENERGY']['Power'] }}"
+    unit_of_measurement: 'W'
+
+#  - platform: mqtt
+#    name: 'Plug washer voltage'
+#    state_topic: 'tele/sonoff_3616/SENSOR'
+#    value_template: "{{ value_json['ENERGY']['Voltage'] }}"
+#    unit_of_measurement: 'V'
+
+#  - platform: mqtt
+#    name: 'Plug washer current'
+#    state_topic: 'tele/sonoff_3616/SENSOR'
+#    value_template: "{{ value_json['ENERGY']['Current'] }}"
+#    unit_of_measurement: 'A'
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    sensor.plug_washer_energy:
+      friendly_name: 'Stroomverbruik wasmachine'
+      icon: 'mdi:flash-circle'
+
+    sensor.plug_washer_power:
+      friendly_name: 'Stroom wasmachine'
+      icon: 'mdi:flash'
+
+  customize_glob:
+    sensor.plug_washer_energy:
+      group:
+        group.consumption_devices:
+          friendly_name: 'Wasmachine'
+          icon: 'mdi:washing-machine'

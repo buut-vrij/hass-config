@@ -1,0 +1,50 @@
+##
+# smoke_sensor_158d000215a794.yaml
+#
+# Xiaomi Aqara smoke sensor
+#
+# @category   Home Assistant
+# @package    Devices
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+sensor:
+  - platform: template
+    sensors:
+      smoke_sensor_158d000215a794_battery:
+        device_class: battery
+        unit_of_measurement: '%'
+        value_template: "{{ state_attr('binary_sensor.smoke_sensor_158d000215a794', 'battery_level')|int }}"
+        icon_template: >
+          {% set battery_level = state_attr('binary_sensor.smoke_sensor_158d000215a794', 'battery_level')|default(0)|int %}
+          {% set battery_round = (battery_level / 10) |int * 10 %}
+          {% if battery_round >= 100 %}
+            mdi:battery
+          {% elif battery_round > 0 %}
+            mdi:battery-{{ battery_round }}
+          {% else %}
+            mdi:battery-alert
+          {% endif %}
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    binary_sensor.smoke_sensor_158d000215a794:
+      device_class: smoke
+      friendly_name: 'Rook garage'
+
+    sensor.smoke_sensor_158d000215a794_battery:
+      friendly_name: 'Batterij rookdetector garage'
+
+  customize_glob:
+    binary_sensor.smoke_sensor_158d000215a794:
+      group:
+        group.security_smoke:
+          friendly_name: 'Garage'
+
+    sensor.smoke_sensor_158d000215a794_battery:
+      group:
+        group.battery_levels:
+          friendly_name: 'Rookdetector garage'

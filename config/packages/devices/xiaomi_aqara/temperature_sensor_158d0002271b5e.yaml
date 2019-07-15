@@ -1,0 +1,72 @@
+##
+# temperature_sensor_158d0002271b5e.yaml
+#
+# Xiaomi Aqara temperature sensor
+#
+# @category   Home Assistant
+# @package    Devices
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+sensor:
+  - platform: template
+    sensors:
+      temperature_158d0002271b5e_battery:
+        device_class: battery
+        unit_of_measurement: '%'
+        value_template: "{{ state_attr('sensor.temperature_158d0002271b5e', 'battery_level')|int }}"
+        icon_template: >
+          {% set battery_level = state_attr('sensor.temperature_158d0002271b5e', 'battery_level')|default(0)|int %}
+          {% set battery_round = (battery_level / 10) |int * 10 %}
+          {% if battery_round >= 100 %}
+            mdi:battery
+          {% elif battery_round > 0 %}
+            mdi:battery-{{ battery_round }}
+          {% else %}
+            mdi:battery-alert
+          {% endif %}
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    sensor.humidity_158d0002271b5e:
+      friendly_name: 'Luchtvochtigheid garage'
+      icon: 'mdi:water-percent'
+
+    sensor.pressure_158d0002271b5e:
+      friendly_name: 'Luchtdruk garage'
+      icon: 'mdi:gauge'
+
+    sensor.temperature_158d0002271b5e:
+      friendly_name: 'Temperatuur garage'
+      icon: 'mdi:thermometer'
+
+    sensor.temperature_158d0002271b5e_battery:
+      friendly_name: 'Batterij temperatuursensor garage'
+
+  customize_glob:
+    sensor.humidity_158d0002271b5e:
+      group:
+        group.climate_garage:
+          friendly_name: 'Luchtvochtigheid'
+        history_graph.luchtvochtigheid:
+          friendly_name: 'Garage'
+
+    sensor.pressure_158d0002271b5e:
+      group:
+        group.climate_garage:
+          friendly_name: 'Luchtdruk'
+
+    sensor.temperature_158d0002271b5e:
+      group:
+        group.climate_garage:
+          friendly_name: 'Temperatuur'
+        history_graph.temperatuur:
+          friendly_name: 'Garage'
+
+    sensor.temperature_158d0002271b5e_battery:
+      group:
+        group.battery_levels:
+          friendly_name: 'Temperatuursensor garage'

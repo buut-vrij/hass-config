@@ -1,0 +1,32 @@
+##
+# water_leak_sensor.yaml
+#
+# Xiaomi Aqara water leak sensor
+#
+# @category   Home Assistant
+# @package    Devices
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+binary_sensor:
+  ##
+  # All combined
+  ##
+  - platform: template
+    sensors:
+      water_leak_sensor_all:
+        device_class: moisture
+        value_template: >-
+          {{ is_state('binary_sensor.water_leak_sensor_158d0001bb63a5', 'on')
+             or is_state('binary_sensor.water_leak_sensor_158d0001bb7922', 'on')
+             or is_state('binary_sensor.water_leak_sensor_158d0001bc19c5', 'on')
+             or is_state('binary_sensor.water_leak_sensor_158d0001bc42dc', 'on')
+             or is_state('binary_sensor.water_leak_sensor_158d0001bc42ee', 'on') }}
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    binary_sensor.water_leak_sensor_all:
+      friendly_name: 'Vocht'

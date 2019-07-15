@@ -1,0 +1,51 @@
+##
+# fibaro_fgd212_kitchen.yaml
+#
+# FIBARO Dimmer 2 FGD-212 (kitchen)
+#
+# @category   Home Assistant
+# @package    Device packages
+# @author     Jeroen Butenaerts
+# @version    1.0
+##
+
+##
+# Customize
+##
+homeassistant:
+  customize:
+    light.fibaro_system_fgd212_dimmer_2_level_10:
+      friendly_name: 'Plafondlamp keuken (S2)'
+      hidden: true
+
+    light.fibaro_system_fgd212_dimmer_2_level_11:
+      friendly_name: 'Plafondlamp keuken'
+      icon: 'mdi:ceiling-light'
+      state_card_mode: break-slider-toggle
+      stretch_slider: true
+      slider_theme:
+        min: 1
+        off_when_min: false
+        report_when_not_changed: false
+
+    sensor.fibaro_system_fgd212_dimmer_2_energy_6:
+      friendly_name: 'Plafondlamp keuken'
+
+    zwave.fibaro_system_fgd212_dimmer_2_6:
+      friendly_name: 'Plafondlamp keuken'
+
+  customize_glob:
+    light.fibaro_system_fgd212_dimmer_2_level_11:
+      group:
+        group.lights_kitchen:
+          friendly_name: 'Plafondlamp'
+
+    sensor.fibaro_system_fgd212_dimmer_2_energy_6:
+      group:
+        group.consumption_lighting:
+          icon: 'mdi:ceiling-light'
+
+    zwave.fibaro_system_fgd212_dimmer_2_6:
+      group:
+        group.zwave_devices:
+          friendly_name: 'Dimmer keuken'
