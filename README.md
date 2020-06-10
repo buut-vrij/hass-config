@@ -7,10 +7,12 @@
 1x Elster Falcon PR6 pulssensor\
 8x Fibaro FGD-212 dimmer\
 1x Fibaro FGWP-102 wall plug\
-4x Gosund SP111 (Tasmota) wall plug\
+8x Gosund SP111 (Tasmota) wall plug\
+6x IKEA Fyrtur roller blind\
 2x IKEA Trådfri drivers\
-1x Philips Hue Bridge 2\
-2x Philips Hue White and Color bulb\
+1x IKEA Trådfri filament bulb\
+1x IKEA Trådfri gateway\
+1x Philips Hue White Filament Globe bulb\
 2x Philips Hue Light Strip Plus\
 2x Reolink RLC-422 IP Camera\
 1x Sensative Strips Comfort outdoor sensor\
@@ -22,6 +24,7 @@
 9x Xiaomi Aqara Human Body Sensor\
 2x Xiaomi Mijia Honeywell natural gas detector\
 6x Xiaomi Mijia Honeywell smoke detector\
+1x Xiaomi Mijia 1S vacuum\
 5x Xiaomi Aqara Temperature sensor\
 5x Xiaomi Aqara Water leak sensor\
 \
@@ -38,7 +41,7 @@
 1x LG OLED55C8PLA\
 1x Sony PlayStation 4\
 \
-**Other devices:**\
+**Other relevant devices:**\
 1x Honeywell EvoHome\
 1x Egardia WoonVeilig\
 1x PowerWalker VI 750\
