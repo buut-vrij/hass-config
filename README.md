@@ -14,19 +14,23 @@ IKEA Trådfri filament bulb\
 IKEA Trådfri gateway\
 Philips Hue White Filament Globe bulb\
 Philips Hue Light Strip Plus\
-Reolink RLC-422 IP Camera\
+Reolink E1 Pro camera\
+Reolink RLC-422 camera\
 Sensative Strips Comfort outdoor sensor\
+Sigma Designs Z-Wave water valve\
 SmartMeterDashboard.nl S0 Pulse Counter Module\
+Xiaomi Air Purifier 2\
 Xiaomi Aqara Gateway 2\
 Xiaomi Aqara curtain motor\
 Xiaomi Aqara door/window sensor\
-Xiaomi Air Purifier 2\
 Xiaomi Aqara Human Body Sensor\
-Xiaomi Mijia Honeywell natural gas detector\
-Xiaomi Mijia Honeywell smoke detector\
-Xiaomi Mijia 1S vacuum\
 Xiaomi Aqara Temperature sensor\
 Xiaomi Aqara Water leak sensor\
+Xiaomi Mijia 1S vacuum\
+Xiaomi Mijia Honeywell natural gas detector\
+Xiaomi Mijia Honeywell smoke detector\
+Xiaomi SmartMi Air Humidifier 2\
+Xiaomi SmartMi Standing Fan 3\
 \
 **Media devices:**\
 Apple TV 4\
@@ -36,10 +40,12 @@ Google Chromecast Ultra\
 Google Home\
 Google Home Hub\
 Google Home Mini\
+Lenovo Smart Alarm Clock\
 LG OLED55C8PLA\
 Sony PlayStation 4\
 \
 **Other relevant devices:**\
+Brother MFC-J4420DW\
 Honeywell EvoHome\
 Egardia WoonVeilig\
 PowerWalker VI 750\
