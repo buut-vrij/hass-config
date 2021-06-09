@@ -56,4 +56,4 @@ Ubiquiti UniFi UAP-AC-Lite\
 Ubiquiti UniFi US-16-150W\
 Ubiquiti UniFi US-8\
 Ubiquiti UniFi USG-Pro-4\
-Ubiquiti UniFi USW-Flex\
+Ubiquiti UniFi USW-Flex
